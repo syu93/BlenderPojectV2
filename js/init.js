@@ -12,7 +12,7 @@ $( document ).ready(function(){
 		//***************************************************************//
 		//***************************************************************//
 		renderer = new THREE.WebGLRenderer({ alpha: true });			
-		renderer.setClearColor( 0x3b426b, 1);
+		renderer.setClearColor( 0xdcdcdc, 1);
 		
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
 		
@@ -33,20 +33,21 @@ $( document ).ready(function(){
 		scene.add( plane );
 		//****************************************************************//
 		// axes();
-		 buildAxes( 100 );
+		var axes = buildAxes(window.innerWidth );
+		scene.add(axes);
 		buildAxis(
 			new THREE.Vector3( 0, 0, 0 ),
 			new THREE.Vector3( length, 0, 0 ),
 			0xFF0000,
 			false
-		)
+		);
 		
 		buildAxis(
 			new THREE.Vector3( 0, 0, 0 ),
 			new THREE.Vector3( -length, 0, 0 ), // notice the minus sign?
 			0xFF0000,
 			true // ... and true because we want this axis to be dashed
-		)
+		);
 		
 		// scene.add(axis);
 		projector = new THREE.Projector();
