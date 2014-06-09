@@ -21,7 +21,7 @@ $( document ).ready(function(){
 		scene.add(camera);
 		
 		camera.position.z = 300; //FIXME : Can we make it move
-		renderer.setSize(1280 , 800);
+		renderer.setSize(window.innerWidth , window.innerHeight);
 		
 		container = $('body');
 		container.append(renderer.domElement);
