@@ -341,7 +341,10 @@ THREE.OrbitControls = function ( object, domElement ) {
 			scope.zoomIn();
 
 		}
-
+		//------
+			alert("plop");
+		//------
+		
 	}
 
 	function onKeyDown( event ) {
