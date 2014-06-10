@@ -7,6 +7,13 @@ $( document ).ready(function(){
 	
 	init();
 	render();
+	
+	// function getCam()
+	// {
+		// var cam = camera;
+		// return cam;
+	// }
+	
 	function init(){
 		// Initiate the canvas scene
 		//***************************************************************//
@@ -14,14 +21,14 @@ $( document ).ready(function(){
 		renderer = new THREE.WebGLRenderer({ alpha: true });			
 		renderer.setClearColor( 0xdcdcdc, 1);
 		
-		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
+		camera = new THREE.PerspectiveCamera(4, window.innerWidth / window.innerHeight, 0.1, 2000);
 		
 		scene = new THREE.Scene();
 		
 		scene.add(camera);
 		
 		camera.position.z = 300; //FIXME : Can we make it move
-		renderer.setSize(window.innerWidth , window.innerHeight);
+		renderer.setSize(window.innerWidth-100 , window.innerHeight-100);
 		
 		container = $('body');
 		container.append(renderer.domElement);
