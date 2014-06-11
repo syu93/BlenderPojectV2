@@ -333,23 +333,18 @@ THREE.OrbitControls = function ( object, domElement ) {
 			delta = - event.detail;
 
 		}
-		// var plop;
 		if ( delta > 0 ) {
 
 			scope.zoomOut();
-			// plop = scope.zoomOut();
 
 		} else {
 
 			scope.zoomIn();
-			// plop = scope.zoomIn();
 
 		}
-		//------
-			// alert(delta);
-			var cam = getCam();
-			$('#scale').html(cam.position.z);
-		//------
+		// ------
+			// var cam = getCam();
+		// ------
 		
 	}
 

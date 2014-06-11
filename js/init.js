@@ -21,7 +21,7 @@ $( document ).ready(function(){
 		renderer = new THREE.WebGLRenderer({ alpha: true });			
 		renderer.setClearColor( 0xdcdcdc, 1);
 		
-		camera = new THREE.PerspectiveCamera(4, window.innerWidth / window.innerHeight, 0.1, 2000);
+		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
 		
 		scene = new THREE.Scene();
 		
@@ -55,7 +55,6 @@ $( document ).ready(function(){
 			0xFF0000,
 			true // ... and true because we want this axis to be dashed
 		);
-		
 		// scene.add(axis);
 		projector = new THREE.Projector();
 		
@@ -87,6 +86,22 @@ $( document ).ready(function(){
 	$('#t_clear').click(function(){
 		$("#s_tools").attr('data', 'clear');
 		clear_scene();		
+	});
+
+	$('#t_zoom').click(function(){
+		$("#s_tools").attr('data', 'zoom');
+		camera.position.z-=100;
+		$('#scale').html(camera.position.z);
+		
+		
+		
+	});
+
+	$('#t_dezoom').click(function(){
+		$("#s_tools").attr('data', 'dezoom');
+		camera.position.z+=100;
+		$('#scale').html(camera.position.z);
+		
 	});
 	
 //***************************************************************//
