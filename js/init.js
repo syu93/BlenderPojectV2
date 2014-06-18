@@ -39,8 +39,16 @@ $( document ).ready(function(){
 		plane.visible = false;
 		scene.add( plane );
 		//****************************************************************//
-		// axes();
-		var axes = buildAxes(window.innerWidth );
+		axis();
+		projector = new THREE.Projector();
+		
+		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
+	}
+	
+	function axis(){
+				var axes = buildAxes(window.innerWidth );
 		scene.add(axes);
 		buildAxis(
 			new THREE.Vector3( 0, 0, 0 ),
@@ -55,19 +63,12 @@ $( document ).ready(function(){
 			0xFF0000,
 			true // ... and true because we want this axis to be dashed
 		);
-		// scene.add(axis);
-		projector = new THREE.Projector();
-		
-		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
-		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
-		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
 	}
-	
 
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
-		controls.update();	
+		controls.update();
 	}
 
 //***************************************************************//
@@ -91,10 +92,7 @@ $( document ).ready(function(){
 	$('#t_zoom').click(function(){
 		$("#s_tools").attr('data', 'zoom');
 		camera.position.z-=100;
-		$('#scale').html(camera.position.z);
-		
-		
-		
+		$('#scale').html(camera.position.z);		
 	});
 
 	$('#t_dezoom').click(function(){
@@ -227,6 +225,7 @@ function new_sphere(){
 	scene.add(sphere);
 	objects.push( sphere );
 	
+	send_scene(scene);
 	render();
 }
 
@@ -246,6 +245,7 @@ function new_cube(){
 	scene.add(cube);
 	objects.push( cube );
 	
+	send_scene(scene);
 	render();
 }
 
@@ -256,8 +256,8 @@ function clear_scene(){
 		obj = scene.children[ i ];
 		if (obj !== camera) {
 			scene.remove(obj);
-			// axes();
 		}
+		axis();
 	}
 }
 
