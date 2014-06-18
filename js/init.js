@@ -8,12 +8,6 @@ $( document ).ready(function(){
 	init();
 	render();
 	
-	// function getCam()
-	// {
-		// var cam = camera;
-		// return cam;
-	// }
-	
 	function init(){
 		// Initiate the canvas scene
 		//***************************************************************//
@@ -99,7 +93,7 @@ $( document ).ready(function(){
 
 	$('#t_dezoom').click(function(){
 		$("#s_tools").attr('data', 'dezoom');
-		camera.position.z+=100;
+		scope.zoomIn();
 		$('#scale').html(camera.position.z);
 		
 	});

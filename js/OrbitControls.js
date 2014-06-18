@@ -341,12 +341,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 			scope.zoomIn();
 
-		}
-		// ------
-			// var cam = getCam();
-		// ------
-		
+		}		
 	}
+	
 
 	function onKeyDown( event ) {
 
