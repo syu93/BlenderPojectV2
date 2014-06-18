@@ -7,13 +7,11 @@
 		<script src="js/jquery-1.11.0.min.js"></script>
 		<script src="js/three.min.js"></script>
 		<script src="js/init.js"></script>
-<<<<<<< HEAD:index.html
+
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/TrackballControls.js"></script>
 		<script src="js/axis.js"></script>
-=======
 		<script src="js/ajax.js"></script>
->>>>>>> origin/Syu93WorkSpace:index.php
 	</head>
 	
 	<body style="background:#3D3D3D;">
