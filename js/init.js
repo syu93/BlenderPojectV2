@@ -5,25 +5,19 @@ $( document ).ready(function(){
 	INTERSECTED, SELECTED;
 	var objects = [], plane;
 	
-	init();
-	render();
-	
 	function init(){
-		// Initiate the canvas scene
-		//***************************************************************//
-		//***************************************************************//
+	// Initiate the canvas scene
 		renderer = new THREE.WebGLRenderer({ alpha: true });			
-		renderer.setClearColor( 0xdcdcdc, 1);
-		
-		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
-		
-		scene = new THREE.Scene();
-		
-		scene.add(camera);
-		
-		camera.position.z = 300; //FIXME : Can we make it move
+		renderer.setClearColor( 0x1d1d1d, 1);
 		renderer.setSize(window.innerWidth-100 , window.innerHeight-100);
 		
+		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);	
+		camera.position.z = 300;
+		
+		scene = new THREE.Scene();		
+		scene.add(camera);
+		
+		//FIXME:identify the better container to use (body or HTML element)
 		container = $('body');
 		container.append(renderer.domElement);
 	
@@ -32,8 +26,10 @@ $( document ).ready(function(){
 		plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
 		plane.visible = false;
 		scene.add( plane );
-		//****************************************************************//
+		
+		//Buld the 3D axis
 		axis();
+		
 		projector = new THREE.Projector();
 		
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -42,7 +38,8 @@ $( document ).ready(function(){
 	}
 	
 	function axis(){
-				var axes = buildAxes(window.innerWidth );
+		//Create the 3D axis
+		var axes = buildAxes(window.innerWidth );
 		scene.add(axes);
 		buildAxis(
 			new THREE.Vector3( 0, 0, 0 ),
@@ -60,6 +57,7 @@ $( document ).ready(function(){
 	}
 
 	function render() {
+	//Make the render for the view
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 		controls.update();
@@ -67,7 +65,7 @@ $( document ).ready(function(){
 
 //***************************************************************//
 //***************************************************************//
-	
+//GUI
 	$('#n_sphere').click(function(){
 		$("#s_tools").attr('data', 'sphere');
 		var new_elem = new_sphere();
@@ -172,9 +170,7 @@ $( document ).ready(function(){
 
 			var intersects = raycaster.intersectObject( plane );
 			offset.copy( intersects[ 0 ].point ).sub( plane.position );
-
-			// container.style.cursor = 'move';
-			// container.css( "cursor", "move" );
+			
 			$(this).css( "cursor", "move" );
 
 		}
@@ -255,4 +251,11 @@ function clear_scene(){
 	}
 }
 
+/**********************************************************************************************************************************************/
+/**********************************************************************************************************************************************/
+/**********************************************************************************************************************************************/
+/**********************************************************************************************************************************************/
+//Execute function FIXME: So bad here make it somewhere else
+	init();
+	render();
 });
