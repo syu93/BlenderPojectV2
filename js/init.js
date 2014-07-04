@@ -167,6 +167,7 @@ $( document ).ready(function(){
 			controls.enabled = false;
 
 			SELECTED = intersects[ 0 ].object;
+			SELECTED.material.color.setHex(0xeeeeee);
 
 			var intersects = raycaster.intersectObject( plane );
 			offset.copy( intersects[ 0 ].point ).sub( plane.position );
@@ -186,6 +187,7 @@ $( document ).ready(function(){
 		if ( INTERSECTED ) {
 
 			plane.position.copy( INTERSECTED.position );
+			SELECTED.material.color.setHex(0x666666);
 
 			SELECTED = null;
 
