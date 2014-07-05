@@ -1,4 +1,5 @@
 $( document ).ready(function(){
+	var x;	
 	var scene, camera, renderer, projector;
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
@@ -7,6 +8,8 @@ $( document ).ready(function(){
 	
 	function init(){
 	// Initiate the canvas scene
+		scene = new THREE.Scene();		
+		
 		renderer = new THREE.WebGLRenderer({ alpha: true });			
 		renderer.setClearColor( 0x1d1d1d, 1);
 		renderer.setSize(window.innerWidth-100 , window.innerHeight-100);
@@ -14,7 +17,6 @@ $( document ).ready(function(){
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);	
 		camera.position.z = 300;
 		
-		scene = new THREE.Scene();		
 		scene.add(camera);
 		
 		//FIXME:identify the better container to use (body or HTML element)
@@ -92,6 +94,12 @@ $( document ).ready(function(){
 		scope.zoomIn();
 		$('#scale').html(camera.position.z);
 		
+	});
+
+	$('#save').click(function(){
+		alert(objects);
+		send_scene(objects);
+		// window.location.reload();
 	});
 	
 //***************************************************************//
@@ -175,7 +183,8 @@ $( document ).ready(function(){
 			$(this).css( "cursor", "move" );
 
 		}
-
+		// else{$(this).css( "cursor", "none" );}
+		// send_scene(scene);
 	}
 
 	function onDocumentMouseUp( event ) {
@@ -208,23 +217,23 @@ function new_sphere(){
 	//***************************************************************//
 	//***************************************************************//
 	var pointLight = new THREE.PointLight(0xFFFFFF);
-	pointLight.position.x = 10;
+	pointLight.position.x = 50;
 	pointLight.position.y = 50;
 	pointLight.position.z = 130;
 	//***************************************************************//
 	//***************************************************************//
-	scene.add(pointLight);
+	// scene.add(pointLight);
 	scene.add(sphere);
 	objects.push( sphere );
 	
-	send_scene(scene);
 	render();
 }
 
 function new_cube(){
-	var geometry = new THREE.CubeGeometry(64,64,64);
-	var material = new THREE.MeshBasicMaterial({color:0x666666});			
+	var geometry = new THREE.BoxGeometry(64,64,64);
+	var material = new THREE.MeshBasicMaterial({color:0x666666});		
 	var cube = new THREE.Mesh(geometry, material);
+	cube.name="cube";
 	//***************************************************************//
 	//***************************************************************//
 	var pointLight = new THREE.PointLight(0xFFFFFF);
@@ -236,8 +245,7 @@ function new_cube(){
 	scene.add(pointLight);
 	scene.add(cube);
 	objects.push( cube );
-	
-	send_scene(scene);
+	// send_scene(objects);
 	render();
 }
 
@@ -258,6 +266,18 @@ function clear_scene(){
 /**********************************************************************************************************************************************/
 /**********************************************************************************************************************************************/
 //Execute function FIXME: So bad here make it somewhere else
+	x = document.cookie;
+
+	if(x=="")
+	{
+		x = document.cookie;
+		s = x.camera;
+		requestAnimationFrame(render);
+		renderer.render(x, s);
+		controls.update();
+	}
+	else{
 	init();
 	render();
+	}
 });
