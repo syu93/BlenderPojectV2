@@ -1,16 +1,12 @@
 <?php
 	require_once('lib.php');
 	
-	if(isset($_POST['scene']))
+	if(isset($_POST['object']))
 	{
-		$obj = json_decode($_POST['scene']);
-		
-		session_start();
-		foreach($obj as $object):
-			array_push($_SESSION['scene'], $object);
-		endforeach;
-		
-		var_dump($obj);
+			session_start();
+			array_push($_SESSION['object'], $_POST['object']);
+			
+		var_dump($_POST['object']);
 		return;
 	}
 	

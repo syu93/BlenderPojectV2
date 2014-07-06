@@ -97,7 +97,7 @@ $( document ).ready(function(){
 	});
 
 	$('#save').click(function(){
-		alert(objects);
+		// alert(objects);
 		send_scene(objects);
 		// window.location.reload();
 	});

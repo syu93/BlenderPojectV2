@@ -21,9 +21,9 @@
 		{
 			session_start();
 			
-			if(empty($_SESSION['scene']))
+			if(empty($_SESSION['object']))
 			{
-				$_SESSION['scene']=[];
+				$_SESSION['object']=[];
 			}
 		}
 	}
