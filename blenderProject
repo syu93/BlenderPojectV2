@@ -1,11 +1,6 @@
 <NotepadPlus>
     <Session activeView="1">
         <mainView activeIndex="0" />
-        <subView activeIndex="0">
-            <File firstVisibleLine="18" xOffset="0" scrollWidth="1199" startPos="1195" endPos="1195" selMode="0" lang="Javascript" encoding="-1" filename="D:\Developpement\EasyPHP-DevServer\data\localweb\BlenderPojectV2\js\init.js" />
-            <File firstVisibleLine="56" xOffset="0" scrollWidth="809" startPos="1551" endPos="1551" selMode="0" lang="Javascript" encoding="-1" filename="D:\Developpement\EasyPHP-DevServer\data\localweb\BlenderPojectV2\js\axis.js" />
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="586" startPos="430" endPos="430" selMode="0" lang="HTML" encoding="-1" filename="D:\Developpement\EasyPHP-DevServer\data\localweb\BlenderPojectV2\index.html" />
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="981" startPos="44" endPos="9" selMode="0" lang="PHP" encoding="-1" filename="D:\Developpement\EasyPHP-DevServer\data\localweb\Split - prod\include\header.php" />
-        </subView>
+        <subView activeIndex="0" />
     </Session>
 </NotepadPlus>

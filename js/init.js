@@ -1,4 +1,4 @@
-$( document ).ready(function(){
+// $( document ).ready(function(){
 	var x;	
 	var scene, camera, renderer, projector;
 	var mouse = new THREE.Vector2(),
@@ -67,6 +67,7 @@ $( document ).ready(function(){
 
 //***************************************************************//
 //***************************************************************//
+$( document ).ready(function(){
 //GUI
 	$('#n_sphere').click(function(){
 		$("#s_tools").attr('data', 'sphere');
@@ -101,7 +102,7 @@ $( document ).ready(function(){
 		send_scene(objects);
 		// window.location.reload();
 	});
-	
+});
 //***************************************************************//
 //***************************************************************//
 	function onDocumentMouseMove( event ) {
@@ -249,6 +250,30 @@ function new_cube(){
 	render();
 }
 
+function new_cube_save(x,y,z){
+	var geometry = new THREE.BoxGeometry(64,64,64);
+	var material = new THREE.MeshBasicMaterial({color:0x666666});		
+	var cube = new THREE.Mesh(geometry, material);
+	cube.name="cube";
+	
+	cube.position.x = x;
+	cube.position.y = y;
+	cube.position.z = z;
+	//***************************************************************//
+	//***************************************************************//
+	var pointLight = new THREE.PointLight(0xFFFFFF);
+	pointLight.position.x = 10;
+	pointLight.position.y = 50;
+	pointLight.position.z = 130;
+	//***************************************************************//
+	//***************************************************************//
+	scene.add(pointLight);
+	scene.add(cube);
+	objects.push( cube );
+	// send_scene(objects);
+	render();
+}
+
 function clear_scene(){
 	var obj, i;
 	for ( i = scene.children.length - 1; i >= 0 ; i -- ) 
@@ -280,4 +305,4 @@ function clear_scene(){
 	init();
 	render();
 	}
-});
+// });
