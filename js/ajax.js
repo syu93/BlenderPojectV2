@@ -16,23 +16,18 @@ function send_scene(scene){
 		
 		for(key in scene) {
 			console.log(scene[key]);
-			x=scene[key].position.x; console.log("X : "+scene[key].position.x); 
+			x=scene[key].position.x; console.log("X : "+scene[key].position.x);
 			y=scene[key].position.y; console.log("Y : "+scene[key].position.y);
 			z=scene[key].position.z; console.log("Z : "+scene[key].position.z);
-			new_cube_save(x,y,z);
+			new_cube_save(x,y,z); //Transform this function in recovery function and check the type of object with the name attr
 
 			if(window.sessionStorage){
-				// for(idx in scene) {
 				var obj_table = {};
-				obj_table.position={x:scene[key].position.x,y:scene[key].position.y, z:scene[key].position.z};
-				// obj_table.position.x= scene[key].position.x;
-				// obj_table.position.y= scene[key].position.y;
-				// obj_table.position.z= scene[key].position.z;
+				obj_table.position={x:scene[key].position.x,y:scene[key].position.y, z:scene[key].position.z};				
+				obj = JSON.stringify(obj_table);
 				
-				// obj = JSON.stringify(obj_table);
 				console.log(obj_table);
-				// window.sessionStorage.setItem( idx, obj );
-				// }
+				window.sessionStorage.setItem( key, obj );
 			}
 		}
 			
