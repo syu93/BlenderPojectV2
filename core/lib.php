@@ -15,8 +15,7 @@
 	echo '</pre>';
 	}
 	
-	function init_session()
-	{
+	function init_session(){
 		if(empty($_SESSION))
 		{
 			session_start();

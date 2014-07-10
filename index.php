@@ -3,14 +3,6 @@
 	/**********/
 	init_session();
 	// debug($_SESSION);
-	$scene="none";
-	// init_cookie($scene);
-	
-	// session_start();
-	// array_push($_SESSION['scene'], "plop");
-	// $stack = array();
-	// array_push($stack, "apple", "raspberry");
-	debug($_SESSION);
 	
 ?>
 <html>
@@ -25,6 +17,7 @@
 		<script src="js/ajax.js"></script>
 
 		<script src="js/init.js"></script>
+		<script src="js/gui.js"></script>
 	</head>
 	
 	<body style="background:#3D3D3D;">

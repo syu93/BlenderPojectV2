@@ -1,4 +1,3 @@
-// $( document ).ready(function(){
 	var x;	
 	var scene, camera, renderer, projector;
 	var mouse = new THREE.Vector2(),
@@ -8,9 +7,9 @@
 	
 	function init(){
 	// Initiate the canvas scene
-		scene = new THREE.Scene();		
+		scene = new THREE.Scene();
 		
-		renderer = new THREE.WebGLRenderer({ alpha: true });			
+		renderer = new THREE.WebGLRenderer({ alpha: true });		
 		renderer.setClearColor( 0x1d1d1d, 1);
 		renderer.setSize(window.innerWidth-100 , window.innerHeight-100);
 		
@@ -67,42 +66,6 @@
 
 //***************************************************************//
 //***************************************************************//
-$( document ).ready(function(){
-//GUI
-	$('#n_sphere').click(function(){
-		$("#s_tools").attr('data', 'sphere');
-		var new_elem = new_sphere();
-	});
-
-	$('#n_cube').click(function(){
-		$("#s_tools").attr('data', 'sphere');
-		var new_elem = new_cube();
-	});
-	
-	$('#t_clear').click(function(){
-		$("#s_tools").attr('data', 'clear');
-		clear_scene();		
-	});
-
-	$('#t_zoom').click(function(){
-		$("#s_tools").attr('data', 'zoom');
-		camera.position.z-=100;
-		$('#scale').html(camera.position.z);		
-	});
-
-	$('#t_dezoom').click(function(){
-		$("#s_tools").attr('data', 'dezoom');
-		scope.zoomIn();
-		$('#scale').html(camera.position.z);
-		
-	});
-
-	$('#save').click(function(){
-		// alert(objects);
-		send_scene(objects);
-		// window.location.reload();
-	});
-});
 //***************************************************************//
 //***************************************************************//
 	function onDocumentMouseMove( event ) {
@@ -185,7 +148,6 @@ $( document ).ready(function(){
 
 		}
 		// else{$(this).css( "cursor", "none" );}
-		// send_scene(scene);
 	}
 
 	function onDocumentMouseUp( event ) {
@@ -246,32 +208,49 @@ function new_cube(){
 	scene.add(pointLight);
 	scene.add(cube);
 	objects.push( cube );
-	// send_scene(objects);
+		console.log(objects);
 	render();
 }
 
-function new_cube_save(x,y,z){
-	var geometry = new THREE.BoxGeometry(64,64,64);
-	var material = new THREE.MeshBasicMaterial({color:0x666666});		
-	var cube = new THREE.Mesh(geometry, material);
-	cube.name="cube";
+function new_cube_save() {
+	var recovery_object;
 	
-	cube.position.x = x;
-	cube.position.y = y;
-	cube.position.z = z;
-	//***************************************************************//
-	//***************************************************************//
-	var pointLight = new THREE.PointLight(0xFFFFFF);
-	pointLight.position.x = 10;
-	pointLight.position.y = 50;
-	pointLight.position.z = 130;
-	//***************************************************************//
-	//***************************************************************//
-	scene.add(pointLight);
-	scene.add(cube);
-	objects.push( cube );
-	// send_scene(objects);
-	render();
+	if(window.sessionStorage){
+	var save = window.sessionStorage;
+		console.log(save);
+			for(key in save)
+			{
+				var attr_obj = JSON.parse(save[key]);
+				console.log(attr_obj);
+				if(attr_obj.type.name == "cube")
+				{
+					var geometry = new THREE.BoxGeometry(64,64,64);
+					var material = new THREE.MeshBasicMaterial({color:0x666666});		
+					var recovery_object = new THREE.Mesh(geometry, material);
+
+					recovery_object.position.x = attr_obj.position.x;
+					recovery_object.position.y = attr_obj.position.y;
+					recovery_object.position.z = attr_obj.position.z;
+				
+					recovery_object.id = attr_obj.id;
+					recovery_object.name = attr_obj.type.name;
+				}
+					//***************************************************************//
+					//***************************************************************//
+					var pointLight = new THREE.PointLight(0xFFFFFF);
+					pointLight.position.x = 10;
+					pointLight.position.y = 50;
+					pointLight.position.z = 130;
+					
+					//***************************************************************//
+					//***************************************************************//				
+					scene.add( pointLight );
+					scene.add( recovery_object );
+					objects.push( recovery_object );
+					render();
+			}
+	}
+					// console.log(scene);
 }
 
 function clear_scene(){
@@ -291,18 +270,10 @@ function clear_scene(){
 /**********************************************************************************************************************************************/
 /**********************************************************************************************************************************************/
 //Execute function FIXME: So bad here make it somewhere else
-	x = document.cookie;
-
-	if(x=="")
-	{
-		x = document.cookie;
-		s = x.camera;
-		requestAnimationFrame(render);
-		renderer.render(x, s);
-		controls.update();
-	}
-	else{
 	init();
 	render();
-	}
-// });
+$( document ).ready(function(){
+	init();
+	new_cube_save();
+	render();
+});

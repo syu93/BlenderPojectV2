@@ -29,7 +29,6 @@ function buildAxes( length ) {
         axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z
 
         return axes;
-
 }
 	// not to used
 	function axes(){
