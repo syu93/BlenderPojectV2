@@ -31,4 +31,16 @@ $( document ).ready(function(){
 	$('#save').click(function(){
 		send_scene(objects);
 	});
+
+	$('#side_menu_on').click(function(){
+		reduce_frame();
+		$('#side_menu_on').attr('id', 'side_menu_off');
+		$('#side_menu_off').attr('value', 'Close side panel');		
+	});
+	
+	$('#side_menu_off').click(function(){
+		expend_frame();
+		$('#side_menu_off').attr('id', 'side_menu_on');
+		$('#side_menu_on').attr('value', 'Open side panel');		
+	});
 });

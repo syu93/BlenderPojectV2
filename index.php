@@ -17,6 +17,7 @@
 		<script src="js/ajax.js"></script>
 
 		<script src="js/init.js"></script>
+		<script src="js/lib.js"></script>
 		<script src="js/gui.js"></script>
 	</head>
 	
@@ -27,6 +28,8 @@
 		<input id="t_zoom" type="button" value="+">	
 		<input id="t_dezoom" type="button" value="-">
 		<input id="save" type="button" value="Save">
+		
+		<input id="side_menu_on" type="button" value="Open side panel">
 		
 		<span id="s_tools" data=""></span>
 		<span id="scale" data=""></span>
