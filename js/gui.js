@@ -41,6 +41,6 @@ $( document ).ready(function(){
 	$('#side_menu_off').click(function(){
 		expend_frame();
 		$('#side_menu_off').attr('id', 'side_menu_on');
-		$('#side_menu_on').attr('value', 'Open side panel');		
+		$('#side_menu_on').attr('value', 'Open side panel');
 	});
 });
