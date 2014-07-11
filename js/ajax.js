@@ -9,7 +9,7 @@ function send_scene(scene) {
 		// z=scene[key].position.z; 
 			console.log("Z : "+scene[key].position.z);
 		
-		if(typeof window.sessionStorage[0] == "undefined"){
+		if(typeof window.sessionStorage[0] == "undefined") {
 		//First time
 		console.log(scene[key].id);
 		console.log(scene[key].name);
@@ -23,7 +23,7 @@ function send_scene(scene) {
 			console.log(obj_table);
 			window.sessionStorage[key] = obj;
 		}
-		else{
+		else {
 		//Other time
 		console.log(scene[key].id.id);
 		console.log(scene[key].name);
