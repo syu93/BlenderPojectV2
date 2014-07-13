@@ -19,6 +19,17 @@
 		<script src="js/init.js"></script>
 		<script src="js/lib.js"></script>
 		<script src="js/gui.js"></script>
+		<script>
+var o = {prop: 37};
+
+function independent() {
+  return this.prop;
+}
+
+o.f = independent;
+
+console.log(o.f());
+		</script>
 	</head>
 	
 	<body style="background:#3D3D3D;">

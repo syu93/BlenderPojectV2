@@ -23,7 +23,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	this.userRotateSpeed = 1.0;
 
 	this.userPan = true;
-	this.userPanSpeed = 2.0;
+	this.userPanSpeed = 3.0;
 
 	this.autoRotate = false;
 	this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
@@ -58,7 +58,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	var lastPosition = new THREE.Vector3();
 
-	var STATE = { NONE: -1, ROTATE: 0, ZOOM: 1, PAN: 2 };
+	var STATE = { NONE: -1, ROTATE: 0, ZOOM: 1, PAN: 3 };
 	var state = STATE.NONE;
 
 	// events
@@ -149,6 +149,11 @@ THREE.OrbitControls = function ( object, domElement ) {
 		this.center.add( distance );
 
 	};
+	
+	// this.pan = function ( distance ) {
+	// console.log(distance);
+
+	// };
 
 	this.update = function () {
 
@@ -250,8 +255,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else if ( state === STATE.PAN ) {
 
-			//state = STATE.PAN;
-
+			// state = STATE.PAN;
+			
+			
 		}
 
 		document.addEventListener( 'mousemove', onMouseMove, false );
@@ -351,8 +357,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 		if ( scope.userPan === false ) return;
 
 		switch ( event.keyCode ) {
-
-			/*case scope.keys.UP:
+//
+			case scope.keys.UP:
 				scope.pan( new THREE.Vector3( 0, 1, 0 ) );
 				break;
 			case scope.keys.BOTTOM:
@@ -364,7 +370,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 			case scope.keys.RIGHT:
 				scope.pan( new THREE.Vector3( 1, 0, 0 ) );
 				break;
-			*/
+//			
 			case scope.keys.ROTATE:
 				state = STATE.ROTATE;
 				break;
