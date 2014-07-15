@@ -393,7 +393,6 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 		event.preventDefault();
 		event.stopPropagation();
-		alert();
 
 		if ( _state === STATE.NONE ) {
 
@@ -405,7 +404,6 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 			_this.getMouseProjectionOnBall( event.pageX, event.pageY, _rotateStart );
 			_rotateEnd.copy(_rotateStart)
-			alert();
 
 		} else if ( _state === STATE.ZOOM && !_this.noZoom ) {
 

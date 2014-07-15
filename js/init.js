@@ -1,4 +1,3 @@
-	var x;	
 	var scene, camera, renderer, projector;
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
@@ -8,16 +7,17 @@
 	function init(){
 	// Initiate the canvas scene
 		scene = new THREE.Scene();
+		scene.name="main scene";
 		
 		renderer = new THREE.WebGLRenderer({ alpha: true });		
 		renderer.setClearColor( 0x1d1d1d, 1);
 		renderer.setSize(window.innerWidth-100 , window.innerHeight-100);
 		
-		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);	
-		camera.position.z = 300;
-		camera.position.y = 300;
-		camera.position.x = 300;
+		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+		camera.name="main camera";
 		
+		camera.position.set(150,150,150);
+		camera.lookAt(scene.position);
 		
 		scene.add(camera);
 		
@@ -42,27 +42,13 @@
 	}
 	
 	function axis(){
-		//Create the 3D axis
+		// Create the 3D axis
 		var axes = buildAxes(window.innerWidth );
 		scene.add(axes);
-		buildAxis(
-			new THREE.Vector3( 0, 0, 0 ),
-			new THREE.Vector3( length, 0, 0 ),
-			0xFF0000,
-			false
-		);
-		
-		buildAxis(
-			new THREE.Vector3( 0, 0, 0 ),
-			new THREE.Vector3( -length, 0, 0 ), // notice the minus sign?
-			0xFF0000,
-			true // ... and true because we want this axis to be dashed
-		);
 	}
 
 	function render() {
-	//Make the render for the view
-		// camera.lookAt( objects.position );
+	// Make the render for the view
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 		controls.update();
@@ -130,8 +116,6 @@
 	function onDocumentMouseDown( event ) {
 
 		event.preventDefault();
-		console.log("X : "+mouse.x+","+"Y : "+ mouse.y);
-		console.log("X : "+camera.position.x+","+"Y : "+ camera.position.y+","+"Z : "+ camera.position.z);
 
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
 		projector.unprojectVector( vector, camera );
@@ -145,14 +129,12 @@
 			controls.enabled = false;
 
 			SELECTED = intersects[ 0 ].object;
-			SELECTED.material.color.setHex(0xeeeeee);
+			selected_object(SELECTED, scene, camera);
 
 			var intersects = raycaster.intersectObject( plane );
 			offset.copy( intersects[ 0 ].point ).sub( plane.position );
 			
 			$(this).css( "cursor", "move" );
-			console.log(SELECTED.position);
-			camera.lookAt( SELECTED );
 		}
 	}
 
@@ -165,14 +147,11 @@
 		if ( INTERSECTED ) {
 
 			plane.position.copy( INTERSECTED.position );
-			SELECTED.material.color.setHex(0x666666);
 
 			SELECTED = null;
 
 		}
 
-		// container.style.cursor = 'auto';.
-		// container.css( "cursor", "auto" );
 		$(this).css( "cursor", "auto" );
 
 	}
@@ -200,22 +179,35 @@ function new_sphere(){
 
 function new_cube(){
 	var geometry = new THREE.BoxGeometry(64,64,64);
-	var material = new THREE.MeshBasicMaterial({color:0x555555});		
+	// var material = new THREE.MeshBasicMaterial({color:0x555555});		
+	var material = new THREE.MeshBasicMaterial({
+		color: 0x0000ff,
+		transparent: true,
+		opacity: 1,
+		blending: THREE.NoBlending
+	});
 	var cube = new THREE.Mesh(geometry, material);
 	cube.name="cube";
+	
 	//***************************************************************//
 	//***************************************************************//
-	var pointLight = new THREE.PointLight(0xFFFFFF);
-	pointLight.position.x = 10;
-	pointLight.position.y = 50;
-	pointLight.position.z = 130;
+	// scene.add(pointLight);
+	var axs = obj_axes(cube);
+	cube.add(axs);
+	
 	//***************************************************************//
 	//***************************************************************//
-	scene.add(pointLight);
+	// camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+	// camera.position.set(150,150,150);
+	// cube.add(camera);
+	
+	//***************************************************************//
+	//***************************************************************//
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
 	scene.add(cube);
 	objects.push( cube );
-		console.log(objects);
-	render();
+	
+	render();	
 }
 
 function new_cube_save() {
@@ -256,7 +248,6 @@ function new_cube_save() {
 					render();
 			}
 	}
-					// console.log(scene);
 }
 
 function clear_scene(){

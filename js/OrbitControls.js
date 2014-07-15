@@ -144,16 +144,13 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		distance.transformDirection( this.object.matrix );
 		distance.multiplyScalar( scope.userPanSpeed );
-
+		
+		// console.log(distance);
+		
 		this.object.position.add( distance );
 		this.center.add( distance );
 
 	};
-	
-	// this.pan = function ( distance ) {
-	// console.log(distance);
-
-	// };
 
 	this.update = function () {
 
