@@ -22,15 +22,22 @@
 	</head>
 	
 	<body style="background:#3D3D3D;">
-		<input id="n_cube" type="button" value="New Cube">
-		<input id="n_sphere" type="button" value="New Sphere">
-		<input id="t_clear" type="button" value="Clear Scene">
-		<input id="t_zoom" type="button" value="+">	
-		<input id="t_dezoom" type="button" value="-">
-		<input id="save" type="button" value="Save">
-		
-		<input id="side_menu_on" type="button" value="Open side panel">
-		
+		<div>
+			<input id="n_cube" type="button" value="New Cube">
+			<input id="n_sphere" type="button" value="New Sphere">
+			<input id="t_clear" type="button" value="Clear Scene">
+			<input id="t_zoom" type="button" value="+">	
+			<input id="t_dezoom" type="button" value="-">
+			<input id="save" type="button" value="Save">
+		</div>
+		<div>
+			<input id="enable_axis" type="button" value="Enisable Axis">
+			<input id="disable_axis" type="button" value="Disable Axis">
+		</div>
+		<div>
+			<input id="side_menu_on" type="button" value="Open side panel">
+			<input id="side_menu_off" type="button" value="Close side panel">
+		</div>
 		<span id="s_tools" data=""></span>
 		<span id="scale" data=""></span>
 	</body>

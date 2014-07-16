@@ -6,6 +6,7 @@
 	
 	function init(){
 	// Initiate the canvas scene
+		//Create the maine scene
 		scene = new THREE.Scene();
 		scene.name="main scene";
 		
@@ -13,17 +14,14 @@
 		renderer.setClearColor( 0x1d1d1d, 1);
 		renderer.setSize(window.innerWidth-100 , window.innerHeight-100);
 		
+		//create the maine camera
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
 		camera.name="main camera";
 		
-		camera.position.set(150,150,150);
-		camera.lookAt(scene.position);
+		camera.position.set(200,180,525);
+		// camera.lookAt(scene.position);
 		
 		scene.add(camera);
-		
-		//FIXME:identify the better container to use (body or HTML element)
-		container = $('body');
-		container.append(renderer.domElement);
 	
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		
@@ -34,8 +32,22 @@
 		//Buld the 3D axis
 		axis();
 		
-		projector = new THREE.Projector();
+		//origin
+		origin();
 		
+		//Floor
+		grid();
+		
+		//Projector for the camera
+		projector = new THREE.Projector();
+
+		// scene.add( new THREE.AxisHelper(50 * 1.5) );
+		//FIXME:identify the better container to use (body or HTML element)
+		container = $('body');
+		container.append(renderer.domElement);
+		
+		//--------
+		//--------
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -72,13 +84,10 @@
 
 		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 
-
 		if ( SELECTED ) {
-
 			var intersects = raycaster.intersectObject( plane );
 			SELECTED.position.copy( intersects[ 0 ].point.sub( offset ) );
 			return;
-
 		}
 
 		var intersects = raycaster.intersectObjects( objects );
@@ -135,6 +144,10 @@
 			offset.copy( intersects[ 0 ].point ).sub( plane.position );
 			
 			$(this).css( "cursor", "move" );
+		}
+		else
+		{
+			// alert('plop');
 		}
 	}
 
@@ -197,13 +210,14 @@ function new_cube(){
 	
 	//***************************************************************//
 	//***************************************************************//
-	// camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
-	// camera.position.set(150,150,150);
-	// cube.add(camera);
+	var hex = 0xff0000;
+	var bbox = new THREE.BoundingBoxHelper( cube, hex ); 
+	bbox.update();
 	
+	cube.add( bbox );
+
 	//***************************************************************//
 	//***************************************************************//
-	controls = new THREE.OrbitControls(camera, renderer.domElement);
 	scene.add(cube);
 	objects.push( cube );
 	
@@ -250,25 +264,11 @@ function new_cube_save() {
 	}
 }
 
-function clear_scene(){
-	var obj, i;
-	for ( i = scene.children.length - 1; i >= 0 ; i -- ) 
-	{
-		obj = scene.children[ i ];
-		if (obj !== camera) {
-			scene.remove(obj);
-		}
-		axis();
-	}
-}
+/**********************************************************************************************************************************************/
+/**********************************************************************************************************************************************/
+/**********************************************************************************************************************************************/
+/**********************************************************************************************************************************************/
 
-/**********************************************************************************************************************************************/
-/**********************************************************************************************************************************************/
-/**********************************************************************************************************************************************/
-/**********************************************************************************************************************************************/
-//Execute function FIXME: So bad here make it somewhere else
-	init();
-	render();
 $( document ).ready(function(){
 	init();
 	new_cube_save();
