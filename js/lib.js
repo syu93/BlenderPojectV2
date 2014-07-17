@@ -78,10 +78,17 @@ function selected_object(object, scene, camera){
 	console.log(object);
 	object.material.color.setHex(0xeeeeee);
 	object.material.blending = THREE.SubtractiveBlending;
-		
-	// object.add(camera);
+
+	obj_camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+	obj_camera.name="object camera";
+	// console.log(object.children[1]);
+	object.children[0].add(camera);
+	obj_camera.lookAt(object.children[0].position);
 	
-	object.children[0].children[0].visible = true;
-	object.children[0].children[1].visible = true;
-	object.children[0].children[2].visible = true;
+	// object.children[0].children[0].visible = true;
+	// object.children[0].children[1].visible = true;
+	// object.children[0].children[2].visible = true;
+		requestAnimationFrame(render);
+		renderer.render(scene, obj_camera);
+		controls.update();
 }

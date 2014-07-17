@@ -33,7 +33,7 @@
 		axis();
 		
 		//origin
-		origin();
+		// origin();
 		
 		//Floor
 		grid();
@@ -206,17 +206,22 @@ function new_cube(){
 	//***************************************************************//
 	// scene.add(pointLight);
 	var axs = obj_axes(cube);
-	cube.add(axs);
+	// cube.add(axs);
 	
 	//***************************************************************//
 	//***************************************************************//
 	var hex = 0xff0000;
-	var bbox = new THREE.BoundingBoxHelper( cube, hex ); 
+	var bbox = new THREE.BoundingBoxHelper( cube, hex );
+	bbox.name="bbox";
 	bbox.update();
+	bbox.box.max=32;
+		console.log(bbox.box.min);
+		console.log(bbox.box.max);
 	
 	cube.add( bbox );
 
 	//***************************************************************//
+	cube.position.set(100,0,0);
 	//***************************************************************//
 	scene.add(cube);
 	objects.push( cube );
