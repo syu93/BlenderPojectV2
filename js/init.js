@@ -77,7 +77,7 @@
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-		//
+		
 
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
 		projector.unprojectVector( vector, camera );
@@ -106,7 +106,7 @@
 
 			}
 
-			// container.style.cursor = 'pointer';
+			//container.style.cursor = 'pointer';
 			container.css( "cursor", "pointer" );
 
 		} else {
@@ -115,7 +115,7 @@
 
 			INTERSECTED = null;
 
-			// container.style.cursor = 'auto';
+			//container.style.cursor = 'auto';
 			container.css( "cursor", "auto" );
 
 		}
@@ -134,20 +134,16 @@
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
-
+			console.log(intersects[ 0 ]);
 			controls.enabled = false;
 
 			SELECTED = intersects[ 0 ].object;
 			selected_object(SELECTED, scene, camera);
-
+			
 			var intersects = raycaster.intersectObject( plane );
 			offset.copy( intersects[ 0 ].point ).sub( plane.position );
 			
 			$(this).css( "cursor", "move" );
-		}
-		else
-		{
-			// alert('plop');
 		}
 	}
 
@@ -204,24 +200,22 @@ function new_cube(){
 	
 	//***************************************************************//
 	//***************************************************************//
-	// scene.add(pointLight);
-	var axs = obj_axes(cube);
-	// cube.add(axs);
-	
-	//***************************************************************//
-	//***************************************************************//
 	var hex = 0xff0000;
 	var bbox = new THREE.BoundingBoxHelper( cube, hex );
 	bbox.name="bbox";
 	bbox.update();
 	bbox.box.max=32;
-		console.log(bbox.box.min);
+	// bbox.position.set(100,0,0);
+	console.log(bbox.box.min);
 		console.log(bbox.box.max);
 	
 	cube.add( bbox );
-
 	//***************************************************************//
-	cube.position.set(100,0,0);
+	//***************************************************************//
+	var axs = obj_axes(cube);
+	cube.add(axs);
+	//***************************************************************//
+	// cube.position.set(100,0,0);
 	//***************************************************************//
 	scene.add(cube);
 	objects.push( cube );
