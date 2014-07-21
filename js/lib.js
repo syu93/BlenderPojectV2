@@ -1,5 +1,6 @@
 //Global variable
-var selected_object, canvas_w, canvas_h;
+var selected_object,
+	panel=false;
 //-------------------
 //-------------------
 function origin(){
@@ -34,25 +35,36 @@ function clear_scene(){
 }
 
 function reduce_frame(){
+	if(panel==false)
+	{
+	panel=true;
 	//The future side bare
 	// alert("Reduce");
 	canvas_w=$('canvas').width();
 	canvas_h=$('canvas').height();
 
-	$('canvas').css("width", window.innerWidth-300);
-	$('canvas').css("height", window.innerHeight-300);
+	$('canvas').css("width", canvas_w-300);
+	$('canvas').css("height", canvas_h-300);
 
 	$('canvas').css(" -webkit-transition", "width 2s");
 	$('canvas').css("transition", "width 2s");
+	}
 }
 function expend_frame(){
+	if(panel==true)
+	{
+	panel=false;
 	//The future side bare
 	// alert("Expend");
-	$('canvas').css("width", canvas_w);
-	$('canvas').css("height", canvas_h);	
+	canvas_w=$('canvas').width();
+	canvas_h=$('canvas').height();
+
+	$('canvas').css("width", canvas_w+300);
+	$('canvas').css("height", canvas_h+300);	
 	
 	$('canvas').css(" -webkit-transition", "width 2s");
 	$('canvas').css("transition", "width 2s");
+	}
 }
 function disable_axis(){
 	window.scene.children[2].children[0].visible=false;
@@ -72,6 +84,14 @@ function enable_axis(){
 	window.scene.children[2].children[4].visible=true;
 	window.scene.children[2].children[5].visible=true;
 	console.log("Axis are enabled");
+}
+
+function enable_grid(){
+	window.scene.children[3].visible=true;
+	console.log("Grid are enabled");
+}function disable_grid(){
+	window.scene.children[3].visible=false;
+	console.log("Grid are enabled");
 }
 
 function selected_object(object, scene, camera){

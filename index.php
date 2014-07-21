@@ -35,6 +35,10 @@
 			<input id="disable_axis" type="button" value="Disable Axis">
 		</div>
 		<div>
+			<input id="enable_grid" type="button" value="Enisable Grid">
+			<input id="disable_grid" type="button" value="Disable Grid">
+		</div>
+		<div>
 			<input id="side_menu_on" type="button" value="Open side panel">
 			<input id="side_menu_off" type="button" value="Close side panel">
 		</div>

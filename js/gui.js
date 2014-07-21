@@ -17,14 +17,18 @@ $( document ).ready(function(){
 
 	$('#t_zoom').click(function(){
 		$("#s_tools").attr('data', 'zoom');
-		camera.position.z-=100;
-		$('#scale').html(camera.position.z);		
+		// camera.position.x-=100;
+		// camera.position.y-=100;
+		// camera.position.z-=100;
+		// $('#scale').html(camera.position.z);		
 	});
 
 	$('#t_dezoom').click(function(){
 		$("#s_tools").attr('data', 'dezoom');
-		scope.zoomIn();
-		$('#scale').html(camera.position.z);
+		// camera.position.x+=100;
+		// camera.position.y+=100;
+		// camera.position.z+=100;
+		// $('#scale').html(camera.position.z);
 		
 	});
 
@@ -43,12 +47,20 @@ $( document ).ready(function(){
 	$('#enable_axis').click(function(){
 		enable_axis();
 		$('#side_menu_off').attr('id', 'side_menu_on');
-		$('#side_menu_on').attr('value', 'Open side panel');
 	});
 
 	$('#disable_axis').click(function(){
 		disable_axis();
 		$('#side_menu_off').attr('id', 'side_menu_on');
-		$('#side_menu_on').attr('value', 'Open side panel');
+	});
+
+	$('#enable_grid').click(function(){
+		enable_grid();
+		$('#side_menu_off').attr('id', 'side_menu_on');
+	});
+
+	$('#disable_grid').click(function(){
+		disable_grid();
+		$('#side_menu_off').attr('id', 'side_menu_on');
 	});
 });
