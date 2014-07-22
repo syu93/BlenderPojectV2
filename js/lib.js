@@ -46,8 +46,11 @@ function reduce_frame(){
 	$('canvas').css("width", canvas_w-300);
 	$('canvas').css("height", canvas_h-300);
 
-	$('canvas').css(" -webkit-transition", "width 2s");
-	$('canvas').css("transition", "width 2s");
+	$('canvas').css(" -webkit-transition", "width 2s", "height 2s");
+	$('canvas').css("transition", "width 2s", "height 2s");
+
+	// $('canvas').css(" -webkit-transition", "height 2s");
+	// $('canvas').css("transition", "height 2s");
 	}
 }
 function expend_frame(){
@@ -62,8 +65,11 @@ function expend_frame(){
 	$('canvas').css("width", canvas_w+300);
 	$('canvas').css("height", canvas_h+300);	
 	
-	$('canvas').css(" -webkit-transition", "width 2s");
-	$('canvas').css("transition", "width 2s");
+	$('canvas').css(" -webkit-transition", "width 2s", "height 2s");
+	$('canvas').css("transition", "width 2s", "height 2s");
+
+	// $('canvas').css(" -webkit-transition", "height 2s");
+	// $('canvas').css("transition", "height 2s");
 	}
 }
 function disable_axis(){

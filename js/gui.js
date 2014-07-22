@@ -28,8 +28,7 @@ $( document ).ready(function(){
 		// camera.position.x+=100;
 		// camera.position.y+=100;
 		// camera.position.z+=100;
-		// $('#scale').html(camera.position.z);
-		
+		// $('#scale').html(camera.position.z);	
 	});
 
 	$('#save').click(function(){
