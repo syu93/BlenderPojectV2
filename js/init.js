@@ -204,10 +204,10 @@ function new_cube(){
 	var bbox = new THREE.BoundingBoxHelper( cube, hex );
 	bbox.name="bbox";
 	bbox.update();
-	bbox.box.max=32;
+	// bbox.box.max=32;
 	// bbox.position.set(100,0,0);
-	console.log(bbox.box.min);
-		console.log(bbox.box.max);
+		// console.log(bbox.box.min);
+		// console.log(bbox.box.max);
 	
 	cube.add( bbox );
 	//***************************************************************//
@@ -255,7 +255,7 @@ function new_cube_save() {
 					
 					//***************************************************************//
 					//***************************************************************//				
-					scene.add( pointLight );
+					// scene.add( pointLight );
 					scene.add( recovery_object );
 					objects.push( recovery_object );
 					render();

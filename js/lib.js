@@ -109,6 +109,6 @@ function selected_object(object, scene, camera){
 	object.children[1].children[1].visible = true;
 	object.children[1].children[2].visible = true;
 	
-	camera.position.copy(object.children[1].children[0].position);
+	// camera.position.copy(object.children[1].children[0].position);
 
 }
