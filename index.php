@@ -8,11 +8,12 @@
 <html>
 	<head>
 		<title>My first Three.js app Blender Project</title>
-		<script src="js/jquery-1.11.0.min.js"></script>
-		<script src="js/three.min.js"></script>
+		<script src="js/libs/jquery-1.11.0.min.js"></script>
+		<script src="js/libs/three.min.js"></script>
 		
-		<script src="js/OrbitControls.js"></script>
-		<script src="js/TrackballControls.js"></script>
+		<script src="js/API/OrbitControls.js"></script>
+		<script src="js/API/TransformControls.js"></script>
+		<!--<script src="js/TrackballControls.js"></script>-->
 		<script src="js/axis.js"></script>
 		<script src="js/ajax.js"></script>
 
@@ -44,5 +45,6 @@
 		</div>
 		<span id="s_tools" data=""></span>
 		<span id="scale" data=""></span>
+		<div id="canvas"></div>
 	</body>
 </html>
