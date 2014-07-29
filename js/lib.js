@@ -13,7 +13,7 @@ function origin(){
 }
 
 function grid(){
-		var size = 200; var step = 1;
+		var size = 20; var step = 1;
 		var gridHelper = new THREE.GridHelper( size, step );
 		gridHelper.setColors(0, 0x3d3d3d)
 		gridHelper.name="main grid";
@@ -110,5 +110,6 @@ function selected_object(object, scene, camera){
 	object.children[1].children[2].visible = true;
 	
 	// camera.position.copy(object.children[1].children[0].position);
+	// camera.position.x = 80;
 
 }

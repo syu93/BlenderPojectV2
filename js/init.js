@@ -18,8 +18,7 @@
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
 		camera.name="main camera";
 		
-		camera.position.set(200,180,525);
-		// camera.lookAt(scene.position);
+		camera.position.set(16,13,39);
 		
 		scene.add(camera);
 	
@@ -187,7 +186,7 @@ function new_sphere(){
 }
 
 function new_cube(){
-	var geometry = new THREE.BoxGeometry(64,64,64);
+	var geometry = new THREE.BoxGeometry(8,8,8);
 	// var material = new THREE.MeshBasicMaterial({color:0x555555});		
 	var material = new THREE.MeshBasicMaterial({
 		color: 0x0000ff,
