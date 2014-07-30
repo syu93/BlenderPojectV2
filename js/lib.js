@@ -105,11 +105,8 @@ function selected_object(object, scene, camera){
 	object.material.color.setHex(0xeeeeee);
 	object.material.blending = THREE.SubtractiveBlending;
 	
-	object.children[1].children[0].visible = true;
-	object.children[1].children[1].visible = true;
-	object.children[1].children[2].visible = true;
-	
-	camera.position.copy(object.children[1].children[0].position);
-	// camera.position.x = 80;
+	// object.children[1].children[0].visible = true;
+	// object.children[1].children[1].visible = true;
+	// object.children[1].children[2].visible = true;
 
 }

@@ -56,10 +56,11 @@
         		});
 		/**********************************************************************************************/
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		/**********************************************************************************************/
-		plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
-		plane.visible = false;
-		scene.add( plane );
+		// plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
+		// plane.visible = false;
+		// scene.add( plane );
 		/**********************************************************************************************/
 		//Buld the 3D axis
 		// axis();
@@ -101,54 +102,14 @@
 		event.preventDefault();
 
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-		
-
-		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
-		projector.unprojectVector( vector, camera );
-
-		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
-		if ( SELECTED ) {
-			var intersects = raycaster.intersectObject( plane );
-			SELECTED.position.copy( intersects[ 0 ].point.sub( offset ) );
-			return;
-		}
-
-		var intersects = raycaster.intersectObjects( objects );
-
-		if ( intersects.length > 0 ) {
-
-			if ( INTERSECTED != intersects[ 0 ].object ) {
-
-				if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-
-				INTERSECTED = intersects[ 0 ].object;
-				INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-					console.log(INTERSECTED.name);//Log the intersect
-				plane.position.copy( INTERSECTED.position );
-				plane.lookAt( camera.position );
-
-			}
-
-			//container.style.cursor = 'pointer';
-			container.css( "cursor", "pointer" );
-
-		} else {
-
-			if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-
-			INTERSECTED = null;
-
-			//container.style.cursor = 'auto';
-			container.css( "cursor", "auto" );
-
-		}
-
+		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;		
 	}
+	function onDocumentMouseDown( event ) {
 
-
+		event.preventDefault();
+		console.log(SELECTED);
+		// selected_object(SELECTED, scene, camera);
+	}
 //***************************************************************//
 //***************************************************************//
 
