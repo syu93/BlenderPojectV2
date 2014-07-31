@@ -100,13 +100,12 @@ function enable_grid(){
 	console.log("Grid are enabled");
 }
 
-function selected_object(object, scene, camera){
-	console.log(object);
-	object.material.color.setHex(0xeeeeee);
-	object.material.blending = THREE.SubtractiveBlending;
+function selected_object(object, controls_object){
+	// console.log(object);
+	// object.material.color.setHex(0xeeeeee);
+	// object.material.blending = THREE.SubtractiveBlending;
+	//***************************************************************//
+	controls_object.attach( object );
 	
-	// object.children[1].children[0].visible = true;
-	// object.children[1].children[1].visible = true;
-	// object.children[1].children[2].visible = true;
 
 }

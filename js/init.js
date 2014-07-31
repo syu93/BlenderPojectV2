@@ -2,7 +2,7 @@
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED;
-	var objects = [], plane;
+	var objects = [], plane, controls_object;
 	
 	function init(){
 	// Initiate the canvas scene
@@ -54,14 +54,17 @@
 						break;
 		            }           
         		});
+		scene.add( controls_object );
+		/**********************************************************************************************/
+
 		/**********************************************************************************************/
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
 		/**********************************************************************************************/
-		plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
-		plane.visible = false;
-		scene.add( plane );
+		// plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
+		// plane.visible = false;
+		// scene.add( plane );
 		/**********************************************************************************************/
 		//Buld the 3D axis
 		// axis();
@@ -108,6 +111,7 @@
 	function onDocumentMouseDown( event ) {
 
 		event.preventDefault();
+		// console.log(mouse);
 
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
 		projector.unprojectVector( vector, camera );
@@ -117,16 +121,31 @@
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
-			console.log(intersects[ 0 ]);
-			controls.enabled = false;
-
+			// console.log(intersects[ 0 ].object);
+			// controls.enabled = false;
+			if(INTERSECTED)
+			{
+				if(SELECTED){}
+				else
+				{
+					INTERSECTED=SELECTED;
+					INTERSECTED.material.color.setHex(SELECTED.oldMaterial);
+					
+				}
+			}
+			else 
+			{
+				INTERSECTED = intersects[ 0 ].object;
+			}
+			
 			SELECTED = intersects[ 0 ].object;
-			selected_object(SELECTED, scene, camera);
+			SELECTED.oldMaterial = SELECTED.material.color.getHex();console.log(SELECTED.oldMaterial);
+			SELECTED.material.color.setHex( 0xcccccc );
+			console.log("Selected object : "+SELECTED.id);
+			if(SELECTED.id != INTERSECTED.id){console.log("other object");}
+			selected_object(SELECTED, controls_object);
 			
-			var intersects = raycaster.intersectObject( plane );
-			offset.copy( intersects[ 0 ].point ).sub( plane.position );
-			
-			$(this).css( "cursor", "move" );
+			// $(this).css( "cursor", "move" );
 		}
 	}
 	function onDocumentMouseUp( event ) {
@@ -137,13 +156,13 @@
 
 		if ( INTERSECTED ) {
 
-			plane.position.copy( INTERSECTED.position );
+			// plane.position.copy( INTERSECTED.position );
 
-			SELECTED = null;
+			// SELECTED = null;
 
 		}
 
-		$(this).css( "cursor", "auto" );
+		// $(this).css( "cursor", "auto" );
 
 	}
 //***************************************************************//
@@ -181,18 +200,9 @@ function new_cube(){
 	});
 	var cube = new THREE.Mesh(geometry, material);
 	cube.name="cube";
-	cube.visible=false
+	cube.visible=true
 	//***************************************************************//
-	//***************************************************************//
-	var hex = 0xff0000;
-	var bbox = new THREE.BoundingBoxHelper( cube, hex );
-	bbox.name="bbox";
-	bbox.update();
 	
-	cube.add( bbox );
-	//***************************************************************//
-	controls_object.attach( cube );
-	scene.add( controls_object );
 	//***************************************************************//
 	var axs = obj_axes(cube);
 	cube.add(axs);
