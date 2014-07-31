@@ -27,6 +27,7 @@
 		/**********************************************************************************************/
 		controls_object =  new THREE.TransformControls( camera, renderer.domElement );
 		controls_object.addEventListener( 'change', render );
+		controls_object.name="object controller";
 		// scene.add( controls_object );
 		
 					window.addEventListener( 'keydown', function ( event ) {
@@ -67,13 +68,13 @@
 		// scene.add( plane );
 		/**********************************************************************************************/
 		//Buld the 3D axis
-		// axis();
+		axis();
 		
 		//origin
-		// origin();
+		origin();
 		
 		//Floor
-		// grid();
+		grid();
 		
 		//Projector for the camera
 		projector = new THREE.Projector();
@@ -86,6 +87,7 @@
 	function axis(){
 		// Create the 3D axis
 		var axes = buildAxes(window.innerWidth );
+		axes.name="main axis";
 		scene.add(axes);
 	}
 
@@ -122,12 +124,15 @@
 
 		if ( intersects.length > 0 ) {
 			// console.log(intersects[ 0 ].object);
-			// controls.enabled = false;
+			controls.enabled = false;
 			if(INTERSECTED)
 			{
 				INTERSECTED=SELECTED;
 				console.log("Old selected object :"+INTERSECTED.id);
-				INTERSECTED.material.color.setHex(0x0000ff);
+				console.log(SELECTED.oldMaterial);
+				INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				INTERSECTED.material.blending=THREE.NoBlending;
+				// INTERSECTED.material.color.setHex(SELECTED.oldMaterial);
 			}
 			else 
 			{
@@ -135,8 +140,8 @@
 			}
 			//Current object
 			SELECTED = intersects[ 0 ].object;
-			SELECTED.oldMaterial = SELECTED.material.color.getHex();//console.log(SELECTED.oldMaterial);
-			SELECTED.material.color.setHex( 0xcccccc );
+			SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);//console.log(SELECTED.oldMaterial);
+			// SELECTED.material.color.setHex( 0xcccccc );
 			console.log("Selected object : "+SELECTED.id);
 			if(SELECTED.id != INTERSECTED.id){console.log("other object");}
 			selected_object(SELECTED, controls_object);
@@ -189,7 +194,7 @@ function new_cube(){
 	var geometry = new THREE.BoxGeometry(8,8,8);
 	// var material = new THREE.MeshBasicMaterial({color:0x555555});		
 	var material = new THREE.MeshBasicMaterial({
-		color: 0x0000ff,
+		color: 0x1111ff,
 		transparent: true,
 		opacity: 1,
 		blending: THREE.NoBlending

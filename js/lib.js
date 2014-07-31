@@ -5,10 +5,11 @@ var selected_object,
 //-------------------
 function origin(){
 	// direction (normalized), origin, length, color(hex)
-	var origin = new THREE.Vector3(50,100,50);
+	var origin = new THREE.Vector3(10,25,0);
 	var terminus  = new THREE.Vector3(0,0,0);
 	var direction = new THREE.Vector3().subVectors(terminus, origin).normalize();
-	var arrow = new THREE.ArrowHelper(direction, origin, 50, 0x884400);
+	var arrow = new THREE.ArrowHelper(direction, origin, 10, 0x884400);
+	arrow.name="origin helper";
 	window.scene.add(arrow);
 }
 
@@ -17,7 +18,7 @@ function grid(){
 		var gridHelper = new THREE.GridHelper( size, step );
 		gridHelper.setColors(0, 0x3d3d3d)
 		gridHelper.name="main grid";
-		window.scene.add( gridHelper );	
+		window.scene.add( gridHelper );
 }
 
 function clear_scene(){
@@ -28,9 +29,9 @@ function clear_scene(){
 		if (obj !== camera) {
 			window.scene.remove(obj);
 		}
-		axis();
-		grid();
-		origin();
+		// axis();
+		// grid();
+		// origin();
 	}
 }
 
@@ -102,8 +103,8 @@ function enable_grid(){
 
 function selected_object(object, controls_object){
 	// console.log(object);
-	// object.material.color.setHex(0xeeeeee);
-	// object.material.blending = THREE.SubtractiveBlending;
+	object.material.color.setHex(0xeeeeee);
+	object.material.blending = THREE.SubtractiveBlending;
 	//***************************************************************//
 	controls_object.attach( object );
 	
