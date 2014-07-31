@@ -57,10 +57,11 @@
 		/**********************************************************************************************/
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
 		/**********************************************************************************************/
-		// plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
-		// plane.visible = false;
-		// scene.add( plane );
+		plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
+		plane.visible = false;
+		scene.add( plane );
 		/**********************************************************************************************/
 		//Buld the 3D axis
 		// axis();
@@ -107,9 +108,46 @@
 	function onDocumentMouseDown( event ) {
 
 		event.preventDefault();
-		console.log(SELECTED);
-		// selected_object(SELECTED, scene, camera);
+
+		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
+		projector.unprojectVector( vector, camera );
+
+		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+		var intersects = raycaster.intersectObjects( objects );
+
+		if ( intersects.length > 0 ) {
+			console.log(intersects[ 0 ]);
+			controls.enabled = false;
+
+			SELECTED = intersects[ 0 ].object;
+			selected_object(SELECTED, scene, camera);
+			
+			var intersects = raycaster.intersectObject( plane );
+			offset.copy( intersects[ 0 ].point ).sub( plane.position );
+			
+			$(this).css( "cursor", "move" );
+		}
 	}
+	function onDocumentMouseUp( event ) {
+
+		event.preventDefault();
+
+		controls.enabled = true;
+
+		if ( INTERSECTED ) {
+
+			plane.position.copy( INTERSECTED.position );
+
+			SELECTED = null;
+
+		}
+
+		$(this).css( "cursor", "auto" );
+
+	}
+//***************************************************************//
+//***************************************************************//
 //***************************************************************//
 //***************************************************************//
 
