@@ -125,21 +125,17 @@
 			// controls.enabled = false;
 			if(INTERSECTED)
 			{
-				if(SELECTED){}
-				else
-				{
-					INTERSECTED=SELECTED;
-					INTERSECTED.material.color.setHex(SELECTED.oldMaterial);
-					
-				}
+				INTERSECTED=SELECTED;
+				console.log("Old selected object :"+INTERSECTED.id);
+				INTERSECTED.material.color.setHex(0x0000ff);
 			}
 			else 
 			{
 				INTERSECTED = intersects[ 0 ].object;
 			}
-			
+			//Current object
 			SELECTED = intersects[ 0 ].object;
-			SELECTED.oldMaterial = SELECTED.material.color.getHex();console.log(SELECTED.oldMaterial);
+			SELECTED.oldMaterial = SELECTED.material.color.getHex();//console.log(SELECTED.oldMaterial);
 			SELECTED.material.color.setHex( 0xcccccc );
 			console.log("Selected object : "+SELECTED.id);
 			if(SELECTED.id != INTERSECTED.id){console.log("other object");}
