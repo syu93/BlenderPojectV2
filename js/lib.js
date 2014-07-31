@@ -74,30 +74,30 @@ function expend_frame(){
 	}
 }
 function disable_axis(){
-	window.scene.children[1].children[0].visible=false;
-	window.scene.children[1].children[1].visible=false;
-	window.scene.children[1].children[2].visible=false;
-	window.scene.children[1].children[3].visible=false;
-	window.scene.children[1].children[4].visible=false;
-	window.scene.children[1].children[5].visible=false;
+	window.scene.children[2].children[0].visible=false;
+	window.scene.children[2].children[1].visible=false;
+	window.scene.children[2].children[2].visible=false;
+	window.scene.children[2].children[3].visible=false;
+	window.scene.children[2].children[4].visible=false;
+	window.scene.children[2].children[5].visible=false;
 	console.log("Axis are disabled");
 }
 
 function enable_axis(){
-	window.scene.children[1].children[0].visible=true;
-	window.scene.children[1].children[1].visible=true;
-	window.scene.children[1].children[2].visible=true;
-	window.scene.children[1].children[3].visible=true;
-	window.scene.children[1].children[4].visible=true;
-	window.scene.children[1].children[5].visible=true;
+	window.scene.children[2].children[0].visible=true;
+	window.scene.children[2].children[1].visible=true;
+	window.scene.children[2].children[2].visible=true;
+	window.scene.children[2].children[3].visible=true;
+	window.scene.children[2].children[4].visible=true;
+	window.scene.children[2].children[5].visible=true;
 	console.log("Axis are enabled");
 }
 
 function enable_grid(){
-	window.scene.children[2].visible=true;
+	window.scene.children[4].visible=true;
 	console.log("Grid are enabled");
 }function disable_grid(){
-	window.scene.children[2].visible=false;
+	window.scene.children[4].visible=false;
 	console.log("Grid are enabled");
 }
 
