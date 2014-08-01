@@ -16,7 +16,7 @@ function origin(){
 function grid(){
 		var size = 20; var step = 1;
 		var gridHelper = new THREE.GridHelper( size, step );
-		gridHelper.setColors(0, 0x3d3d3d)
+		gridHelper.setColors(0, 0x5d5d5d)
 		gridHelper.name="main grid";
 		window.scene.add( gridHelper );
 }
@@ -29,9 +29,9 @@ function clear_scene(){
 		if (obj !== camera) {
 			window.scene.remove(obj);
 		}
-		// axis();
-		// grid();
-		// origin();
+		axis();
+		grid();
+		origin();
 	}
 }
 
@@ -40,7 +40,6 @@ function reduce_frame(){
 	{
 	panel=true;
 	//The future side bare
-	// alert("Reduce");
 	canvas_w=$('canvas').width();
 	canvas_h=$('canvas').height();
 
@@ -49,9 +48,6 @@ function reduce_frame(){
 
 	$('canvas').css(" -webkit-transition", "width 2s", "height 2s");
 	$('canvas').css("transition", "width 2s", "height 2s");
-
-	// $('canvas').css(" -webkit-transition", "height 2s");
-	// $('canvas').css("transition", "height 2s");
 	}
 }
 function expend_frame(){
@@ -68,9 +64,6 @@ function expend_frame(){
 	
 	$('canvas').css(" -webkit-transition", "width 2s", "height 2s");
 	$('canvas').css("transition", "width 2s", "height 2s");
-
-	// $('canvas').css(" -webkit-transition", "height 2s");
-	// $('canvas').css("transition", "height 2s");
 	}
 }
 function disable_axis(){
@@ -98,15 +91,16 @@ function enable_grid(){
 	console.log("Grid are enabled");
 }function disable_grid(){
 	window.scene.children[4].visible=false;
-	console.log("Grid are enabled");
+	console.log("Grid are disable");
 }
 
 function selected_object(object, controls_object){
-	// console.log(object);
-	object.material.color.setHex(0xeeeeee);
+	console.log(object);
+	object.material.color.setHex(0x3d3d3d);
+	object.material.opacity = 0.3;
 	object.material.blending = THREE.SubtractiveBlending;
-	//***************************************************************//
-	controls_object.attach( object );
 	
+	object.children[0].visible=true;
+	//***************************************************************//
 
 }

@@ -123,30 +123,47 @@
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
-			// console.log(intersects[ 0 ].object);
 			controls.enabled = false;
 			if(INTERSECTED)
 			{
+				//Old object
 				INTERSECTED=SELECTED;
-				console.log("Old selected object :"+INTERSECTED.id);
-				console.log(SELECTED.oldMaterial);
 				INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				INTERSECTED.material.opacity=1;
 				INTERSECTED.material.blending=THREE.NoBlending;
-				// INTERSECTED.material.color.setHex(SELECTED.oldMaterial);
+				
+				INTERSECTED.children[0].visible=false;
 			}
 			else 
 			{
+				//Old object
 				INTERSECTED = intersects[ 0 ].object;
+				controls_object.detach(INTERSECTED);
 			}
 			//Current object
 			SELECTED = intersects[ 0 ].object;
-			SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);//console.log(SELECTED.oldMaterial);
-			// SELECTED.material.color.setHex( 0xcccccc );
-			console.log("Selected object : "+SELECTED.id);
-			if(SELECTED.id != INTERSECTED.id){console.log("other object");}
+			SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
+			controls_object.attach( SELECTED );
 			selected_object(SELECTED, controls_object);
-			
-			// $(this).css( "cursor", "move" );
+		
+			if(SELECTED.id != INTERSECTED.id)
+			{
+			console.log("-------------------");
+			console.log("Old selected object : "+INTERSECTED.id);
+			console.log("Current selected object : "+SELECTED.id);
+			console.log("-------------------");
+			}
+		}
+		else
+		{
+			if(SELECTED){
+				controls_object.detach(SELECTED);
+				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				SELECTED.material.opacity=1;
+				SELECTED.material.blending=THREE.NoBlending;
+				
+				SELECTED.children[0].visible=false;
+			}
 		}
 	}
 	function onDocumentMouseUp( event ) {
@@ -201,14 +218,13 @@ function new_cube(){
 	});
 	var cube = new THREE.Mesh(geometry, material);
 	cube.name="cube";
-	cube.visible=true
 	//***************************************************************//
-	
-	//***************************************************************//
-	var axs = obj_axes(cube);
-	cube.add(axs);
-	//***************************************************************//
-	// cube.position.set(100,0,0);
+	var hex = 0xff0000;
+	var bbox = new THREE.BoundingBoxHelper( cube, hex );
+	bbox.name="bbox";
+	bbox.update();
+	bbox.visible = false;
+	cube.add(bbox);
 	//***************************************************************//
 	scene.add(cube);
 	objects.push( cube );
