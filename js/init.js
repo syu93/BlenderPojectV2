@@ -18,68 +18,32 @@
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
 		camera.name="main camera";
 		
-		camera.position.set(16,13,39);
-		
+		camera.position.set(30,15,20);
 		scene.add(camera);
+		
+		//Projector for the camera
+		projector = new THREE.Projector();
 	
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		
 		/**********************************************************************************************/
-		controls_object =  new THREE.TransformControls( camera, renderer.domElement );
-		controls_object.addEventListener( 'change', render );
-		controls_object.name="object controller";
-		// scene.add( controls_object );
-		
-					window.addEventListener( 'keydown', function ( event ) {
-		            //console.log(event.which);
-		            switch ( event.keyCode ) {
-		              case 81: // Q
-		                controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
-		                break;
-		              case 87: // W
-		                controls_object.setMode( "translate" );
-		                break;
-		              case 69: // E
-		                controls_object.setMode( "rotate" );
-		                break;
-		              case 82: // R
-		                controls_object.setMode( "scale" );
-		                break;
-					case 187:
-					case 107: // +,=,num+
-						controls_object.setSize( controls_object.size + 0.1 );
-						break;
-					case 189:
-					case 10: // -,_,num-
-						controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
-						break;
-		            }           
-        		});
-		scene.add( controls_object );
-		/**********************************************************************************************/
+		object_control();
 
-		/**********************************************************************************************/
-		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
-		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
-		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
-		/**********************************************************************************************/
-		// plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.25, transparent: true, wireframe: true } ) );
-		// plane.visible = false;
-		// scene.add( plane );
-		/**********************************************************************************************/
 		//Buld the 3D axis
 		axis();
-		
+		disable_axis();
 		//origin
 		origin();
 		
 		//Floor
 		grid();
-		
-		//Projector for the camera
-		projector = new THREE.Projector();
 
-		// scene.add( new THREE.AxisHelper(50 * 1.5) );
+		orientation();
+		/**********************************************************************************************/
+		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
+		
 		container = $('#canvas');
 		container.append(renderer.domElement);
 	}
@@ -156,14 +120,14 @@
 		}
 		else
 		{
-			if(SELECTED){
-				controls_object.detach(SELECTED);
-				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				SELECTED.material.opacity=1;
-				SELECTED.material.blending=THREE.NoBlending;
+			// if(SELECTED){
+				// controls_object.detach(SELECTED);
+				// SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				// SELECTED.material.opacity=1;
+				// SELECTED.material.blending=THREE.NoBlending;
 				
-				SELECTED.children[0].visible=false;
-			}
+				// SELECTED.children[0].visible=false;
+			// }
 		}
 	}
 	function onDocumentMouseUp( event ) {
@@ -211,7 +175,7 @@ function new_cube(){
 	var geometry = new THREE.BoxGeometry(8,8,8);
 	// var material = new THREE.MeshBasicMaterial({color:0x555555});		
 	var material = new THREE.MeshBasicMaterial({
-		color: 0x1111ff,
+		color: 0x808080,
 		transparent: true,
 		opacity: 1,
 		blending: THREE.NoBlending
@@ -219,7 +183,7 @@ function new_cube(){
 	var cube = new THREE.Mesh(geometry, material);
 	cube.name="cube";
 	//***************************************************************//
-	var hex = 0xff0000;
+	var hex = 0xEEFF00;
 	var bbox = new THREE.BoundingBoxHelper( cube, hex );
 	bbox.name="bbox";
 	bbox.update();

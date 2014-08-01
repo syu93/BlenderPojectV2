@@ -3,6 +3,39 @@ var selected_object,
 	panel=false;
 //-------------------
 //-------------------
+function object_control(){
+	controls_object =  new THREE.TransformControls( camera, renderer.domElement );
+	controls_object.addEventListener( 'change', render );
+	controls_object.name="object controller";
+	// scene.add( controls_object );
+	
+				window.addEventListener( 'keydown', function ( event ) {
+				//console.log(event.which);
+				switch ( event.keyCode ) {
+				  case 81: // Q
+					controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
+					break;
+				  case 87: // W
+					controls_object.setMode( "translate" );
+					break;
+				  case 69: // E
+					controls_object.setMode( "rotate" );
+					break;
+				  case 82: // R
+					controls_object.setMode( "scale" );
+					break;
+				case 187:
+				case 107: // +,=,num+
+					controls_object.setSize( controls_object.size + 0.1 );
+					break;
+				case 189:
+				case 10: // -,_,num-
+					controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
+					break;
+				}           
+			});
+	window.scene.add( controls_object );
+}
 function origin(){
 	// direction (normalized), origin, length, color(hex)
 	var origin = new THREE.Vector3(10,25,0);
@@ -14,11 +47,17 @@ function origin(){
 }
 
 function grid(){
-		var size = 20; var step = 1;
+		var size = 25; var step = 1;
 		var gridHelper = new THREE.GridHelper( size, step );
 		gridHelper.setColors(0, 0x5d5d5d)
 		gridHelper.name="main grid";
 		window.scene.add( gridHelper );
+}
+
+function orientation(){
+	var axisHelper = new THREE.AxisHelper( 3 );
+	axisHelper.position.x=100;
+	window.scene.add( axisHelper );
 }
 
 function clear_scene(){
@@ -29,6 +68,7 @@ function clear_scene(){
 		if (obj !== camera) {
 			window.scene.remove(obj);
 		}
+		object_control();
 		axis();
 		grid();
 		origin();
