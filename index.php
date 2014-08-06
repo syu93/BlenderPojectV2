@@ -13,7 +13,6 @@
 		
 		<script src="js/API/OrbitControls.js"></script>
 		<script src="js/API/TransformControls.js"></script>
-		<!--<script src="js/TrackballControls.js"></script>-->
 		<script src="js/axis.js"></script>
 		<script src="js/ajax.js"></script>
 
@@ -45,6 +44,7 @@
 		</div>
 		<span id="s_tools" data=""></span>
 		<span id="scale" data=""></span>
+		
 		<div id="canvas"></div>
 	</body>
 </html>
