@@ -120,14 +120,14 @@
 		}
 		else
 		{
-			// if(SELECTED){
-				// controls_object.detach(SELECTED);
-				// SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				// SELECTED.material.opacity=1;
-				// SELECTED.material.blending=THREE.NoBlending;
+			if(SELECTED){
+				controls_object.detach(SELECTED);
+				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				SELECTED.material.opacity=1;
+				SELECTED.material.blending=THREE.NoBlending;
 				
-				// SELECTED.children[0].visible=false;
-			// }
+				SELECTED.children[0].visible=false;
+			}
 		}
 	}
 	function onDocumentMouseUp( event ) {
