@@ -3,7 +3,7 @@
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED;
 	var objects = [], plane, controls_object;
-	
+	var unit={x:8,y:8,z:8};
 	function init(){
 	// Initiate the canvas scene
 		//Create the maine scene
@@ -208,27 +208,31 @@ function new_cube_save() {
 				console.log(attr_obj);
 				if(attr_obj.type.name == "cube")
 				{
-					var geometry = new THREE.BoxGeometry(64,64,64);
+					var x = attr_obj.scale.x;
+					var y = attr_obj.scale.y;
+					var z = attr_obj.scale.z;
+					
+					var geometry = new THREE.BoxGeometry((unit.x*x),(unit.x*y),(unit.z*z));
 					var material = new THREE.MeshBasicMaterial({color:0x555555});		
 					var recovery_object = new THREE.Mesh(geometry, material);
-
+					
 					recovery_object.position.x = attr_obj.position.x;
 					recovery_object.position.y = attr_obj.position.y;
 					recovery_object.position.z = attr_obj.position.z;
 				
 					recovery_object.id = attr_obj.id;
 					recovery_object.name = attr_obj.type.name;
-				}
-					//***************************************************************//
-					//***************************************************************//
-					var pointLight = new THREE.PointLight(0xFFFFFF);
-					pointLight.position.x = 10;
-					pointLight.position.y = 50;
-					pointLight.position.z = 130;
 					
 					//***************************************************************//
+					
+					var hex = 0xEEFF00;
+					var bbox = new THREE.BoundingBoxHelper( recovery_object, hex );
+					bbox.name="bbox";
+					bbox.update();
+					bbox.visible = false;
+					recovery_object.add(bbox);
+				}					
 					//***************************************************************//				
-					// scene.add( pointLight );
 					scene.add( recovery_object );
 					objects.push( recovery_object );
 					render();

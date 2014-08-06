@@ -15,6 +15,7 @@ function send_scene(scene) {
 			obj_table = {};
 			obj_table={id:scene[key].id};
 			obj_table.type={name:scene[key].name};
+			obj_table.scale={x:scene[key].scale.x,y:scene[key].scale.y,z:scene[key].scale.z}
 			obj_table.position={x:scene[key].position.x,y:scene[key].position.y, z:scene[key].position.z};			
 			obj = JSON.stringify(obj_table);
 			
