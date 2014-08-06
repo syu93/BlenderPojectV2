@@ -142,5 +142,5 @@ function selected_object(object, controls_object){
 	
 	object.children[0].visible=true;
 	//***************************************************************//
-	controls_object.attach( object );
+
 }
