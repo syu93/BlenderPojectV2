@@ -105,7 +105,7 @@
 
 		if ( intersects.length > 0 ) {
 			controls.enabled = false;
-			SELECTED = intersects[0].object;
+			// SELECTED = intersects[0].object;
 			console.log(intersects[0].object);
 			
 			
@@ -124,47 +124,44 @@
 			
 			
 			
-			// if(INTERSECTED)
-			// {
+			if(INTERSECTED)
+			{
 				// //Old object
-				// INTERSECTED=SELECTED;
-				// INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				// INTERSECTED.material.opacity=1;
-				// INTERSECTED.material.blending=THREE.NoBlending;
-				
-				// INTERSECTED.children[0].visible=false;
-			// }
-			// else 
-			// {
-				// //Old object
-				// INTERSECTED = intersects[ 0 ].object;
-				// controls_object.detach(INTERSECTED);
-			// }
-			// //Current object
-			// SELECTED = intersects[ 0 ].object;
-			// SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
-			// controls_object.attach( SELECTED );
+				INTERSECTED=SELECTED;
+				INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				INTERSECTED.material.opacity=1;
+				INTERSECTED.material.blending=THREE.NoBlending;
+			}
+			else 
+			{
+				//Old object
+				INTERSECTED = intersects[ 0 ].object;
+				controls_object.detach(INTERSECTED);
+			}
+			//Current object
+			SELECTED = intersects[ 0 ].object;
+			SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
+			controls_object.attach( SELECTED );
 			selected_object(SELECTED, controls_object);
 		
-			// if(SELECTED.id != INTERSECTED.id)
-			// {
-			// console.log("-------------------");
-			// console.log("Old selected object : "+INTERSECTED.id);
-			// console.log("Current selected object : "+SELECTED.id);
-			// console.log("-------------------");
-			// }
+			if(SELECTED.id != INTERSECTED.id)
+			{
+			console.log("-------------------");
+			console.log("Old selected object : "+INTERSECTED.id);
+			console.log("Current selected object : "+SELECTED.id);
+			console.log("-------------------");
+			}
 		}
-		// else
-		// {
-			// if(SELECTED){
-				// controls_object.detach(SELECTED);
-				// SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				// SELECTED.material.opacity=1;
-				// SELECTED.material.blending=THREE.NoBlending;
-				
-				// SELECTED.children[0].visible=false;
-			// }
-		// }
+		else
+		{
+			if(SELECTED){
+				controls_object.detach(SELECTED);
+				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				SELECTED.material.opacity=1;
+				SELECTED.material.blending=THREE.NoBlending;
+				window.scene.children[5].visible=false;
+			}
+		}
 	}
 	function onDocumentMouseUp( event ) {
 
