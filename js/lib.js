@@ -2,12 +2,14 @@
 var selected_object,
 	panel=false;
 //-------------------
+var editor = function () {
+	
+}
 //-------------------
 function object_control(){
 	controls_object =  new THREE.TransformControls( camera, renderer.domElement );
 	controls_object.addEventListener( 'change', render );
 	controls_object.name="object controller";
-	// scene.add( controls_object );
 	
 				window.addEventListener( 'keydown', function ( event ) {
 				//console.log(event.which);
@@ -47,7 +49,7 @@ function origin(){
 }
 
 function grid(){
-		var size = 25; var step = 1;
+		var size = 500; var step = 25;
 		var gridHelper = new THREE.GridHelper( size, step );
 		gridHelper.setColors(0, 0x5d5d5d)
 		gridHelper.name="main grid";
@@ -107,30 +109,30 @@ function expend_frame(){
 	}
 }
 function disable_axis(){
-	window.scene.children[2].children[0].visible=false;
-	window.scene.children[2].children[1].visible=false;
-	window.scene.children[2].children[2].visible=false;
-	window.scene.children[2].children[3].visible=false;
-	window.scene.children[2].children[4].visible=false;
-	window.scene.children[2].children[5].visible=false;
+	window.scene.children[1].children[0].visible=false;
+	window.scene.children[1].children[1].visible=false;
+	window.scene.children[1].children[2].visible=false;
+	window.scene.children[1].children[3].visible=false;
+	window.scene.children[1].children[4].visible=false;
+	window.scene.children[1].children[5].visible=false;
 	console.log("Axis are disabled");
 }
 
 function enable_axis(){
-	window.scene.children[2].children[0].visible=true;
-	window.scene.children[2].children[1].visible=true;
-	window.scene.children[2].children[2].visible=true;
-	window.scene.children[2].children[3].visible=true;
-	window.scene.children[2].children[4].visible=true;
-	window.scene.children[2].children[5].visible=true;
+	window.scene.children[1].children[0].visible=true;
+	window.scene.children[1].children[1].visible=true;
+	window.scene.children[1].children[2].visible=true;
+	window.scene.children[1].children[3].visible=true;
+	window.scene.children[1].children[4].visible=true;
+	window.scene.children[1].children[5].visible=true;
 	console.log("Axis are enabled");
 }
 
 function enable_grid(){
-	window.scene.children[4].visible=true;
+	window.scene.children[3].visible=true;
 	console.log("Grid are enabled");
 }function disable_grid(){
-	window.scene.children[4].visible=false;
+	window.scene.children[3].visible=false;
 	console.log("Grid are disable");
 }
 

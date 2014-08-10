@@ -1,56 +1,62 @@
-	var scene, camera, renderer, projector;
+	var editor, scene, camera, renderer, projector, width, height, intersects;
+	var helpers = [];
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED;
-	var objects = [], plane, controls_object;
-	var unit={x:8,y:8,z:8};
+	var objects = [], controls_object;
+	var unit={x:100,y:100,z:100};
+	/******************************************************************************************************/	
+	
 	function init(){
-	// Initiate the canvas scene
+		// Initiate the canvas scene
+		width = window.innerWidth-200;
+		height = window.innerHeight-60;
 		//Create the maine scene
 		scene = new THREE.Scene();
 		scene.name="main scene";
-		
-		renderer = new THREE.WebGLRenderer({ alpha: true });		
-		renderer.setClearColor( 0x1d1d1d, 1);
-		renderer.setSize(window.innerWidth-200 , window.innerHeight-200);
-		
+		// scene.add(editor);
 		//create the maine camera
-		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
-		camera.name="main camera";
-		
-		camera.position.set(30,15,20);
+		camera = new THREE.PerspectiveCamera(50, width / height, 1, 5000);
+		camera.name="main camera";		
+		camera.position.set(0,0,300);
+		camera.lookAt(scene.position);	
 		scene.add(camera);
-		
 		//Projector for the camera
-		projector = new THREE.Projector();
-	
-		controls = new THREE.OrbitControls(camera, renderer.domElement);
-		
-		/**********************************************************************************************/
-		object_control();
-
-		//Buld the 3D axis
-		axis();
-		disable_axis();
+		projector = new THREE.Projector();	
+		//Axis
+		axis();disable_axis();
 		//origin
-		origin();
-		
+		origin();		
 		//Floor
-		grid();
-
+		// grid();
+		//Arrow
 		orientation();
+		
+		renderer = new THREE.CanvasRenderer();		
+		renderer.setSize(width , height);
+		renderer.setClearColor( 0x1d1d1d, 1);
+		container = $('#canvas');
+		container.append(renderer.domElement);
 		/**********************************************************************************************/
-		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		controls = new THREE.OrbitControls(camera, renderer.domElement);
+		object_control();	
+		
+		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
 		
-		container = $('#canvas');
-		container.append(renderer.domElement);
+		var selectionBox = new THREE.BoxHelper();
+		selectionBox.material.depthTest = false;
+		selectionBox.material.transparent = true;
+		selectionBox.visible = false;
+		scene.add( selectionBox );
+		
+		new_cube();
 	}
 	
 	function axis(){
 		// Create the 3D axis
-		var axes = buildAxes(window.innerWidth );
+		var axes = buildAxes(width );
 		axes.name="main axis";
 		scene.add(axes);
 	}
@@ -71,64 +77,93 @@
 
 		event.preventDefault();
 
-		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;		
+		mouse.x = ( event.clientX / width ) * 2 - 1;
+		mouse.y = - ( event.clientY / height ) * 2 + 1;
+		
+		var vector = new THREE.Vector3( mouse.x, mouse.y,1);
+		projector.unprojectVector( vector, camera );
+		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		var intersects = raycaster.intersectObjects( objects );
+
+		if ( intersects.length > 0 ) {
+			$('canvas').css("cursor", "move");
+		}
+		else
+		{
+			$('canvas').css("cursor", "auto");
+		}
 	}
 	function onDocumentMouseDown( event ) {
 
 		event.preventDefault();
-		// console.log(mouse);
 
-		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
-		projector.unprojectVector( vector, camera );
-
+		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+			projector.unprojectVector( vector, camera );
 		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
 			controls.enabled = false;
-			if(INTERSECTED)
-			{
-				//Old object
-				INTERSECTED=SELECTED;
-				INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				INTERSECTED.material.opacity=1;
-				INTERSECTED.material.blending=THREE.NoBlending;
+			SELECTED = intersects[0].object;
+			console.log(intersects[0].object);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			// if(INTERSECTED)
+			// {
+				// //Old object
+				// INTERSECTED=SELECTED;
+				// INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				// INTERSECTED.material.opacity=1;
+				// INTERSECTED.material.blending=THREE.NoBlending;
 				
-				INTERSECTED.children[0].visible=false;
-			}
-			else 
-			{
-				//Old object
-				INTERSECTED = intersects[ 0 ].object;
-				controls_object.detach(INTERSECTED);
-			}
-			//Current object
-			SELECTED = intersects[ 0 ].object;
-			SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
-			controls_object.attach( SELECTED );
-			selected_object(SELECTED, controls_object);
+				// INTERSECTED.children[0].visible=false;
+			// }
+			// else 
+			// {
+				// //Old object
+				// INTERSECTED = intersects[ 0 ].object;
+				// controls_object.detach(INTERSECTED);
+			// }
+			// //Current object
+			// SELECTED = intersects[ 0 ].object;
+			// SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
+			// controls_object.attach( SELECTED );
+			// selected_object(SELECTED, controls_object);
 		
-			if(SELECTED.id != INTERSECTED.id)
-			{
-			console.log("-------------------");
-			console.log("Old selected object : "+INTERSECTED.id);
-			console.log("Current selected object : "+SELECTED.id);
-			console.log("-------------------");
-			}
+			// if(SELECTED.id != INTERSECTED.id)
+			// {
+			// console.log("-------------------");
+			// console.log("Old selected object : "+INTERSECTED.id);
+			// console.log("Current selected object : "+SELECTED.id);
+			// console.log("-------------------");
+			// }
 		}
-		else
-		{
-			if(SELECTED){
-				controls_object.detach(SELECTED);
-				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				SELECTED.material.opacity=1;
-				SELECTED.material.blending=THREE.NoBlending;
+		// else
+		// {
+			// if(SELECTED){
+				// controls_object.detach(SELECTED);
+				// SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				// SELECTED.material.opacity=1;
+				// SELECTED.material.blending=THREE.NoBlending;
 				
-				SELECTED.children[0].visible=false;
-			}
-		}
+				// SELECTED.children[0].visible=false;
+			// }
+		// }
 	}
 	function onDocumentMouseUp( event ) {
 
@@ -172,23 +207,17 @@ function new_sphere(){
 }
 
 function new_cube(){
-	var geometry = new THREE.BoxGeometry(8,8,8);
-	// var material = new THREE.MeshBasicMaterial({color:0x555555});		
-	var material = new THREE.MeshBasicMaterial({
-		color: 0x808080,
-		transparent: true,
-		opacity: 1,
-		blending: THREE.NoBlending
-	});
-	var cube = new THREE.Mesh(geometry, material);
+	var width = 100;
+	var height = 100;
+	var depth = 100;
+
+	var widthSegments = 1;
+	var heightSegments = 1;
+	var depthSegments = 1;
+		
+	var geometry = new THREE.BoxGeometry( width, height, depth, widthSegments, heightSegments, depthSegments );
+	var cube = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
 	cube.name="cube";
-	//***************************************************************//
-	var hex = 0xEEFF00;
-	var bbox = new THREE.BoundingBoxHelper( cube, hex );
-	bbox.name="bbox";
-	bbox.update();
-	bbox.visible = false;
-	cube.add(bbox);
 	//***************************************************************//
 	scene.add(cube);
 	objects.push( cube );
@@ -213,7 +242,7 @@ function new_cube_save() {
 					var z = attr_obj.scale.z;
 					
 					var geometry = new THREE.BoxGeometry((unit.x*x),(unit.x*y),(unit.z*z));
-					var material = new THREE.MeshBasicMaterial({color:0x555555});		
+					var material = new THREE.MeshBasicMaterial({color:0xDDDDDD});		
 					var recovery_object = new THREE.Mesh(geometry, material);
 					
 					recovery_object.position.x = attr_obj.position.x;
