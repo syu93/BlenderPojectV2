@@ -49,6 +49,7 @@
 		selectionBox.material.depthTest = false;
 		selectionBox.material.transparent = true;
 		selectionBox.visible = false;
+		selectionBox.name="selectionBox";
 		scene.add( selectionBox );
 		
 		new_cube();
@@ -143,7 +144,7 @@
 			// SELECTED = intersects[ 0 ].object;
 			// SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
 			// controls_object.attach( SELECTED );
-			// selected_object(SELECTED, controls_object);
+			selected_object(SELECTED, controls_object);
 		
 			// if(SELECTED.id != INTERSECTED.id)
 			// {

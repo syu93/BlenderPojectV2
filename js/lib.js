@@ -142,7 +142,10 @@ function selected_object(object, controls_object){
 	object.material.opacity = 0.3;
 	object.material.blending = THREE.SubtractiveBlending;
 	
-	object.children[0].visible=true;
+	// object.children[0].visible=true;
 	//***************************************************************//
-
+	controls_object.attach(object);
+	// window.scene.children[5].position.copy(object.position);
+	window.scene.children[5].update( object );
+	window.scene.children[5].visible=true;
 }
