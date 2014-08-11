@@ -155,7 +155,7 @@
 		else
 		{
 			if(SELECTED){
-				controls_object.detach(SELECTED);
+				// controls_object.detach(SELECTED); // Detache object only when clicking on the scene
 				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
 				SELECTED.material.opacity=1;
 				SELECTED.material.blending=THREE.NoBlending;
