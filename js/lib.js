@@ -2,42 +2,54 @@
 var selected_object,
 	panel=false;
 //-------------------
-var editor = function () {
+var library = function(){
+	var controls_object, selectionBox;
+}
+
+library.proto = {
+	object_control : function object_control(){
+		controls_object =  new THREE.TransformControls( camera, renderer.domElement );
+		// controls_object.addEventListener( 'change', render ); // lag ?
+		controls_object.name="object_controller";
+		
+					window.addEventListener( 'keydown', function ( event ) {
+					//console.log(event.which);
+					switch ( event.keyCode ) {
+					  case 81: // Q
+						controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
+						break;
+					  case 87: // W
+						controls_object.setMode( "translate" );
+						break;
+					  case 69: // E
+						controls_object.setMode( "rotate" );
+						break;
+					  case 82: // R
+						controls_object.setMode( "scale" );
+						break;
+					case 187:
+					case 107: // +,=,num+
+						controls_object.setSize( controls_object.size + 0.1 );
+						break;
+					case 189:
+					case 10: // -,_,num-
+						controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
+						break;
+					}           
+				});
+		return  controls_object;
+	},
 	
+	box_selection : function box_selection(){
+		selectionBox = new THREE.BoxHelper();
+		selectionBox.material.depthTest = false;
+		selectionBox.material.transparent = true;
+		selectionBox.visible = false;
+		selectionBox.name="selectionBox";
+		return selectionBox;
+		}
 }
 //-------------------
-function object_control(){
-	controls_object =  new THREE.TransformControls( camera, renderer.domElement );
-	controls_object.addEventListener( 'change', render );
-	controls_object.name="object controller";
-	
-				window.addEventListener( 'keydown', function ( event ) {
-				//console.log(event.which);
-				switch ( event.keyCode ) {
-				  case 81: // Q
-					controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
-					break;
-				  case 87: // W
-					controls_object.setMode( "translate" );
-					break;
-				  case 69: // E
-					controls_object.setMode( "rotate" );
-					break;
-				  case 82: // R
-					controls_object.setMode( "scale" );
-					break;
-				case 187:
-				case 107: // +,=,num+
-					controls_object.setSize( controls_object.size + 0.1 );
-					break;
-				case 189:
-				case 10: // -,_,num-
-					controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
-					break;
-				}           
-			});
-	window.scene.add( controls_object );
-}
 function origin(){
 	// direction (normalized), origin, length, color(hex)
 	var origin = new THREE.Vector3(10,25,0);
@@ -145,7 +157,7 @@ function selected_object(object, controls_object){
 	// object.children[0].visible=true;
 	//***************************************************************//
 	controls_object.attach(object);
-	// window.scene.children[5].position.copy(object.position);
-	window.scene.children[5].update( object );
-	window.scene.children[5].visible=true;
+	window.scene.getObjectByName("selectionBox").position.copy(object.position);
+	window.scene.getObjectByName("selectionBox").update( object );
+	window.scene.getObjectByName("selectionBox").visible=true;
 }
