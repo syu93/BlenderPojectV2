@@ -25,6 +25,7 @@
 	</head>
 	
 	<body style="background:#3D3D3D;">
+	<div id="canvas" style="position: absolute;"><div id="direction" style="position:absolute; bottom:0px;"></div></div>
 		<div style="display:none;">
 			<input id="n_cube" type="button" value="New Cube">
 			<input id="n_sphere" type="button" value="New Sphere">
@@ -47,6 +48,5 @@
 		</div>
 		<span id="s_tools" data=""></span>
 		<span id="scale" data=""></span>
-		<div id="canvas" style="position: absolute;"></div>
 	</body>
 </html>

@@ -1,10 +1,16 @@
-	var editor, scene, camera, renderer, projector, width, height, intersects;
-	var helpers = [];
+	var scene, camera, renderer, projector, width, height, intersects;
+	var scene2, camera2, renderer2, projector2, width, height, intersects;
+	var helpers = [];	
+	var objects = [];
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED;
-	var objects = [], controls_object;
+
+	var object_control,selectionBox; 
+	
 	var unit={x:100,y:100,z:100};
+	//---------
+	
 	/******************************************************************************************************/	
 	
 	function init(){
@@ -14,45 +20,72 @@
 		//Create the maine scene
 		scene = new THREE.Scene();
 		scene.name="main scene";
-		// scene.add(editor);
 		//create the maine camera
 		camera = new THREE.PerspectiveCamera(50, width / height, 1, 5000);
 		camera.name="main camera";		
 		camera.position.set(0,0,300);
-		camera.lookAt(scene.position);	
+		camera.lookAt(scene.position);
 		scene.add(camera);
 		//Projector for the camera
-		projector = new THREE.Projector();	
+		projector = new THREE.Projector();
 		//Axis
-		axis();disable_axis();
+		axis();
+		disable_axis();
 		//origin
-		origin();		
+		// origin();		
 		//Floor
-		// grid();
-		//Arrow
-		orientation();
+		grid();
 		
 		renderer = new THREE.CanvasRenderer();		
 		renderer.setSize(width , height);
-		renderer.setClearColor( 0x1d1d1d, 1);
+		renderer.setClearColor( 0xcccccc, 1);
 		container = $('#canvas');
 		container.append(renderer.domElement);
-		/**********************************************************************************************/
-		controls = new THREE.OrbitControls(camera, renderer.domElement);
-		object_control();	
 		
-		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		/***********************************************/
+		controls = new THREE.OrbitControls(camera, renderer.domElement);
+		
+		object_control = library.proto.object_control(); scene.add(object_control);
+		selectionBox = library.proto.box_selection();	scene.add(selectionBox);
+		
+		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
+	}
+
+	function init2(){
+		width2 = window.innerWidth/12;
+		height2 = window.innerHeight/12;
+		scene2 = new THREE.Scene();
+		camera2 = new THREE.PerspectiveCamera(50, width2 / height2, 1, 5000);
+		camera2.lookAt(scene.position);
+		scene2.add(camera2);
+		projector2 = new THREE.Projector();			
+		var axisHelper = new THREE.AxisHelper( 125 );
+		scene2.add( axisHelper );
 		
-		var selectionBox = new THREE.BoxHelper();
-		selectionBox.material.depthTest = false;
-		selectionBox.material.transparent = true;
-		selectionBox.visible = false;
-		selectionBox.name="selectionBox";
-		scene.add( selectionBox );
-		
-		new_cube();
+		renderer2 = new THREE.CanvasRenderer();		
+		renderer2.setSize(width2 , height2);
+		renderer2.setClearColor( 0xa9a9a9, 1);
+		container2 = $('#direction');
+		container2.append(renderer2.domElement);
+		controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
+	}
+	
+	function render() {
+	// Make the render for the view
+		requestAnimationFrame(render);
+		renderer.render(scene, camera);
+		controls.update();
+		controls_object.update();
+	}
+
+	function render2() {
+	// Make the render for the view
+		requestAnimationFrame(render2);		
+		camera2.position.copy(camera.position);		
+		renderer2.render(scene2, camera2);
+		controls2.update();
 	}
 	
 	function axis(){
@@ -60,14 +93,6 @@
 		var axes = buildAxes(width );
 		axes.name="main axis";
 		scene.add(axes);
-	}
-
-	function render() {
-	// Make the render for the view
-		requestAnimationFrame(render);
-		renderer.render(scene, camera);
-		controls.update();
-		controls_object.update();
 	}
 
 //***************************************************************//
@@ -104,9 +129,9 @@
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
-			controls.enabled = false;
+			// controls.enabled = false;
 			// SELECTED = intersects[0].object;
-			console.log(intersects[0].object);
+			// console.log(intersects[0].object);
 			
 			
 			
@@ -155,11 +180,13 @@
 		else
 		{
 			if(SELECTED){
-				controls_object.detach(SELECTED);
+				// if()
+				// controls_object.detach(SELECTED);
 				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
 				SELECTED.material.opacity=1;
 				SELECTED.material.blending=THREE.NoBlending;
-				window.scene.children[5].visible=false;
+				// window.scene.children[5].visible=false;
+				scene.getObjectByName("selectionBox").visible=false;
 			}
 		}
 	}
@@ -215,6 +242,7 @@ function new_cube(){
 		
 	var geometry = new THREE.BoxGeometry( width, height, depth, widthSegments, heightSegments, depthSegments );
 	var cube = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
+
 	cube.name="cube";
 	//***************************************************************//
 	scene.add(cube);
@@ -274,6 +302,9 @@ function new_cube_save() {
 
 $( document ).ready(function(){
 	init();
-	new_cube_save();
 	render();
+	new_cube_save();
+	init2();
+	render2();
+	new_cube();
 });
