@@ -754,7 +754,7 @@
 				var intersect = intersectObjects( pointer, scope.gizmo[_mode].pickers.children );
 
 				if ( intersect ) {
-
+					window.control_active = true; //perso
 					scope.axis = intersect.object.name;
 
 					scope.update();
@@ -955,6 +955,7 @@
 		function onPointerUp( event ) {
 
 			_dragging = false;
+			window.control_active = false; //perso
 			onPointerHover( event );
 
 		}

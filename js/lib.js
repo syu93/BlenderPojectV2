@@ -49,7 +49,8 @@ library.proto = {
 		return selectionBox;
 		}
 }
-//-------------------
+
+
 function origin(){
 	// direction (normalized), origin, length, color(hex)
 	var origin = new THREE.Vector3(10,25,0);
@@ -63,7 +64,7 @@ function origin(){
 function grid(){
 		var size = 500; var step = 25;
 		var gridHelper = new THREE.GridHelper( size, step );
-		gridHelper.setColors(0, 0x5d5d5d)
+		// gridHelper.setColors(0, 0x5d5d5d)
 		gridHelper.name="main grid";
 		window.scene.add( gridHelper );
 }
@@ -157,6 +158,7 @@ function selected_object(object, controls_object){
 	// object.children[0].visible=true;
 	//***************************************************************//
 	controls_object.attach(object);
+	// object.add(controls_object);
 	window.scene.getObjectByName("selectionBox").position.copy(object.position);
 	window.scene.getObjectByName("selectionBox").update( object );
 	window.scene.getObjectByName("selectionBox").visible=true;

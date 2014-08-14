@@ -1,42 +1,38 @@
 	var scene, camera, renderer, projector, width, height, intersects;
 	var scene2, camera2, renderer2, projector2, width, height, intersects;
-	var helpers = [];	
 	var objects = [];
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED;
 
-	var object_control,selectionBox; 
+	var object_control, selectionBox, control_active=false;
 	
 	var unit={x:100,y:100,z:100};
-	//---------
-	
-	/******************************************************************************************************/	
 	
 	function init(){
-		// Initiate the canvas scene
 		width = window.innerWidth-200;
 		height = window.innerHeight-60;
-		//Create the maine scene
+		// main scene
 		scene = new THREE.Scene();
 		scene.name="main scene";
-		//create the maine camera
-		camera = new THREE.PerspectiveCamera(50, width / height, 1, 5000);
+		// main camera
+		camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000);
 		camera.name="main camera";		
 		camera.position.set(0,0,300);
 		camera.lookAt(scene.position);
 		scene.add(camera);
-		//Projector for the camera
+		// Projector for the camera
 		projector = new THREE.Projector();
 		//Axis
-		axis();
-		disable_axis();
+		// axis();
+		// disable_axis();
 		//origin
-		// origin();		
+		// origin();
 		//Floor
 		grid();
 		
-		renderer = new THREE.CanvasRenderer();		
+		// renderer = new THREE.CanvasRenderer();		
+		renderer = new THREE.WebGLRenderer({ alpha: true });		
 		renderer.setSize(width , height);
 		renderer.setClearColor( 0xcccccc, 1);
 		container = $('#canvas');
@@ -46,7 +42,7 @@
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		
 		object_control = library.proto.object_control(); scene.add(object_control);
-		selectionBox = library.proto.box_selection();	scene.add(selectionBox);
+		selectionBox = library.proto.box_selection(); scene.add(selectionBox);
 		
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
@@ -120,35 +116,14 @@
 		}
 	}
 	function onDocumentMouseDown( event ) {
-
 		event.preventDefault();
 
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-			projector.unprojectVector( vector, camera );
+		projector.unprojectVector( vector, camera );
 		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
-			// controls.enabled = false;
-			// SELECTED = intersects[0].object;
-			// console.log(intersects[0].object);
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			if(INTERSECTED)
 			{
 				// //Old object
@@ -163,33 +138,26 @@
 				INTERSECTED = intersects[ 0 ].object;
 				controls_object.detach(INTERSECTED);
 			}
-			//Current object
-			SELECTED = intersects[ 0 ].object;
-			SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
-			controls_object.attach( SELECTED );
-			selected_object(SELECTED, controls_object);
-		
-			if(SELECTED.id != INTERSECTED.id)
-			{
-			console.log("-------------------");
-			console.log("Old selected object : "+INTERSECTED.id);
-			console.log("Current selected object : "+SELECTED.id);
-			console.log("-------------------");
-			}
+				//Current object
+				SELECTED = intersects[ 0 ].object;
+				SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
+				controls_object.attach( SELECTED );
+				selected_object(SELECTED, controls_object);
 		}
 		else
 		{
-			if(SELECTED){
-				// if()
-				// controls_object.detach(SELECTED);
-				SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				SELECTED.material.opacity=1;
-				SELECTED.material.blending=THREE.NoBlending;
-				// window.scene.children[5].visible=false;
-				scene.getObjectByName("selectionBox").visible=false;
+			if(SELECTED){ //If an object is selected			
+				if ( ! window.control_active ){
+					controls_object.detach(SELECTED);
+					SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+					SELECTED.material.opacity=1;
+					SELECTED.material.blending=THREE.NoBlending;
+					scene.getObjectByName("selectionBox").visible=false;
+				}
 			}
 		}
 	}
+	
 	function onDocumentMouseUp( event ) {
 
 		event.preventDefault();
@@ -198,14 +166,7 @@
 
 		if ( INTERSECTED ) {
 
-			// plane.position.copy( INTERSECTED.position );
-
-			// SELECTED = null;
-
 		}
-
-		// $(this).css( "cursor", "auto" );
-
 	}
 //***************************************************************//
 //***************************************************************//
@@ -306,5 +267,4 @@ $( document ).ready(function(){
 	new_cube_save();
 	init2();
 	render2();
-	new_cube();
 });

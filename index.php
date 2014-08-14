@@ -25,8 +25,8 @@
 	</head>
 	
 	<body style="background:#3D3D3D;">
-	<div id="canvas" style="position: absolute;"><div id="direction" style="position:absolute; bottom:0px;"></div></div>
-		<div style="display:none;">
+	<div id="canvas" style="position: absolute; margin-top:35px;"><div id="direction" style="position:absolute; bottom:0px;"></div></div>
+		<div style="display:block; position:absolute; top:0px;">
 			<input id="n_cube" type="button" value="New Cube">
 			<input id="n_sphere" type="button" value="New Sphere">
 			<input id="t_clear" type="button" value="Clear Scene">
