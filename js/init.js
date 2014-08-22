@@ -5,7 +5,7 @@
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED,rect;
 	
-	var object_control, selectionBox, control_active=false;
+	var object_control, selectionBox, multi_box, control_active=false;
 	
 	var unit={x:100,y:100,z:100};
 	
@@ -45,7 +45,7 @@
 		
 		object_control = library.proto.object_control(); scene.add(object_control);
 		selectionBox = library.proto.box_selection(); scene.add(selectionBox);
-		
+		multi_box = library.proto.muti_selection();
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -210,6 +210,11 @@ function new_cube(){
 	//***************************************************************//
 	scene.add(cube);
 	objects.push( cube );
+	
+	// window.scene.getObjectByName("selectionBox").update(cube);
+	// window.scene.getObjectByName("selectionBox").update( cube );
+	// window.scene.getObjectByName("selectionBox").visible=true;
+	// controls_object.attach( cube );
 	
 	render();	
 }

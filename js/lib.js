@@ -1,9 +1,8 @@
 //Global variable
-var selected_object,
-	panel=false;
+var selected_object, panel=false, milti=false;
 //-------------------
 var library = function(){
-	var controls_object, selectionBox;
+	var controls_object, selectionBox, multi_box;
 }
 
 library.proto = {
@@ -35,7 +34,7 @@ library.proto = {
 					case 10: // -,_,num-
 						controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
 						break;
-					}           
+						}
 				});
 		return  controls_object;
 	},
@@ -47,6 +46,34 @@ library.proto = {
 		selectionBox.visible = false;
 		selectionBox.name="selectionBox";
 		return selectionBox;
+		},
+		
+	muti_selection : function muti_selection(){
+	var group = new THREE.Object3D(); group.name="group", cloneBox=[];
+	window.scene.add(group);
+			addEventListener("keydown", function(event){
+				switch ( event.keyCode ) {
+					case 17: // Ctrl
+					group.add(SELECTED);
+					console.log(group);
+					//---
+					if(SELECTED){
+						for(var i=0; i<group.children.length; i++)
+						{
+							cloneBox.push(window.scene.getObjectByName("selectionBox").clone()); scene.add(cloneBox);
+							cloneBox[i].name="selectionBox_"+i; console.log( cloneBox[i] );
+							
+							cloneBox[i].position.copy(SELECTED.position);
+							cloneBox[i].update( SELECTED );
+							cloneBox[i].visible=true;
+						}
+					}
+					break;
+				}
+			});
+			addEventListener("keyup", function(event){
+				
+			});
 		}
 }
 
@@ -154,11 +181,9 @@ function selected_object(object, controls_object){
 	object.material.color.setHex(0x3d3d3d);
 	object.material.opacity = 0.3;
 	object.material.blending = THREE.SubtractiveBlending;
-	
-	// object.children[0].visible=true;
-	//***************************************************************//
+
 	controls_object.attach(object);
-	// object.add(controls_object);
+
 	window.scene.getObjectByName("selectionBox").position.copy(object.position);
 	window.scene.getObjectByName("selectionBox").update( object );
 	window.scene.getObjectByName("selectionBox").visible=true;
