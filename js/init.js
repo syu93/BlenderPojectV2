@@ -3,8 +3,8 @@
 	var objects = [];
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
-	INTERSECTED, SELECTED;
-
+	INTERSECTED, SELECTED,rect;
+	
 	var object_control, selectionBox, control_active=false;
 	
 	var unit={x:100,y:100,z:100};
@@ -36,7 +36,9 @@
 		renderer.setSize(width , height);
 		renderer.setClearColor( 0xcccccc, 1);
 		container = $('#canvas');
-		container.append(renderer.domElement);
+		container.append(renderer.domElement);		
+		rect = container[0];
+		// console.log(rect.clientHeight);
 		
 		/***********************************************/
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -99,8 +101,8 @@
 
 		event.preventDefault();
 
-		mouse.x = ( event.clientX / width ) * 2 - 1;
-		mouse.y = - ( event.clientY / height ) * 2 + 1;
+		mouse.x = (( event.clientX ) / rect.clientWidth)* 2 - 1;
+		mouse.y = -(( event.clientY - 35) / rect.clientHeight) * 2 + 1;
 		
 		var vector = new THREE.Vector3( mouse.x, mouse.y,1);
 		projector.unprojectVector( vector, camera );
