@@ -46,7 +46,7 @@
 			<input id="side_menu_on" type="button" value="Open side panel">
 			<input id="side_menu_off" type="button" value="Close side panel">
 		</div>
-		<span id="s_tools" data=""></span>
+		<span style='position: absolute; bottom:0;' id="s_tools" data=""></span>
 		<span id="scale" data=""></span>
 	</body>
 </html>

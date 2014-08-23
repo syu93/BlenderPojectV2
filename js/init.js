@@ -5,7 +5,7 @@
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED,rect;
 	
-	var object_control, selectionBox, multi_box, control_active=false;
+	var object_control, selectionBox, multi_box, control_active=false, onCtrl=false;
 	
 	var unit={x:100,y:100,z:100};
 	
@@ -46,6 +46,8 @@
 		object_control = library.proto.object_control(); scene.add(object_control);
 		selectionBox = library.proto.box_selection(); scene.add(selectionBox);
 		multi_box = library.proto.muti_selection();
+		muti_move = library.proto.muti_move();
+		
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -75,7 +77,10 @@
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 		controls.update();
-		controls_object.update();
+		object_control.update();
+		
+		document.getElementById("s_tools").innerHTML=window.onCtrl;
+		// alert(window.control_active);
 	}
 
 	function render2() {
@@ -144,17 +149,23 @@
 				SELECTED = intersects[ 0 ].object;
 				SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
 				controls_object.attach( SELECTED );
-				selected_object(SELECTED, controls_object);
+				selected_object(SELECTED, controls_object);window.onCtrl=true;
 		}
 		else
 		{
 			if(SELECTED){ //If an object is selected			
 				if ( ! window.control_active ){
+					window.onCtrl=false;
 					controls_object.detach(SELECTED);
 					SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
 					SELECTED.material.opacity=1;
 					SELECTED.material.blending=THREE.NoBlending;
 					scene.getObjectByName("selectionBox").visible=false;
+					//----
+					for(var i=0; i<window.scene.children[4].children.length; i++)
+					{
+						scene.getObjectByName("selectionBox_"+i).visible=false;
+					}
 				}
 			}
 		}

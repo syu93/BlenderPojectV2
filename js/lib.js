@@ -1,8 +1,9 @@
 //Global variable
 var selected_object, panel=false, milti=false;
+var group = new THREE.Object3D();
 //-------------------
 var library = function(){
-	var controls_object, selectionBox, multi_box;
+	var controls_object, selectionBox, multi_box, multi_control;
 }
 
 library.proto = {
@@ -49,32 +50,62 @@ library.proto = {
 		},
 		
 	muti_selection : function muti_selection(){
-	var group = new THREE.Object3D(); group.name="group", cloneBox=[];
+	group.name="group", cloneBox=[];
 	window.scene.add(group);
 			addEventListener("keydown", function(event){
 				switch ( event.keyCode ) {
-					case 17: // Ctrl
-					group.add(SELECTED);
-					console.log(group);
+					case 17: // Ctrl					
 					//---
 					if(SELECTED){
-						for(var i=0; i<group.children.length; i++)
-						{
-							cloneBox.push(window.scene.getObjectByName("selectionBox").clone()); scene.add(cloneBox);
-							cloneBox[i].name="selectionBox_"+i; console.log( cloneBox[i] );
-							
-							cloneBox[i].position.copy(SELECTED.position);
-							cloneBox[i].update( SELECTED );
-							cloneBox[i].visible=true;
+						if( window.onCtrl == true){
+							console.log(group);
+							group.add(SELECTED);
+							for(var i=0; i<group.children.length; i++)
+							{
+							var bx = "multi_box_"+i;
+								var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
+								
+								window.scene.getObjectByName("selectionBox_"+i).position.copy(group.children[i].position);
+								window.scene.getObjectByName("selectionBox_"+i).update( group.children[i] );
+								window.scene.getObjectByName("selectionBox_"+i).visible=true;
+							}
 						}
 					}
 					break;
 				}
 			});
 			addEventListener("keyup", function(event){
-				
+								
 			});
-		}
+		},
+	
+	muti_move : function muti_move(){
+		addEventListener("keydown", function(event){
+			switch ( event.keyCode ) {
+				case 17: // Ctrl					
+					//---
+				if( SELECTED){
+					var move = {};
+					move.x = SELECTED.position.x;
+					move.y = SELECTED.position.y;
+					move.z = SELECTED.position.z;
+					for(var i=0; i<group.children.length; i++)
+					{
+						if( window.control_active )
+						{
+							// addEventListener("mousedown", function(event){
+								// alert("plop");
+								group.children[i].position.x+=move.x;
+								// group.children[i].position.x+=move.x;
+								// group.children[i].position.x+=move.x;
+							// });
+						}
+					}
+				}	
+			break;
+			}	
+		});	
+	}
 }
 
 
@@ -183,7 +214,7 @@ function selected_object(object, controls_object){
 	object.material.blending = THREE.SubtractiveBlending;
 
 	controls_object.attach(object);
-
+	
 	window.scene.getObjectByName("selectionBox").position.copy(object.position);
 	window.scene.getObjectByName("selectionBox").update( object );
 	window.scene.getObjectByName("selectionBox").visible=true;
