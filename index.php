@@ -29,6 +29,8 @@
 		<div style="display:block; position:absolute; top:0px;">
 			<input id="n_cube" type="button" value="New Cube">
 			<input id="n_sphere" type="button" value="New Sphere">
+			<input id="n_clone" type="button" value="Clone">
+			<input id="n_cloneGp" type="button" value="Clone Group">
 			<input id="t_clear" type="button" value="Clear Scene">
 			<input id="t_zoom" type="button" value="+">	
 			<input id="t_dezoom" type="button" value="-">
@@ -47,6 +49,7 @@
 			<input id="side_menu_off" type="button" value="Close side panel">
 		</div>
 		<span style='position: absolute; bottom:0;' id="s_tools" data=""></span>
+		<span style='position: absolute; bottom:0;left:35px;' id="s_tools2" data=""></span>
 		<span id="scale" data=""></span>
 	</body>
 </html>

@@ -23,6 +23,3 @@ function send_scene(scene) {
 			window.sessionStorage[key] = obj;
 	}	
 }
-
-$( document ).ready(function(){
-});

@@ -80,7 +80,7 @@
 		object_control.update();
 		
 		document.getElementById("s_tools").innerHTML=window.onCtrl;
-		// alert(window.control_active);
+		document.getElementById("s_tools2").innerHTML=window.nb_group;
 	}
 
 	function render2() {
@@ -131,25 +131,8 @@
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
-			if(INTERSECTED)
-			{
-				// //Old object
-				INTERSECTED=SELECTED;
-				INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				INTERSECTED.material.opacity=1;
-				INTERSECTED.material.blending=THREE.NoBlending;
-			}
-			else 
-			{
-				//Old object
-				INTERSECTED = intersects[ 0 ].object;
-				controls_object.detach(INTERSECTED);
-			}
-				//Current object
-				SELECTED = intersects[ 0 ].object;
-				SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
-				controls_object.attach( SELECTED );
-				selected_object(SELECTED, controls_object);window.onCtrl=true;
+			
+			library.proto.selection(intersects[ 0 ].object);
 		}
 		else
 		{
@@ -169,8 +152,7 @@
 				}
 			}
 		}
-	}
-	
+	}	
 	function onDocumentMouseUp( event ) {
 
 		event.preventDefault();
@@ -190,44 +172,11 @@ function new_sphere(){
 	var geometry = new THREE.SphereGeometry(50,16,16);
 	var material = new THREE.MeshLambertMaterial({color:0x666666});	
 	var sphere = new THREE.Mesh(geometry, material);
-	//***************************************************************//
-	//***************************************************************//
-	var pointLight = new THREE.PointLight(0xFFFFFF);
-	pointLight.position.x = 50;
-	pointLight.position.y = 50;
-	pointLight.position.z = 130;
-	//***************************************************************//
-	//***************************************************************//
-	// scene.add(pointLight);
+
 	scene.add(sphere);
 	objects.push( sphere );
 	
 	render();
-}
-
-function new_cube(){
-	var width = 100;
-	var height = 100;
-	var depth = 100;
-
-	var widthSegments = 1;
-	var heightSegments = 1;
-	var depthSegments = 1;
-		
-	var geometry = new THREE.BoxGeometry( width, height, depth, widthSegments, heightSegments, depthSegments );
-	var cube = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
-
-	cube.name="cube";
-	//***************************************************************//
-	scene.add(cube);
-	objects.push( cube );
-	
-	// window.scene.getObjectByName("selectionBox").update(cube);
-	// window.scene.getObjectByName("selectionBox").update( cube );
-	// window.scene.getObjectByName("selectionBox").visible=true;
-	// controls_object.attach( cube );
-	
-	render();	
 }
 
 function new_cube_save() {
@@ -282,7 +231,7 @@ function new_cube_save() {
 $( document ).ready(function(){
 	init();
 	render();
-	new_cube_save();
+	// new_cube_save();
 	init2();
 	render2();
 });
