@@ -72,8 +72,7 @@ library.proto = {
 				SELECTED = object;
 				SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
 				controls_object.attach( SELECTED );
-				selected_object(SELECTED, controls_object);window.onCtrl=true;
-	
+				selected_object(SELECTED, controls_object);window.onCtrl=true;	
 	},
 		
 	muti_selection : function muti_selection(){
@@ -172,7 +171,19 @@ library.proto = {
 							if(SELECTED && num == true){
 								if( window.onCtrl == true){
 								console.log( selected_group );
+										var cur_obj = {};
+										cur_obj.properties = {};
+										cur_obj.properties.position = SELECTED.position;
+										cur_obj.properties.id = SELECTED.id;
+									// console.log(cur_obj.properties.position);
+									// console.log(cur_obj.properties.id);
+									
 									selected_group.add(SELECTED);
+										console.log(SELECTED);
+										SELECTED.position.x = cur_obj.properties.position.x;
+										SELECTED.position.y = cur_obj.properties.position.y;
+										SELECTED.position.z = cur_obj.properties.position.z;
+									
 									for(var i=0; i<selected_group.children.length; i++)
 									{
 									var bx = "multi_box_"+i;
@@ -187,6 +198,9 @@ library.proto = {
 							});
 						break;
 					}
+				});
+				addEventListener("keyup", function(event){
+					return;
 				});
 		
 		},
@@ -302,13 +316,13 @@ menubar.Add = {
 	},
 	
 	addCloneGp : function(){
-		if( window.onCtrl ) {
-		var clone = selected_group.clone();
-		for(var i=0; i< clone.children.length;i++){
-			window.scene.add(clone.children[i]);
-			window.objects.push(clone.children[i]);
-		}
-		}
+		// if( window.onCtrl ) {
+		// var clone = selected_group.clone();
+		// for(var i=0; i< clone.children.length;i++){
+			// window.scene.add(clone.children[i]);
+			// window.objects.push(clone.children[i]);
+		// }
+		// }
 	}
 }
 
