@@ -179,6 +179,7 @@ library.proto = {
 									// console.log(cur_obj.properties.id);
 									
 									selected_group.add(SELECTED);
+									selected_group.position.copy(cur_obj.properties.position);
 										console.log(SELECTED);
 										SELECTED.position.x = cur_obj.properties.position.x;
 										SELECTED.position.y = cur_obj.properties.position.y;
