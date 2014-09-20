@@ -5,9 +5,12 @@
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED,rect;
 	
-	var object_control, selectionBox, multi_box, control_active=false, onCtrl=false;
-	
+	var object_control, selectionBox, multi_box, control_active=false, onCtrl=false, ctrl;
+
 	var unit={x:100,y:100,z:100};
+	
+	var onMouseDownPosition = new THREE.Vector2();
+	var onMouseUpPosition = new THREE.Vector2();
 	
 	function init(){
 		width = window.innerWidth-200;
@@ -32,7 +35,7 @@
 		grid();
 		
 		// renderer = new THREE.CanvasRenderer();		
-		renderer = new THREE.WebGLRenderer({ alpha: true });		
+		renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });		
 		renderer.setSize(width , height);
 		renderer.setClearColor( 0xcccccc, 1);
 		container = $('#canvas');
@@ -47,7 +50,7 @@
 		selectionBox = library.proto.box_selection(); scene.add(selectionBox);
 		multi_box = library.proto.muti_selection();
 		muti_move = library.proto.muti_move();
-		
+
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -123,6 +126,7 @@
 		}
 	}
 	function onDocumentMouseDown( event ) {
+
 		event.preventDefault();
 
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
@@ -130,21 +134,38 @@
 		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		var intersects = raycaster.intersectObjects( objects );
 
+		controls.enabled = true;
+
+		onMouseDownPosition.set(mouse.x, mouse.y);
+
+	}
+	function onDocumentMouseUp( event ) {
+		event.preventDefault();
+
+		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+		projector.unprojectVector( vector, camera );
+		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		var intersects = raycaster.intersectObjects( objects );
+
+		onMouseUpPosition.set( mouse.x, mouse.y );
+
 		if ( intersects.length > 0 ) {
 			
 			library.proto.selection(intersects[ 0 ].object);
 		}
 		else
 		{
-			if(SELECTED){ //If an object is selected			
-				if ( ! window.control_active ){
+			if(SELECTED){ //If an object is selected
+			// console.log(onMouseDownPosition.distanceTo( onMouseUpPosition ));
+
+				if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0){
 					window.onCtrl=false;
 					controls_object.detach(SELECTED);
 					SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
 					SELECTED.material.opacity=1;
 					SELECTED.material.blending=THREE.NoBlending;
 					scene.getObjectByName("selectionBox").visible=false;
-					//----
+					// ----
 					for(var i=0; i<window.scene.children[4].children.length; i++)
 					{
 						scene.getObjectByName("selectionBox_"+i).visible=false;
@@ -153,16 +174,6 @@
 			}
 		}
 	}	
-	function onDocumentMouseUp( event ) {
-
-		event.preventDefault();
-
-		controls.enabled = true;
-
-		if ( INTERSECTED ) {
-
-		}
-	}
 //***************************************************************//
 //***************************************************************//
 //***************************************************************//
