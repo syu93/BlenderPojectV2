@@ -79,8 +79,12 @@ library.proto = {
 	},
 		
 	muti_selection : function muti_selection(){
-		addEventListener("keydown", group_assign);
-		// addEventListener("keyup", function addaction(event){addEventListener("keydown", group_assign);});
+		addEventListener("keydown", function(event){
+			event.preventDefault();
+			if(event.keyCode == 16 ){
+				addEventListener("keydown", group_assign);
+			}
+		});
 	},
 	
 	muti_move : function muti_move(){
@@ -88,9 +92,18 @@ library.proto = {
 			switch ( event.keyCode ) {
 				case 17: // Ctrl					
 					//---
-				if( SELECTED && window.onCtrl){
+				// if( SELECTED && window.onCtrl){ // To use
 					controls_object.attach(selected_group);
-				}	
+					for(var i=0; i<selected_group.children.length; i++)
+					{
+					var bx = "multi_box_"+i;
+						var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
+						
+						window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
+						window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
+						window.scene.getObjectByName("selectionBox_"+i).visible=true;
+					}
+				// }
 			break;
 			}	
 		});
@@ -213,10 +226,9 @@ function group_assign(event){
 					if(typeof subGroup_1 == "undefined") {
 					subGroup_1 = new THREE.Object3D(); subGroup_1.name="subGroup_1"; window.scene.add(subGroup_1); selected_group = subGroup_1; }
 					else{selected_group = subGroup_1;
-					// console.log("group 1");
-					// window.removeEventListener('keydown',group_assign);
 					}
 					var num = true;
+					removeEventListener("keydown", group_assign);
 				break;
 				
 				// case	17 : // Ctrl
@@ -227,6 +239,7 @@ function group_assign(event){
 					subGroup_2 = new THREE.Object3D(); subGroup_2.name="subGroup_2"; window.scene.add(subGroup_2); selected_group = subGroup_2;}
 					else{selected_group = subGroup_2;}
 					var num = true;
+					removeEventListener("keydown", group_assign);
 				break;
 				
 				// case	17 : // Ctrl
@@ -306,7 +319,22 @@ function group_assign(event){
 			if(SELECTED && num == true){
 				if( window.onCtrl == true){
 				console.log( selected_group );
+
+					var obj_scene_pos = new THREE.Vector3();
+					var grp_scene_pos = new THREE.Vector3();
+
+					obj_scene_pos.copy(SELECTED.position);
+					grp_scene_pos.copy(selected_group.position);
+						// console.log(obj_scene_pos);
+						// console.log(grp_scene_pos);
+
 					selected_group.add(SELECTED);
+
+					SELECTED.position.set(
+						obj_scene_pos.x-grp_scene_pos.x,
+						obj_scene_pos.y-grp_scene_pos.y,
+						obj_scene_pos.z-grp_scene_pos.z);
+
 					for(var i=0; i<selected_group.children.length; i++)
 					{
 					var bx = "multi_box_"+i;

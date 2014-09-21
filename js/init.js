@@ -61,7 +61,7 @@
 		height2 = window.innerHeight/12;
 		scene2 = new THREE.Scene();
 		camera2 = new THREE.PerspectiveCamera(50, width2 / height2, 1, 5000);
-		camera2.lookAt(scene.position);
+		camera2.lookAt(scene.position); // FIXME : whene change focus of the camera, the help axis turn
 		scene2.add(camera2);
 		projector2 = new THREE.Projector();			
 		var axisHelper = new THREE.AxisHelper( 125 );
