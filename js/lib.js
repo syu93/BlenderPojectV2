@@ -105,6 +105,10 @@ library.proto = {
 							window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
 							window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
 							window.scene.getObjectByName("selectionBox_"+i).visible=true;
+							window.scene.getObjectByName("selectionBox_"+i).material.color.r=0;
+							window.scene.getObjectByName("selectionBox_"+i).material.color.g=1;
+							window.scene.getObjectByName("selectionBox_"+i).material.color.b=0;
+							console.log(window.scene.getObjectByName("selectionBox_"+i).material.color.r);
 						}
 					}
 			break;
@@ -297,8 +301,8 @@ menubar.Add = {
 			window.scene.add(clone);
 			window.objects.push(clone);
 		// add Group
-			if(SELECTED.userData.group.group != "none"){
-				var grp = scene.getObjectByName(clone.userData.group.group);
+			if(SELECTED.userData.group != "none"){
+				var grp = scene.getObjectByName(clone.userData.group);
 				grp.add(clone);
 			}
 		}
@@ -432,6 +436,7 @@ function group_assign(event){
 			if(SELECTED && num == true){
 				if( window.onCtrl == true){
 				console.log( selected_group );
+				console.log(selected_group.name);
 
 					var obj_scene_pos = new THREE.Vector3();
 					var grp_scene_pos = new THREE.Vector3();
@@ -442,15 +447,25 @@ function group_assign(event){
 						// console.log(grp_scene_pos);
 
 					selected_group.add(SELECTED);
-					SELECTED.userData.group = {group:selected_group.name};
 
-					// if(SELECTED.userData.group.group != selected_group.name){
-						// Bug
+					if(grp_scene_pos.x == 0 && grp_scene_pos.y == 0 && grp_scene_pos.z == 0){
+						console.log("grp objs at 0,0,0");
 						SELECTED.position.set(
-						obj_scene_pos.x-grp_scene_pos.x,
-						obj_scene_pos.y-grp_scene_pos.y,
-						obj_scene_pos.z-grp_scene_pos.z);
-					// }
+							obj_scene_pos.x,
+							obj_scene_pos.y,
+							obj_scene_pos.z
+						);
+					}
+					else if( SELECTED.userData.group != selected_group.name ){
+						console.log("grp objs not at 0,0,0");
+						SELECTED.position.set(
+							obj_scene_pos.x-grp_scene_pos.x,
+							obj_scene_pos.y-grp_scene_pos.y,
+							obj_scene_pos.z-grp_scene_pos.z
+						);
+					}
+
+					SELECTED.userData.group = selected_group.name;
 				}
 			}
 }
