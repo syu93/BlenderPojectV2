@@ -15,7 +15,7 @@ $( document ).ready(function(){
 		menubar.Add.addClone();
 	});	
 
-	$('#n_clone').click(function(){
+	$('#n_cloneGp').click(function(){
 		menubar.Add.addCloneGp();
 	});	
 

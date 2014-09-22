@@ -5,13 +5,13 @@
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED,rect;
 	
-	var object_control, selectionBox, multi_box, control_active=false, onCtrl=false, ctrl;
+	var object_control, selectionBox, multi_box, control_active=false, onCtrl=false, grp_ctrl=false;
 
 	var unit={x:100,y:100,z:100};
 	
 	var onMouseDownPosition = new THREE.Vector2();
 	var onMouseUpPosition = new THREE.Vector2();
-	
+
 	function init(){
 		width = window.innerWidth-200;
 		height = window.innerHeight-60;
@@ -145,8 +145,7 @@
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		projector.unprojectVector( vector, camera );
 		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-		var intersects = raycaster.intersectObjects( objects );
-
+		var intersects = raycaster.intersectObjects( objects )
 		onMouseUpPosition.set( mouse.x, mouse.y );
 
 		if ( intersects.length > 0 ) {
@@ -156,21 +155,7 @@
 		else
 		{
 			if(SELECTED){ //If an object is selected
-			// console.log(onMouseDownPosition.distanceTo( onMouseUpPosition ));
-
-				if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0){
-					window.onCtrl=false;
-					controls_object.detach(SELECTED);
-					SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-					SELECTED.material.opacity=1;
-					SELECTED.material.blending=THREE.NoBlending;
-					scene.getObjectByName("selectionBox").visible=false;
-					// ----
-					for(var i=0; i<window.scene.children[4].children.length; i++)
-					{
-						scene.getObjectByName("selectionBox_"+i).visible=false;
-					}
-				}
+				unselected_object(SELECTED, controls_object);
 			}
 		}
 	}	
@@ -242,7 +227,9 @@ function new_cube_save() {
 $( document ).ready(function(){
 	init();
 	render();
-	// new_cube_save();
+
 	init2();
 	render2();
+
+	library.proto.load_scene();
 });

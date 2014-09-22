@@ -1,5 +1,5 @@
 //Global variable
-var selected_object, selected_group, nb_group, panel=false, milti=false;
+var selected_object, selected_group, nb_group, panel=false;
 var group = new THREE.Object3D();
 var subGroup_1, subGroup_2, subGroup_3, subGroup_4, subGroup_5, subGroup_6, subGroup_7, subGroup_8,subGroup_9;
 //-------------------
@@ -81,8 +81,11 @@ library.proto = {
 	muti_selection : function muti_selection(){
 		addEventListener("keydown", function(event){
 			event.preventDefault();
-			if(event.keyCode == 16 ){
+			if(event.keyCode == 16 ){ // Shift
 				addEventListener("keydown", group_assign);
+			}
+			else{
+				addEventListener("keydown", group_select);
 			}
 		});
 	},
@@ -90,36 +93,120 @@ library.proto = {
 	muti_move : function muti_move(){
 		addEventListener("keydown", function(event){
 			switch ( event.keyCode ) {
-				case 17: // Ctrl					
+				case 17: // Ctrl			
 					//---
-				// if( SELECTED && window.onCtrl){ // To use
-					controls_object.attach(selected_group);
-					for(var i=0; i<selected_group.children.length; i++)
-					{
-					var bx = "multi_box_"+i;
-						var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
-						
-						window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
-						window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
-						window.scene.getObjectByName("selectionBox_"+i).visible=true;
+					if(typeof (selected_group) != "undefined"){
+						controls_object.attach(selected_group);
+						for(var i=0; i<selected_group.children.length; i++)
+						{
+						var bx = "multi_box_"+i;
+							var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
+							
+							window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
+							window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
+							window.scene.getObjectByName("selectionBox_"+i).visible=true;
+						}
 					}
-				// }
 			break;
 			}	
 		});
 		addEventListener("keyup", function(event){
-			// controls_object.detach(group);
-			// window.scene.getObjectByName("selectionBox_group").visible=false;			
+			switch ( event.keyCode ) {
+				case 17: // Ctrl			
+					//---
+					if((typeof (selected_group) != "undefined"))
+					{
+						controls_object.attach(SELECTED);
+						for(var i=0; i<selected_group.children.length; i++)
+						{
+						var bx = "multi_box_"+i;
+							var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
+							
+							window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
+							window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
+							window.scene.getObjectByName("selectionBox_"+i).visible=false;
+						}
+					}
+			break;
+			}	
 		});
 	},
 	
 	save_scene : function save_scene(){
-	alert();
-	// if(	window.sessionStorage)
-		// for(var i=0; i < window.objects.children.length ; i++)
-		// {
-			
+		// if(typeof window.sessionStorage.save=="undefined"){
+		window.sessionStorage.clear();
+			var save = {};			
+				// Get the camera
+				save.camera = {position:window.camera.position};
+
+				//get objects
+				var objs = [];
+				for(key in objects) {
+					var properties = {};
+					properties.id = {id:objects[key].id};
+					properties.uuid = {id:objects[key].uuid};
+					properties.name = {name:objects[key].name};
+					properties.position = {position:objects[key].position};
+					properties.group = {group:objects[key].userData.group};
+
+					//push properties into objs
+					objs.push(properties);
+					// console.log(objs);
+				};
+				save.objects = objs;
+
+
+
+
+			// save into session storage
+			var g_save = JSON.stringify(save);
+
+			window.sessionStorage.save = g_save;
+			console.log(window.sessionStorage.save);
 		// }
+		// else if(typeof window.sessionStorage.save!="undefined"){
+
+		// }
+	},
+
+	load_scene : function load_scene(){
+		if(typeof window.sessionStorage.save!="undefined"){
+			var g_save = window.sessionStorage.save;
+
+			var save = JSON.parse(g_save);
+			console.log(save);
+
+			// Retrieve camera
+			window.camera.position.copy(save.camera.position);
+
+			// Retrieve object
+			for(key in save.objects) {
+				console.log(save.objects[key].position);
+				//Creat the object
+				switch ( save.objects[key].name.name ) {
+					case "cube":
+						var created_obj = menubar.Add.addCube();
+					break;
+
+					case "sphere":
+						var created_obj = menubar.Add.addSphere();
+					break;
+
+					case "circle":
+						var created_obj = menubar.Add.addCircle();
+					break;
+
+					case "cylinder":
+						var created_obj = menubar.Add.addCylinder();
+					break;
+				}
+				// Set objects properties
+				created_obj.id = save.objects[key].id.id;
+				created_obj.uuid = save.objects[key].uuid.uuid;
+				created_obj.position.copy(save.objects[key].position.position);
+				created_obj.userData.group = save.objects[key].group.group;
+			}
+		}
 	}
 }
 
@@ -140,12 +227,13 @@ menubar.Add = {
 		var cube = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
 
 		cube.name='cube';
+		cube.userData = {group:""};
 			// cube.position.x = Math.random() * 1000 - 250;
 		scene.add(cube);
 		objects.push( cube );
 		library.proto.selection(cube);
 		
-		// render();
+		return cube;
 	},
 	
 	addSphere : function(){
@@ -155,13 +243,14 @@ menubar.Add = {
 
 		var geometry = new THREE.SphereGeometry( radius, widthSegments, heightSegments );
 		var sphere = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
-		sphere.name = 'sphere ';
+		sphere.name = 'sphere';
+		sphere.userData = {group:"none"};
 		
 		scene.add(sphere);
 		objects.push( sphere );
 		library.proto.selection(sphere);
 		
-		// render();
+		return sphere;
 	},
 	
 	addCircle : function(){
@@ -170,13 +259,14 @@ menubar.Add = {
 
 		var geometry = new THREE.CircleGeometry( radius, segments );
 		var circle = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
-		circle.name = 'circle ';
+		circle.name = 'circle';
+		circle.userData = {group:"none"};
 		
 		scene.add(circle);
 		objects.push( circle );		
 		library.proto.selection(circle);
 		
-		// render();
+		return circle;
 	},
 	
 	addCylinder : function(){
@@ -189,11 +279,14 @@ menubar.Add = {
 
 		var geometry = new THREE.CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded );
 		var cylinder = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
-		mesh.name = 'cylinder ';
+		mesh.name = 'cylinder';
+		cylinder.userData = {group:"none"};
 		
 		scene.add(cylinder);
 		objects.push( cylinder );		
 		library.proto.selection(cylinder);
+
+		return cylinder;
 	},
 	
 	
@@ -203,19 +296,31 @@ menubar.Add = {
 		var clone = SELECTED.clone();
 			window.scene.add(clone);
 			window.objects.push(clone);
+		// add Group
+			if(SELECTED.userData.group.group != "none"){
+				var grp = scene.getObjectByName(clone.userData.group.group);
+				grp.add(clone);
+			}
 		}
 	},
 	
 	addCloneGp : function(){
-		if( window.onCtrl ) {
-		var clone = selected_group.clone();
-		for(var i=0; i< clone.children.length;i++){
-			window.scene.add(clone.children[i]);
-			window.objects.push(clone.children[i]);
-		}
-		}
+		// if( window.onCtrl ) {
+		// var clone = selected_group.clone();
+		// 	for(var i=0; i< clone.children.length;i++){
+		// 		window.scene.add(clone.children[i]);
+		// 		window.objects.push(clone.children[i]);
+		// 	}
+		// }
+	},
+
+	addDelete : function(){
+		SELECTED
 	}
 }
+
+//---
+
 function group_assign(event){
 		event.preventDefault();
 			switch ( event.keyCode ) {
@@ -226,9 +331,9 @@ function group_assign(event){
 					if(typeof subGroup_1 == "undefined") {
 					subGroup_1 = new THREE.Object3D(); subGroup_1.name="subGroup_1"; window.scene.add(subGroup_1); selected_group = subGroup_1; }
 					else{selected_group = subGroup_1;
+					removeEventListener("keydown", group_assign);
 					}
 					var num = true;
-					removeEventListener("keydown", group_assign);
 				break;
 				
 				// case	17 : // Ctrl
@@ -238,8 +343,8 @@ function group_assign(event){
 					if(typeof subGroup_2 == "undefined") {
 					subGroup_2 = new THREE.Object3D(); subGroup_2.name="subGroup_2"; window.scene.add(subGroup_2); selected_group = subGroup_2;}
 					else{selected_group = subGroup_2;}
-					var num = true;
 					removeEventListener("keydown", group_assign);
+					var num = true;
 				break;
 				
 				// case	17 : // Ctrl
@@ -249,6 +354,7 @@ function group_assign(event){
 					if(typeof subGroup_3 == "undefined") {
 					subGroup_3 = new THREE.Object3D(); subGroup_3.name="subGroup_3"; window.scene.add(subGroup_3); selected_group = subGroup_3;}
 					else{selected_group = subGroup_3;};
+					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
@@ -259,6 +365,7 @@ function group_assign(event){
 					if(typeof subGroup_4 == "undefined") {
 					subGroup_4 = new THREE.Object3D(); subGroup_4.name="subGroup_4"; window.scene.add(subGroup_4); selected_group = subGroup_4;}
 					else{selected_group = subGroup_4;}
+					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;
 
@@ -269,6 +376,7 @@ function group_assign(event){
 					if(typeof subGroup_5 == "undefined") {
 					subGroup_5 = new THREE.Object3D(); subGroup_5.name="subGroup_5"; window.scene.add(subGroup_5); selected_group = subGroup_5;}
 					else{selected_group = subGroup_5;}
+					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;
 
@@ -279,6 +387,7 @@ function group_assign(event){
 					if(typeof subGroup_6 == "undefined") {
 					subGroup_6 = new THREE.Object3D(); subGroup_6.name="subGroup_6"; window.scene.add(subGroup_6); selected_group = subGroup_6;}
 					else{selected_group = subGroup_6;}
+					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
@@ -289,6 +398,7 @@ function group_assign(event){
 					if(typeof subGroup_7 == "undefined") {
 					subGroup_7 = new THREE.Object3D(); subGroup_7.name="subGroup_7"; window.scene.add(subGroup_7); selected_group = subGroup_7;}
 					else{selected_group = subGroup_7;}
+					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
@@ -299,6 +409,7 @@ function group_assign(event){
 					if(typeof subGroup_8 == "undefined") {
 					subGroup_8 = new THREE.Object3D(); subGroup_8.name="subGroup_8"; window.scene.add(subGroup_8); selected_group = subGroup_8;}
 					else{selected_group = subGroup_8;}
+					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
@@ -309,6 +420,7 @@ function group_assign(event){
 					if(typeof subGroup_9 == "undefined") {
 					subGroup_9 = new THREE.Object3D(); subGroup_9.name="subGroup_9"; window.scene.add(subGroup_9); selected_group = subGroup_9;}
 					else{selected_group = subGroup_9;}
+					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;
 
@@ -316,6 +428,7 @@ function group_assign(event){
 				var num = false;
 				break;
 			}
+			// put objet in the selected group
 			if(SELECTED && num == true){
 				if( window.onCtrl == true){
 				console.log( selected_group );
@@ -329,23 +442,86 @@ function group_assign(event){
 						// console.log(grp_scene_pos);
 
 					selected_group.add(SELECTED);
+					SELECTED.userData.group = {group:selected_group.name};
 
-					SELECTED.position.set(
+					// if(SELECTED.userData.group.group != selected_group.name){
+						// Bug
+						SELECTED.position.set(
 						obj_scene_pos.x-grp_scene_pos.x,
 						obj_scene_pos.y-grp_scene_pos.y,
 						obj_scene_pos.z-grp_scene_pos.z);
-
-					for(var i=0; i<selected_group.children.length; i++)
-					{
-					var bx = "multi_box_"+i;
-						var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
-						
-						window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
-						window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
-						window.scene.getObjectByName("selectionBox_"+i).visible=true;
-					}
+					// }
 				}
 			}
+}
+
+function group_select(event){
+	event.preventDefault();
+			switch ( event.keyCode ) {
+				case  	49 : // 1
+				case  	97 : // numpad 1
+				nb_group = 1;
+				selected_group = subGroup_1;
+				removeEventListener("keydown", group_select);
+				break;
+				
+				case  	50 : // 2
+				case  	98 : // numpad 2
+				nb_group = 2;
+				selected_group = subGroup_2;
+				removeEventListener("keydown", group_select);
+				break;
+				
+				case  	51 : // 3
+				case  	99 : // numpad 3
+				nb_group = 3;
+				selected_group = subGroup_3;
+				removeEventListener("keydown", group_select);
+				break;	
+
+				case  	52 : // 4
+				case  	100 : // numpad 4
+				nb_group = 4;
+				selected_group = subGroup_4;
+				removeEventListener("keydown", group_select);
+				break;
+
+				case  	53 : // 5
+				case  	101 : // numpad 5
+				nb_group = 5;
+				selected_group = subGroup_5;
+				removeEventListener("keydown", group_select);
+				break;
+
+				case  	54 : // 6
+				case  	102 : // numpad 6
+				nb_group = 6;
+				selected_group = subGroup_6;
+				removeEventListener("keydown", group_select);
+				break;	
+
+				case  	55 : // 7
+				case  	103 : // numpad 7
+				nb_group = 7;
+				selected_group = subGroup_7;
+				removeEventListener("keydown", group_select);
+				break;	
+
+				case  	56 : // 8
+				case  	104 : // numpad 8
+				nb_group = 8;
+				selected_group = subGroup_8;
+				removeEventListener("keydown", group_select);
+				break;	
+
+				case  	57 : // 9
+				case  	105 : // numpad 9
+				nb_group = 9;
+				selected_group = subGroup_9;
+				removeEventListener("keydown", group_select);
+				break;
+			}
+
 }
 
 function origin(){
@@ -457,4 +633,20 @@ function selected_object(object, controls_object){
 	window.scene.getObjectByName("selectionBox").position.copy(object.position);
 	window.scene.getObjectByName("selectionBox").update( object );
 	window.scene.getObjectByName("selectionBox").visible=true;
+}
+
+function unselected_object(object, controls_object){
+	if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0){
+		window.onCtrl=false;
+		controls_object.detach(SELECTED);
+		SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+		SELECTED.material.opacity=1;
+		SELECTED.material.blending=THREE.NoBlending;
+		scene.getObjectByName("selectionBox").visible=false;
+		// ----
+		// for(var i=0; i<window.scene.children[4].children.length; i++)
+		// {
+		// 	scene.getObjectByName("selectionBox_"+i).visible=false;
+		// }
+	}
 }
