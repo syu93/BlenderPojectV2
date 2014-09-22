@@ -447,23 +447,23 @@ function group_assign(event){
 						// console.log(grp_scene_pos);
 
 					selected_group.add(SELECTED);
-
-					if(grp_scene_pos.x == 0 && grp_scene_pos.y == 0 && grp_scene_pos.z == 0){
-						console.log("grp objs at 0,0,0");
-						SELECTED.position.set(
-							obj_scene_pos.x,
-							obj_scene_pos.y,
-							obj_scene_pos.z
-						);
-					}
-					else if( SELECTED.userData.group != selected_group.name ){
-						console.log("grp objs not at 0,0,0");
-						SELECTED.position.set(
-							obj_scene_pos.x-grp_scene_pos.x,
-							obj_scene_pos.y-grp_scene_pos.y,
-							obj_scene_pos.z-grp_scene_pos.z
-						);
-					}
+					// World matrix - Absolute position
+					// if(grp_scene_pos.x == 0 && grp_scene_pos.y == 0 && grp_scene_pos.z == 0){
+					// 	console.log("grp objs at 0,0,0");
+					// 	SELECTED.position.set(
+					// 		obj_scene_pos.x,
+					// 		obj_scene_pos.y,
+					// 		obj_scene_pos.z
+					// 	);
+					// }
+					// else if( SELECTED.userData.group != selected_group.name ){
+					// 	console.log("grp objs not at 0,0,0");
+					// 	SELECTED.position.set(
+					// 		obj_scene_pos.x-grp_scene_pos.x,
+					// 		obj_scene_pos.y-grp_scene_pos.y,
+					// 		obj_scene_pos.z-grp_scene_pos.z
+					// 	);
+					// }
 
 					SELECTED.userData.group = selected_group.name;
 				}
