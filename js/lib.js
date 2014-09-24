@@ -151,6 +151,8 @@ library.proto = {
 					properties.uuid = {id:objects[key].uuid};
 					properties.name = {name:objects[key].name};
 					properties.position = {position:objects[key].position};
+					properties.scale = {scale:objects[key].scale};
+					properties.rotation = {rotation:objects[key].rotation};
 					properties.group = {group:objects[key].userData.group};
 
 					//push properties into objs
@@ -208,6 +210,8 @@ library.proto = {
 				created_obj.id = save.objects[key].id.id;
 				created_obj.uuid = save.objects[key].uuid.uuid;
 				created_obj.position.copy(save.objects[key].position.position);
+				created_obj.scale.copy(save.objects[key].scale.scale);
+				created_obj.rotation.copy(save.objects[key].rotation.rotation);
 				created_obj.userData.group = save.objects[key].group.group;
 			}
 		}
