@@ -11,6 +11,16 @@ $( document ).ready(function(){
 		menubar.Add.addSphere();
 	});
 
+	$('#n_circle').click(function(){
+		// $("#s_tools").attr('data', 'sphere');
+		menubar.Add.addCircle();
+	});
+
+	$('#n_cilinder').click(function(){
+		// $("#s_tools").attr('data', 'sphere');
+		menubar.Add.addCylinder();
+	});
+
 	$('#n_clone').click(function(){
 		menubar.Add.addClone();
 	});	
@@ -26,5 +36,9 @@ $( document ).ready(function(){
 
 	$('#save').click(function(){
 		library.proto.save_scene();
+	});
+
+	$('#delete').click(function(){
+		menubar.Add.addDelete();
 	});
 });

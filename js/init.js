@@ -119,6 +119,7 @@
 
 		if ( intersects.length > 0 ) {
 			$('canvas').css("cursor", "move");
+			// console.log(intersects[ 0 ].object);
 		}
 		else
 		{

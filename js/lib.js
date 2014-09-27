@@ -263,7 +263,7 @@ menubar.Add = {
 	
 	addCircle : function(){
 		var radius = 20;
-		var segments = 8;
+		var segments = 100;
 
 		var geometry = new THREE.CircleGeometry( radius, segments );
 		var circle = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
@@ -281,13 +281,13 @@ menubar.Add = {
 		var radiusTop = 20;
 		var radiusBottom = 20;
 		var height = 100;
-		var radiusSegments = 8;
+		var radiusSegments = 100;
 		var heightSegments = 1;
 		var openEnded = false;
 
 		var geometry = new THREE.CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded );
 		var cylinder = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
-		mesh.name = 'cylinder';
+		cylinder.name = 'cylinder';
 		cylinder.userData = {group:"none"};
 		
 		scene.add(cylinder);
@@ -305,7 +305,7 @@ menubar.Add = {
 			window.scene.add(clone);
 			window.objects.push(clone);
 		// add Group
-			if(SELECTED.userData.group != "none"){
+			if(SELECTED.userData.group != ""){
 				var grp = scene.getObjectByName(clone.userData.group);
 				grp.add(clone);
 			}
@@ -323,7 +323,25 @@ menubar.Add = {
 	},
 
 	addDelete : function(){
-		SELECTED
+		if ( confirm( 'Delete ' + SELECTED.name + ' ?' ) === false ) return;
+		controls_object.detach(SELECTED);
+		//---
+		var box = scene.getObjectByName("selectionBox");
+		box.geometry.dispose();
+		scene.remove(box);
+		selectionBox = library.proto.box_selection(); scene.add(selectionBox);
+		//---
+		var sup_obj  = scene.getObjectById(SELECTED.id);
+		//---
+		sup_obj.geometry.dispose();
+		scene.remove(sup_obj);
+		//--- not the best way
+		sup_obj.scale.set(0,0,0);
+		box.scale.set(0,0,0);
+		//---
+		sup_obj.position.set(0,0,0);
+		box.position.set(0,0,0);
+
 	}
 }
 
