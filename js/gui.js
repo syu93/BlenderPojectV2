@@ -16,6 +16,11 @@ $( document ).ready(function(){
 		menubar.Add.addCircle();
 	});
 
+	$('#n_triangle').click(function(){
+		// $("#s_tools").attr('data', 'sphere');
+		menubar.Add.addTriangle();
+	});
+
 	$('#n_cilinder').click(function(){
 		// $("#s_tools").attr('data', 'sphere');
 		menubar.Add.addCylinder();

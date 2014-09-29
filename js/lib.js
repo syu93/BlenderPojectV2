@@ -296,6 +296,23 @@ menubar.Add = {
 
 		return cylinder;
 	},
+
+	addTriangle : function(){
+		// var a = new THEE.
+		// var
+		// var
+
+		// var geometry = new THREE.CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded );
+		// var triangle = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
+		// triangle.name = 'triangle';
+		// triangle.userData = {group:"none"};
+
+		// scene.add(triangle);
+		// objects.push( triangle );
+		// library.proto.selection(triangle);
+
+		// return triangle;
+	},
 	
 	
 	
@@ -336,10 +353,10 @@ menubar.Add = {
 		sup_obj.geometry.dispose();
 		scene.remove(sup_obj);
 		//--- not the best way
-		sup_obj.scale.set(0,0,0);
+		sup_obj.scale.set(1000,1000,1000);
 		box.scale.set(0,0,0);
 		//---
-		sup_obj.position.set(0,0,0);
+		sup_obj.position.set(1000,1000,1000);
 		box.position.set(0,0,0);
 
 	}
