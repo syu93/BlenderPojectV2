@@ -1,11 +1,9 @@
 //Global variable
-var selected_object, selected_group, nb_group, panel=false;
-var group = new THREE.Object3D();
+var selected_object, delete_obj, selected_group, nb_group, panel=false;
 var subGroup_1, subGroup_2, subGroup_3, subGroup_4, subGroup_5, subGroup_6, subGroup_7, subGroup_8,subGroup_9;
 //-------------------
 var library = function(){
 	var controls_object, selectionBox, multi_box, multi_control;
-	// window.scene.add(group);
 }
 
 library.proto = {
@@ -289,7 +287,6 @@ menubar.Add = {
 		var cylinder = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
 		cylinder.name = 'cylinder';
 		cylinder.userData = {group:"none"};
-		
 		scene.add(cylinder);
 		objects.push( cylinder );		
 		library.proto.selection(cylinder);
@@ -298,20 +295,24 @@ menubar.Add = {
 	},
 
 	addTriangle : function(){
-		// var a = new THEE.
-		// var
-		// var
+		var radiusTop = 0;
+		var radiusBottom = 20;
+		var height = 100;
+		var radiusSegments = 100;
+		var heightSegments = 1;
+		var openEnded = false;
 
-		// var geometry = new THREE.CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded );
-		// var triangle = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
-		// triangle.name = 'triangle';
-		// triangle.userData = {group:"none"};
+		var geometry = new THREE.CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded );
+		var triangle = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
+		triangle.name = 'triangle';
+		triangle.userData = {group:"none"};
+		triangle.scale.z=0.00028726221039769107;
 
-		// scene.add(triangle);
-		// objects.push( triangle );
-		// library.proto.selection(triangle);
+		scene.add(triangle);
+		objects.push( triangle );
+		library.proto.selection(triangle);
 
-		// return triangle;
+		return triangle;
 	},
 	
 	
@@ -322,10 +323,10 @@ menubar.Add = {
 			window.scene.add(clone);
 			window.objects.push(clone);
 		// add Group
-			if(SELECTED.userData.group != ""){
-				var grp = scene.getObjectByName(clone.userData.group);
-				grp.add(clone);
-			}
+			// if(SELECTED.userData.group != "none"){
+			// 	var grp = scene.getObjectByName(clone.userData.group);
+			// 	grp.add(clone);
+			// }
 		}
 	},
 	
@@ -341,24 +342,24 @@ menubar.Add = {
 
 	addDelete : function(){
 		if ( confirm( 'Delete ' + SELECTED.name + ' ?' ) === false ) return;
-		controls_object.detach(SELECTED);
+		delete_obj=true;
+		unselected_object(SELECTED, controls_object);
 		//---
-		var box = scene.getObjectByName("selectionBox");
-		box.geometry.dispose();
-		scene.remove(box);
-		selectionBox = library.proto.box_selection(); scene.add(selectionBox);
+		// console.log(sup_obj);
 		//---
-		var sup_obj  = scene.getObjectById(SELECTED.id);
+		SELECTED.geometry = {};
+		SELECTED.geometry = new THREE.Geometry();
+		SELECTED.geometry.dispose();
+		scene.remove(SELECTED);
 		//---
-		sup_obj.geometry.dispose();
-		scene.remove(sup_obj);
-		//--- not the best way
-		sup_obj.scale.set(1000,1000,1000);
-		box.scale.set(0,0,0);
+		for(key in objects){
+			
+		}
 		//---
-		sup_obj.position.set(1000,1000,1000);
-		box.position.set(0,0,0);
-
+		render();
+		console.log(SELECTED);
+		//---
+		delete_obj=false;
 	}
 }
 
@@ -678,9 +679,8 @@ function enable_grid(){
 
 function selected_object(object, controls_object){
 	console.log(object);
-	object.material.color.setHex(0x3d3d3d);
-	object.material.opacity = 0.3;
-	object.material.blending = THREE.SubtractiveBlending;
+
+	window.onCtrl=false;
 
 	controls_object.attach(object);
 	
@@ -690,17 +690,13 @@ function selected_object(object, controls_object){
 }
 
 function unselected_object(object, controls_object){
-	if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0){
+	if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0 || delete_obj == true){
 		window.onCtrl=false;
+
 		controls_object.detach(SELECTED);
-		SELECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-		SELECTED.material.opacity=1;
-		SELECTED.material.blending=THREE.NoBlending;
-		scene.getObjectByName("selectionBox").visible=false;
-		// ----
-		// for(var i=0; i<window.scene.children[4].children.length; i++)
-		// {
-		// 	scene.getObjectByName("selectionBox_"+i).visible=false;
-		// }
+
+		window.scene.getObjectByName("selectionBox").position.copy(scene.position);
+		window.scene.getObjectByName("selectionBox").update(window.scene.getObjectByName("main grid"));
+		window.scene.getObjectByName("selectionBox").visible=false;
 	}
 }

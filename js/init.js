@@ -6,8 +6,6 @@
 	INTERSECTED, SELECTED,rect;
 	
 	var object_control, selectionBox, multi_box, control_active=false, onCtrl=false, grp_ctrl=false;
-
-	var unit={x:100,y:100,z:100};
 	
 	var onMouseDownPosition = new THREE.Vector2();
 	var onMouseUpPosition = new THREE.Vector2();
@@ -26,15 +24,9 @@
 		scene.add(camera);
 		// Projector for the camera
 		projector = new THREE.Projector();
-		//Axis
-		// axis();
-		// disable_axis();
-		//origin
-		// origin();
-		//Floor
+
 		grid();
-		
-		// renderer = new THREE.CanvasRenderer();		
+			
 		renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });		
 		renderer.setSize(width , height);
 		renderer.setClearColor( 0xcccccc, 1);
@@ -159,66 +151,7 @@
 				unselected_object(SELECTED, controls_object);
 			}
 		}
-	}	
-//***************************************************************//
-//***************************************************************//
-//***************************************************************//
-//***************************************************************//
-
-function new_sphere(){
-	var geometry = new THREE.SphereGeometry(50,16,16);
-	var material = new THREE.MeshLambertMaterial({color:0x666666});	
-	var sphere = new THREE.Mesh(geometry, material);
-
-	scene.add(sphere);
-	objects.push( sphere );
-	
-	render();
-}
-
-function new_cube_save() {
-	var recovery_object;
-	
-	if(window.sessionStorage){
-	var save = window.sessionStorage;
-		console.log(save);
-			for(key in save)
-			{
-				var attr_obj = JSON.parse(save[key]);
-				console.log(attr_obj);
-				if(attr_obj.type.name == "cube")
-				{
-					var x = attr_obj.scale.x;
-					var y = attr_obj.scale.y;
-					var z = attr_obj.scale.z;
-					
-					var geometry = new THREE.BoxGeometry((unit.x*x),(unit.x*y),(unit.z*z));
-					var material = new THREE.MeshBasicMaterial({color:0xDDDDDD});		
-					var recovery_object = new THREE.Mesh(geometry, material);
-					
-					recovery_object.position.x = attr_obj.position.x;
-					recovery_object.position.y = attr_obj.position.y;
-					recovery_object.position.z = attr_obj.position.z;
-				
-					recovery_object.id = attr_obj.id;
-					recovery_object.name = attr_obj.type.name;
-					
-					//***************************************************************//
-					
-					var hex = 0xEEFF00;
-					var bbox = new THREE.BoundingBoxHelper( recovery_object, hex );
-					bbox.name="bbox";
-					bbox.update();
-					bbox.visible = false;
-					recovery_object.add(bbox);
-				}					
-					//***************************************************************//				
-					scene.add( recovery_object );
-					objects.push( recovery_object );
-					render();
-			}
 	}
-}
 
 /**********************************************************************************************************************************************/
 /**********************************************************************************************************************************************/
