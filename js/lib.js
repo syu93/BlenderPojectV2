@@ -233,7 +233,7 @@ menubar.Add = {
 		var cube = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
 
 		cube.name='cube';
-		cube.userData = {group:""};
+		cube.userData = {group:"none"};
 			// cube.position.x = Math.random() * 1000 - 250;
 		scene.add(cube);
 		objects.push( cube );
@@ -478,32 +478,24 @@ function group_assign(event){
 				console.log( selected_group );
 				console.log(selected_group.name);
 
-					var obj_scene_pos = new THREE.Vector3();
 					var grp_scene_pos = new THREE.Vector3();
+					grp_scene_pos.setFromMatrixPosition( selected_group.matrixWorld );
+					console.log(grp_scene_pos);
 
-					obj_scene_pos.copy(SELECTED.position);
-					grp_scene_pos.copy(selected_group.position);
-						// console.log(obj_scene_pos);
-						// console.log(grp_scene_pos);
 
 					selected_group.add(SELECTED);
-					// World matrix - Absolute position
-					// if(grp_scene_pos.x == 0 && grp_scene_pos.y == 0 && grp_scene_pos.z == 0){
-					// 	console.log("grp objs at 0,0,0");
-					// 	SELECTED.position.set(
-					// 		obj_scene_pos.x,
-					// 		obj_scene_pos.y,
-					// 		obj_scene_pos.z
-					// 	);
-					// }
-					// else if( SELECTED.userData.group != selected_group.name ){
-					// 	console.log("grp objs not at 0,0,0");
-					// 	SELECTED.position.set(
-					// 		obj_scene_pos.x-grp_scene_pos.x,
-					// 		obj_scene_pos.y-grp_scene_pos.y,
-					// 		obj_scene_pos.z-grp_scene_pos.z
-					// 	);
-					// }
+					
+					if(SELECTED.userData.group != selected_group.name)
+					{
+						// World matrix - Absolute position
+						var x = SELECTED.position.x-grp_scene_pos.x;
+						var y = SELECTED.position.y-grp_scene_pos.y;
+						var z = SELECTED.position.z-grp_scene_pos.z;
+
+						SELECTED.position.x = x;
+						SELECTED.position.y = y;
+						SELECTED.position.z = z;
+					}
 
 					SELECTED.userData.group = selected_group.name;
 				}
