@@ -24,7 +24,7 @@
 		<link rel="stylesheet" href="css/init.css">
 	</head>
 	
-	<body style="background:#3D3D3D;">
+	<body style="color:#fff; background:#171717;">
 	<div id="canvas" style="position: absolute; margin-top:35px;"><div id="direction" style="position:absolute; bottom:0px;"></div></div>
 		<div style="display:block; position:absolute; top:0px;">
 			<input id="n_cube" type="button" value="New Cube">
@@ -35,8 +35,6 @@
 			<input id="n_clone" type="button" value="Clone">
 			<input id="n_cloneGp" type="button" value="Clone Group">
 			<input id="t_clear" type="button" value="Clear Scene">
-			<input id="t_zoom" type="button" value="+">	
-			<input id="t_dezoom" type="button" value="-">
 			<input id="save" type="button" value="Save">
 			<input id="delete" type="button" value="Delete">
 		</div>

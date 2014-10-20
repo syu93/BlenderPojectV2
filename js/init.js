@@ -24,12 +24,12 @@
 		scene.add(camera);
 		// Projector for the camera
 		projector = new THREE.Projector();
-
+		
 		grid();
-			
+
 		renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });		
 		renderer.setSize(width , height);
-		renderer.setClearColor( 0xcccccc, 1);
+		renderer.setClearColor( 0x373737, 1);
 		container = $('#canvas');
 		container.append(renderer.domElement);		
 		rect = container[0];
@@ -53,15 +53,15 @@
 		height2 = window.innerHeight/12;
 		scene2 = new THREE.Scene();
 		camera2 = new THREE.PerspectiveCamera(50, width2 / height2, 1, 5000);
-		camera2.lookAt(scene.position); // FIXME : whene change focus of the camera, the help axis turn
+
 		scene2.add(camera2);
 		projector2 = new THREE.Projector();			
 		var axisHelper = new THREE.AxisHelper( 125 );
 		scene2.add( axisHelper );
 		
-		renderer2 = new THREE.CanvasRenderer();		
+		renderer2 = new THREE.CanvasRenderer();
 		renderer2.setSize(width2 , height2);
-		renderer2.setClearColor( 0xa9a9a9, 1);
+		renderer2.setClearColor( 0x373737, 1);
 		container2 = $('#direction');
 		container2.append(renderer2.domElement);
 		controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
@@ -81,16 +81,9 @@
 	function render2() {
 	// Make the render for the view
 		requestAnimationFrame(render2);		
-		camera2.position.copy(camera.position);		
+		camera2.position.copy(camera.position);
 		renderer2.render(scene2, camera2);
 		controls2.update();
-	}
-	
-	function axis(){
-		// Create the 3D axis
-		var axes = buildAxes(width );
-		axes.name="main axis";
-		scene.add(axes);
 	}
 
 //***************************************************************//
