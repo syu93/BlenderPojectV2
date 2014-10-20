@@ -106,7 +106,7 @@ library.proto = {
 							window.scene.getObjectByName("selectionBox_"+i).material.color.r=0;
 							window.scene.getObjectByName("selectionBox_"+i).material.color.g=1;
 							window.scene.getObjectByName("selectionBox_"+i).material.color.b=0;
-							console.log(window.scene.getObjectByName("selectionBox_"+i).material.color.r);
+							// console.log(window.scene.getObjectByName("selectionBox_"+i).material.color.r);
 						}
 					}
 			break;
@@ -475,28 +475,23 @@ function group_assign(event){
 			// put objet in the selected group
 			if(SELECTED && num == true){
 				if( window.onCtrl == true){
-				console.log( selected_group );
-				console.log(selected_group.name);
-
-					var grp_scene_pos = new THREE.Vector3();
-					grp_scene_pos.setFromMatrixPosition( selected_group.matrixWorld );
-					console.log(grp_scene_pos);
-
-
-					selected_group.add(SELECTED);
-					
+					// console.log( selected_group );
+					// console.log(selected_group.name);					
 					if(SELECTED.userData.group != selected_group.name)
 					{
-						// World matrix - Absolute position
-						var x = SELECTED.position.x-grp_scene_pos.x;
-						var y = SELECTED.position.y-grp_scene_pos.y;
-						var z = SELECTED.position.z-grp_scene_pos.z;
+						var old_group = window.scene.getObjectByName(SELECTED.userData.group);
+						console.log(old_group);
 
-						SELECTED.position.x = x;
-						SELECTED.position.y = y;
-						SELECTED.position.z = z;
+						if(SELECTED.userData.group =="none")
+						{
+							THREE.SceneUtils.attach(SELECTED, window.scene, selected_group);
+						}
+						else
+						{
+							THREE.SceneUtils.detach(SELECTED, old_group, window.scene);
+							THREE.SceneUtils.attach(SELECTED, window.scene, selected_group);
+						}
 					}
-
 					SELECTED.userData.group = selected_group.name;
 				}
 			}
