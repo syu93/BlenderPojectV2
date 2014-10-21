@@ -133,6 +133,13 @@ library.proto = {
 			}	
 		});
 	},
+
+	groupCreate : function(gp_name){
+		subGroup = new THREE.Object3D(); 
+		subGroup.name= gp_name;
+
+		return subGroup;
+	},
 	
 	save_scene : function save_scene(){
 		// if(typeof window.sessionStorage.save=="undefined"){
@@ -376,101 +383,119 @@ menubar.Add = {
 function group_assign(event){
 		event.preventDefault();
 			switch ( event.keyCode ) {
-				// case	17 : // Ctrl
 				case  	49 : // 1
 				case  	97 : // numpad 1
 				nb_group = 1;
 					if(typeof subGroup_1 == "undefined") {
-					subGroup_1 = new THREE.Object3D(); subGroup_1.name="subGroup_1"; window.scene.add(subGroup_1); selected_group = subGroup_1; }
+						var gp_name = "subGroup_1"; 
+						subGroup_1 = library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_1); selected_group = subGroup_1;
+					}					
 					else{selected_group = subGroup_1;
 					removeEventListener("keydown", group_assign);
 					}
 					var num = true;
 				break;
 				
-				// case	17 : // Ctrl
 				case  	50 : // 2
 				case  	98 : // numpad 2
 				nb_group = 2;
 					if(typeof subGroup_2 == "undefined") {
-					subGroup_2 = new THREE.Object3D(); subGroup_2.name="subGroup_2"; window.scene.add(subGroup_2); selected_group = subGroup_2;}
+						var gp_name = "subGroup_2";
+						subGroup_2 = library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_2); selected_group = subGroup_2;
+					}					
 					else{selected_group = subGroup_2;}
 					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;
 				
-				// case	17 : // Ctrl
 				case  	51 : // 3
 				case  	99 : // numpad 3
 				nb_group = 3;
 					if(typeof subGroup_3 == "undefined") {
-					subGroup_3 = new THREE.Object3D(); subGroup_3.name="subGroup_3"; window.scene.add(subGroup_3); selected_group = subGroup_3;}
+						var gp_name = "subGroup_3";
+						subGroup_3 = library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_3); selected_group = subGroup_3;
+					}
 					else{selected_group = subGroup_3;};
 					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
-				// case	17 : // Ctrl				
 				case  	52 : // 4
 				case  	100 : // numpad 4
 				nb_group = 4;
 					if(typeof subGroup_4 == "undefined") {
-					subGroup_4 = new THREE.Object3D(); subGroup_4.name="subGroup_4"; window.scene.add(subGroup_4); selected_group = subGroup_4;}
+						var gp_name = "subGroup_4";
+						subGroup_4 = library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_4); selected_group = subGroup_4;
+					}
 					else{selected_group = subGroup_4;}
 					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;
 
-				// case	17 : // Ctrl
 				case  	53 : // 5
 				case  	101 : // numpad 5
 				nb_group = 5;
 					if(typeof subGroup_5 == "undefined") {
-					subGroup_5 = new THREE.Object3D(); subGroup_5.name="subGroup_5"; window.scene.add(subGroup_5); selected_group = subGroup_5;}
+						var gp_name = "subGroup_5";
+						subGroup_5 = library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_5); selected_group = subGroup_5;
+					}					
 					else{selected_group = subGroup_5;}
 					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;
 
-				// case	17 : // Ctrl
 				case  	54 : // 6
 				case  	102 : // numpad 6
 				nb_group = 6;
 					if(typeof subGroup_6 == "undefined") {
-					subGroup_6 = new THREE.Object3D(); subGroup_6.name="subGroup_6"; window.scene.add(subGroup_6); selected_group = subGroup_6;}
+						var gp_name = "subGroup_6";
+						library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_6); selected_group = subGroup_6;
+					}					
 					else{selected_group = subGroup_6;}
 					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
-				// case	17 : // Ctrl
 				case  	55 : // 7
 				case  	103 : // numpad 7
 				nb_group = 7;
 					if(typeof subGroup_7 == "undefined") {
-					subGroup_7 = new THREE.Object3D(); subGroup_7.name="subGroup_7"; window.scene.add(subGroup_7); selected_group = subGroup_7;}
+						var gp_name = "subGroup_7";
+						subGroup_7 = library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_7); selected_group = subGroup_7;
+					}					
 					else{selected_group = subGroup_7;}
 					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
-				// case	17 : // Ctrl
 				case  	56 : // 8
 				case  	104 : // numpad 8
 				nb_group = 8;
 					if(typeof subGroup_8 == "undefined") {
-					subGroup_8 = new THREE.Object3D(); subGroup_8.name="subGroup_8"; window.scene.add(subGroup_8); selected_group = subGroup_8;}
+						var gp_name = "subGroup_8";
+						library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_8); selected_group = subGroup_8;
+					}					
 					else{selected_group = subGroup_8;}
 					removeEventListener("keydown", group_assign);
 					var num = true;
 				break;	
 
-				// case	17 : // Ctrl
 				case  	57 : // 9
 				case  	105 : // numpad 9
 				nb_group = 9;
 					if(typeof subGroup_9 == "undefined") {
-					subGroup_9 = new THREE.Object3D(); subGroup_9.name="subGroup_9"; window.scene.add(subGroup_9); selected_group = subGroup_9;}
+						var gp_name ="subGroup_9";
+						subGroup_9 = library.proto.groupCreate(gp_name);
+						window.scene.add(subGroup_9); selected_group = subGroup_9;
+					}					
 					else{selected_group = subGroup_9;}
 					removeEventListener("keydown", group_assign);
 					var num = true;

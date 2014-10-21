@@ -152,11 +152,21 @@
 /**********************************************************************************************************************************************/
 
 $( document ).ready(function(){
-	init();
-	render();
+	// init();
+	// render();
 
-	init2();
-	render2();
+	// init2();
+	// render2();
 
-	library.proto.load_scene();
+	// library.proto.load_scene();
+
+	window.onresize = function(event) {
+		// init();
+		// render();
+
+		// init2();
+		// render2();
+
+		// library.proto.load_scene();
+	};
 });
