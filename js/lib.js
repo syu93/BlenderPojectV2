@@ -137,7 +137,7 @@ library.proto = {
 	save_scene : function save_scene(){
 		// if(typeof window.sessionStorage.save=="undefined"){
 		window.sessionStorage.clear();
-			var save = {};			
+			var save = {};		
 				// Get the camera
 				save.camera = {position:window.camera.position};
 
@@ -203,6 +203,10 @@ library.proto = {
 					case "cylinder":
 						var created_obj = menubar.Add.addCylinder();
 					break;
+					case "triangle":
+						var created_obj = menubar.Add.addTriangle();
+					break;
+
 				}
 				// Set objects properties
 				created_obj.id = save.objects[key].id.id;
@@ -211,6 +215,10 @@ library.proto = {
 				created_obj.scale.copy(save.objects[key].scale.scale);
 				created_obj.rotation.copy(save.objects[key].rotation.rotation);
 				created_obj.userData.group = save.objects[key].group.group;
+
+				if(created_obj.userData.group != "none"){
+					// FIXME : add object leaded to the group
+				}
 			}
 		}
 	}
