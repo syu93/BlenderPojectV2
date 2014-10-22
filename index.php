@@ -26,11 +26,11 @@
 	</head>
 	
 	<body style="color:#fff; background:#171717;">
-	plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop 
-<!-- 		<div id="canvas" style="position: absolute; margin-top:35px;">
+	<!-- plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop  -->
+		<div id="canvas" style="position: absolute; margin-top:35px;">
 			<div id="direction" style="position:absolute; bottom:0px;">
 			</div>
-		</div> -->
+		</div>
 
 		<div class="container_control_panel">
 			<div id="control_panel" class="control_panel">

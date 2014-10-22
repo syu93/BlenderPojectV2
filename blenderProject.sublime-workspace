@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"bor",
+				"border-bottom"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"leve",
+				"level1"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
 				"qu",
 				"query"
 			],
@@ -87,7 +103,7 @@
 			"file": "index.php",
 			"settings":
 			{
-				"buffer_size": 2985,
+				"buffer_size": 3026,
 				"line_ending": "Windows"
 			}
 		},
@@ -103,7 +119,7 @@
 			"file": "css/menu.css",
 			"settings":
 			{
-				"buffer_size": 117,
+				"buffer_size": 753,
 				"line_ending": "Windows"
 			}
 		}
@@ -132,6 +148,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/BlenderPojectV2/blenderProject",
 		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/BlenderPojectV2/js/gui.js",
 		"/C/Users/htutuaku/AppData/Local/Temp/scp57111/home/htutuaku/hanafuda-db-web/main.php",
 		"/C/Users/htutuaku/AppData/Local/Temp/scp56701/home/htutuaku/hanafuda-db-web/model/db_connect.php",
@@ -311,8 +328,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								810,
+								810
 							]
 						],
 						"settings":
@@ -364,15 +381,15 @@
 					"file": "index.php",
 					"settings":
 					{
-						"buffer_size": 2985,
+						"buffer_size": 3026,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1987,
+								1987
 							]
 						],
 						"settings":
@@ -424,15 +441,15 @@
 					"file": "css/menu.css",
 					"settings":
 					{
-						"buffer_size": 117,
+						"buffer_size": 753,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								547,
+								547
 							]
 						],
 						"settings":
@@ -482,7 +499,7 @@
 		"cols":
 		[
 			0.0,
-			0.01953125,
+			0.28359375,
 			0.646875,
 			1.0
 		],
