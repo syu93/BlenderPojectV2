@@ -1,0 +1,523 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"qu",
+				"query"
+			],
+			[
+				"prev",
+				"previous"
+			],
+			[
+				"arr",
+				"array"
+			],
+			[
+				"a",
+				"array"
+			],
+			[
+				"game",
+				"game_id"
+			],
+			[
+				"title",
+				"title_id"
+			],
+			[
+				"hanafud",
+				"Hanafuda-db"
+			],
+			[
+				"pre",
+				"prepare"
+			],
+			[
+				"q",
+				"query"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"crc",
+				"crc_32"
+			],
+			[
+				"fet",
+				"fetch"
+			],
+			[
+				"row",
+				"rowCount"
+			],
+			[
+				"exe",
+				"execute"
+			],
+			[
+				"loca",
+				"localhost"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "js/init.js",
+			"settings":
+			{
+				"buffer_size": 5630,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/gui.js",
+			"settings":
+			{
+				"buffer_size": 975,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 2985,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/init.css",
+			"settings":
+			{
+				"buffer_size": 912,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/menu.css",
+			"settings":
+			{
+				"buffer_size": 117,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/BlenderPojectV2/js/gui.js",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp57111/home/htutuaku/hanafuda-db-web/main.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp56701/home/htutuaku/hanafuda-db-web/model/db_connect.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp28172/home/htutuaku/hanafuda-db-web/controller/get_game.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/main.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/result_game_gallery.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/result_game_dump.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/static_bar.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/footer.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/gallery_model.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/controller/ldap_connect.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/login.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/edit_game_ntr.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/main.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/result_game_ntr.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/view/result_tab.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-mvc/controller/main.php",
+		"/C/Users/htutuaku/Desktop/common.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/common.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/index.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-mvc/view/static_bar.tpl",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-mvc/view/footer.tpl",
+		"/C/Users/htutuaku/AppData/Local/Temp/Rar$DIa0.597/blog.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/query.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-mvc/test.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/Rar$DIa0.006/index.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/Rar$DIa0.959/index.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/Rar$DIa0.015/blog.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-mvc/controller/mail.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-mvc/model/db_connect.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp54801/home/htutuaku/hanafuda-db-web/common.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/L4D2 app/index.php",
+		"/D/main.php",
+		"/D/common.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/save.common.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp12350/home/htutuaku/hanafuda-db-web/main.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp29683/home/htutuaku/hanafuda-db-web/common.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/common.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web.old/common (2).php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/Split/index.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/Split/bdd/bddconnect.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp29683/home/htutuaku/hanafuda-db-web/plop.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web/data/vessel-ntr-cafe.lnk",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/hanafuda-db-web.old/common.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp07502/mnt/vessel-ntr-cafe/WUP-N-A3VJ/bootDrcTex.png",
+		"/C/Users/htutuaku/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/htutuaku/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp40860/home/htutuaku/hanafuda-db-web/index.php",
+		"/C/Users/htutuaku/AppData/Local/Temp/scp40891/home/htutuaku/hanafuda-db-web/common.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/BlenderPojectV2/core/lib.php",
+		"/C/Users/htutuaku/Documents/EasyPHP-DevServer/data/localweb/BlenderPojectV2/core/init.php"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"cafe_title_id",
+			"//printf",
+			"update_ntr_game_from_post",
+			"remove_vessel_ntr_cafe",
+			"\"js",
+			"\"css",
+			"main",
+			"perpare",
+			"query",
+			"update_game_from_post",
+			"donnnees_result",
+			"donnnees_ntr_result",
+			"game_info",
+			"urlencode",
+			"execute",
+			"//",
+			"donnees",
+			"$link",
+			"get_rom_path",
+			"mysql_query",
+			"generate_olv_key",
+			"generate_unique_id",
+			"mysql_query",
+			"remove_vessel_ntr_cafe",
+			"mysql_query",
+			"mysql_numrows",
+			"mysql_query",
+			"get_rom_path",
+			"get_rom_path(",
+			"get_rom_path",
+			"mysql_query",
+			"generate_olv_key(",
+			"generate_olv_key",
+			"rowCount",
+			"generate_unique_id",
+			"delete_directory",
+			"remove_vessel_ntr_cafe",
+			"mysql_query",
+			"print_history(",
+			"print_history",
+			"update_game_file_from_post(",
+			"update_game_from_post(",
+			"update_game_from_post",
+			"print_test",
+			"display",
+			"display_layout",
+			"query=",
+			"game_info",
+			"list_games_db",
+			"origami",
+			"$donnees[\"crc_32\"]",
+			"NTR",
+			"crc_32",
+			"crc32",
+			"cou",
+			"rowCount",
+			"print_editable_row",
+			"print_editable_row()",
+			"game_info",
+			"game_in",
+			"init_hanafuda_db",
+			"+/",
+			"+q",
+			"+d",
+			"+d "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"game_id",
+			"$game_id",
+			"printf",
+			"update_game_from_post",
+			"\"view/js",
+			"\"view/css",
+			"data_result",
+			"data_ntr_result",
+			"data",
+			"generate_olv_key($link ",
+			"remove_vessel_ntr_cafe($link, ",
+			"print_history($link, ",
+			"update_game_file_from_post($link,",
+			"update_game_from_post($link, "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "js/init.js",
+					"settings":
+					{
+						"buffer_size": 5630,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/gui.js",
+					"settings":
+					{
+						"buffer_size": 975,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "index.php",
+					"settings":
+					{
+						"buffer_size": 2985,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "css/init.css",
+					"settings":
+					{
+						"buffer_size": 912,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "css/menu.css",
+					"settings":
+					{
+						"buffer_size": 117,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				2,
+				0,
+				3,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.01953125,
+			0.646875,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

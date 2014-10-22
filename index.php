@@ -26,7 +26,7 @@
 	</head>
 	
 	<body style="color:#fff; background:#171717;">
-	<!-- plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop  -->
+	plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop 
 <!-- 		<div id="canvas" style="position: absolute; margin-top:35px;">
 			<div id="direction" style="position:absolute; bottom:0px;">
 			</div>
@@ -45,7 +45,7 @@
 
 		<div class='menu_bar'>
 			<ul class="level1">
-				<li><span>add</span>
+				<li tabindex="0"><span>add</span>
 					<ul class="level2">
 						<li ><span id="n_cube">Cube</span></li>
 						<li><span id="n_sphere">Sphere</span></li>
@@ -54,14 +54,14 @@
 						<li><span id="n_cilinder">Cylinder</span></li>
 					</ul>
 				</li>
-				<li><span>clone</span>
+				<li tabindex="0"><span>clone</span>
 					<ul class="level2">
-						<li><span id="n_clone">Clone</span></li>
-						<li><span id="n_cloneGp">Clone Group</span></li>
+						<li><span id="n_clone">object</span></li>
+						<li><span id="n_cloneGp">Group</span></li>
 					</ul>
 				</li>
-				<li><span id="save">save</span></li>
-				<li><span id="delete">delecte</span></li>
+				<li tabindex="0"><span id="save">save</span></li>				
+				<li tabindex="0"><span id="delete">delete</span></li>
 			</ul>				
 <!-- 					<input id="n_cube" type="button" value="New Cube">
 					<input id="n_sphere" type="button" value="New Sphere">

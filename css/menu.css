@@ -1,11 +1,62 @@
-.level1 .level2{
-	display: none;
+li{
+	list-style: none;
 }
 
-.level1 li:hover > .level2{
+/*set the drop down menu*/
+
+.level1{
+	position: relative;
+	display: inline-block;
+}
+.level2{
+	position: absolute;
+	left: 0;
+}
+.level2 li{
+    display: none;
+    opacity: 0;
+	z-index: 1;
+}
+
+.level1 li:focus .level2 li{
+	opacity: 1;
 	display: block;
 }
 
+/*set the drop down menu*/
+
+/*custum style*/
+
 .level1 > li{
-	display: inline;
+	z-index: 1;
+	position:relative;
+	display: inline-block;
+	text-align: center;
+	width: 50px;
+	height: 24px;
+	margin:0;
+	padding: 0 10px 0 10px;
+	background: #333;
 }
+
+.level1 > li:focus{
+	border-left: solid white 3px;
+}
+
+.level1 li:hover{
+	cursor: pointer;
+}
+
+
+
+.level2 > li{
+	text-align: center;
+	width: 50px;
+	height: 24px;
+	margin:0;
+	padding: 0 10px 0 10px;
+	background: #333;
+
+	border-bottom: inset black 1px;
+}
+
