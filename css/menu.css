@@ -6,17 +6,79 @@ li{
 
 .level1{
 	position: relative;
-	display: inline-block;
 }
-.level2{
-	display: none;
-	position: absolute;
-	left: 0;
+.level1 li{
+	display: inline-block;
+	z-index: 1;
+	position:relative;
+	text-align: center;
+	width: 50px;
+	height: 24px;
+	margin:0;
+	padding: 0 10px 0 10px;
+	background: #333;
+	border-bottom: inset black 1px;
+}
+.level1 li:focus > .level2 li{
+	visibility: visible;
+	opacity:1;
+	z-index: 9999;
 }
 
-.level2.visible{
-	display: block;
+.level1 li:hover{
+	cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************/
+/*************/
+/*************/
+/*************/
+
+
+
+
+
+.level2{
+	position: absolute;
+	top:25px;
+	left: 0;
+}
+.level2 li{
+	position: absolute;
+	visibility: hidden;
+	opacity:0;
+	z-index: -9999;
+	text-align: center;
+	width: 50px;
+	height: 24px;
+	margin:0;
+	padding: 0 10px 0 10px;
+	background: #333;
+
+	border-bottom: inset black 1px;
+}
+
+
+/*.level2 li{
+	visibility: visible;
+	opacity:1;
+	z-index: 9999;
+}*/
 
 /*.level2 li{
     display: none;
@@ -28,29 +90,9 @@ li{
 
 /*custum style*/
 
-.level1 > li{
-	z-index: 1;
-	position:relative;
-	display: inline-block;
-	text-align: center;
-	width: 50px;
-	height: 24px;
-	margin:0;
-	padding: 0 10px 0 10px;
-	background: #333;
-}
-
-.level1 > li:focus{
-	border-left: solid white 3px;
-}
-
-.level1 li:hover{
-	cursor: pointer;
-}
 
 
-
-.level2 > li{
+/*.level2 > li{
 	text-align: center;
 	width: 50px;
 	height: 24px;
@@ -59,5 +101,4 @@ li{
 	background: #333;
 
 	border-bottom: inset black 1px;
-}
-
+}*/
