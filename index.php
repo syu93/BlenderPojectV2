@@ -26,7 +26,6 @@
 	</head>
 	
 	<body style="color:#fff; background:#171717;">
-	<!-- plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop plop  -->
 		<div id="canvas" style="position: absolute; margin-top:35px;">
 			<div id="direction" style="position:absolute; bottom:0px;">
 			</div>
@@ -47,34 +46,23 @@
 			<ul class="level1">
 				<li tabindex="0"><span>add</span>
 					<ul class="level2">
-						<li ><span id="n_cube">Cube</span></li>
-						<li><span id="n_sphere">Sphere</span></li>
-						<li><span id="n_circle">Circle</span></li>
-						<li><span id="n_triangle">Triangle</span></li>
-						<li><span id="n_cilinder">Cylinder</span></li>
+						<li id="n_cube"><span>Cube</span></li>
+						<li id="n_sphere"><span>Sphere</span></li>
+						<li id="n_circle"><span>Circle</span></li>
+						<li id="n_triangle"><span>Triangle</span></li>
+						<li id="n_cilinder"><span>Cylinder</span></li>
+						<li class="last-child"></li>
 					</ul>
 				</li>
 				<li tabindex="0"><span>clone</span>
 					<ul class="level2">
-						<li><span id="n_clone">object</span></li>
-						<li><span id="n_cloneGp">Group</span></li>
+						<li id="n_clone"><span>object</span></li>
+						<li id="n_cloneGp"><span>Group</span></li>
+						<li class="last-child"></li>
 					</ul>
 				</li>
-				<li tabindex="0"><span id="save">save</span></li>				
-				<li tabindex="0"><span id="delete">delete</span></li>
-			</ul>				
-<!-- 					<input id="n_cube" type="button" value="New Cube">
-					<input id="n_sphere" type="button" value="New Sphere">
-					<input id="n_circle" type="button" value="New Circle">
-					<input id="n_triangle" type="button" value="New Triangle">
-					<input id="n_cilinder" type="button" value="New Cylinder">
-
-					<input id="n_clone" type="button" value="Clone">
-					<input id="n_cloneGp" type="button" value="Clone Group">
-					<input id="t_clear" type="button" value="Clear Scene">
-
-					<input id="save" type="button" value="Save">
-					<input id="delete" type="button" value="Delete"> -->
+				<li tabindex="0" id="save"><span>save</span></li>				
+				<li tabindex="0" id="delete"><span>delete</span></li>
 			</ul>
 		</div>
 
