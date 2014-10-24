@@ -143,8 +143,8 @@ library.proto = {
 	
 	save_scene : function save_scene(){
 		// if(typeof window.sessionStorage.save=="undefined"){
-		window.sessionStorage.clear();
-		if (clock.getDelta() > 5 || window.save_sate =="on"){
+		if (clock.getElapsedTime() % 10 > 1  || window.save_sate =="on"){
+			window.sessionStorage.clear();
 					var save = {};		
 						// Get the camera
 						save.camera = {position:window.camera.position};
@@ -173,9 +173,11 @@ library.proto = {
 					window.sessionStorage.save = g_save;
 					console.log(window.sessionStorage.save);
 
-					$( "#auto_save_msg" ).toggle();
-		}
+					$( "#auto_save_msg" ).toggle('.visible_hiden');
 		window.save_sate="off";
+		window.clock.start();
+		return;
+		}
 	},
 
 	load_scene : function load_scene(){

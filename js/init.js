@@ -28,6 +28,8 @@
 		grid();
 
 		clock = new THREE.Clock();
+		clock.start();
+		// clock.getDelta();
 
 		renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });		
 		renderer.setSize(width , height);
@@ -75,11 +77,17 @@
 		renderer.render(scene, camera);
 		controls.update();
 		object_control.update();
-		clock.start();
 		
-		document.getElementById("s_tools").innerHTML=window.onCtrl;
+		// document.getElementById("s_tools").innerHTML=window.onCtrl;
+		document.getElementById("s_tools").innerHTML=window.clock.getElapsedTime();
 		document.getElementById("s_tools2").innerHTML=window.save_sate;
-		selectede_info(SELECTED);
+		selected_info(SELECTED);
+		// console.log(clock.getElapsedTime ());
+		if (clock.getElapsedTime () > 5){
+			console.log('save');
+			// library.proto.save_scene();
+			clock.start();
+		}
 	}
 
 	function render2() {
@@ -128,8 +136,9 @@
 
 		onMouseDownPosition.set(mouse.x, mouse.y);
 
-		 save_sate ="on";
-		 library.proto.save_scene();
+			// save_sate ="on";
+			// library.proto.save_scene();
+		console.log('save');
 
 	}
 	function onDocumentMouseUp( event ) {
@@ -168,14 +177,14 @@ $( document ).ready(function(){
 	library.proto.load_scene();
 
 	window.onresize = function(event) {
-		width = window.innerWidth-200;
-		height = window.innerHeight-60;
 
+		// alert('plop');
+		location.reload();
 		// init();
-		render();
+		// render();
 
 		// init2();
-		render2();
+		// render2();
 
 		// library.proto.load_scene();
 	};

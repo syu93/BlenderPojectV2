@@ -35,7 +35,6 @@ $( document ).ready(function(){
 	});	
 
 	$('#t_clear').click(function(){
-		$("#s_tools").attr('data', 'clear');
 		// clear_scene();		
 	});
 
@@ -46,9 +45,13 @@ $( document ).ready(function(){
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
+	$('#start').click(function(){
+		clock.stop();
+		// clock.start();
+	});
 });
 
-function selectede_info(SELECTED){
+function selected_info(SELECTED){
 	if(SELECTED){
 		document.getElementById("obect_id").innerHTML=(SELECTED.id);
 		document.getElementById("obect_uuid").innerHTML=(SELECTED.uuid);

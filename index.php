@@ -88,6 +88,7 @@
 				</li>
 				<li tabindex="0" id="save"><span>save</span></li>				
 				<li tabindex="0" id="delete"><span>delete</span></li>
+				<li tabindex="0" id="start"><span>start</span></li>
 			</ul>
 			<span id='auto_save_msg' class="auto_save visible_hiden">auto save</span>
 		</div>
