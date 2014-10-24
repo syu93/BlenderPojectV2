@@ -33,7 +33,29 @@
 
 		<div class="container_control_panel">
 			<div id="control_panel" class="control_panel">
+				<div class="active_info">
+					<table class="active_info_table">
+						<tbody>
+							<tr>
+								<td class="row_title">uuid</td>
+								<td id="obect_id">...</td>
+							</tr>
+							<tr>
+								<td class="row_title">type</td>
+								<td id="obect_type">...</td>
+							</tr>
+							<tr>
+								<td class="row_title">plop</td>
+								<td>...</td>
+							</tr>
+							<tr>
+								<td class="row_title">plop</td>
+								<td>...</td>
+							</tr>
 
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="control_info">
 				<span>info :</span>

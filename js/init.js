@@ -76,6 +76,16 @@
 		
 		document.getElementById("s_tools").innerHTML=window.onCtrl;
 		document.getElementById("s_tools2").innerHTML=window.nb_group;
+
+
+		if(SELECTED){
+		document.getElementById("obect_id").innerHTML=(SELECTED.uuid);
+		document.getElementById("obect_type").innerHTML=(SELECTED.name);
+		}
+		else{
+		document.getElementById("obect_id").innerHTML=("");	
+		document.getElementById("obect_type").innerHTML=("");	
+		}
 	}
 
 	function render2() {

@@ -46,9 +46,5 @@ $( document ).ready(function(){
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
-// Menu style action
 
-	// $('.level1').click(function() {
-	// 	$('.level2').toggleClass('visible');
-	// });
 });
