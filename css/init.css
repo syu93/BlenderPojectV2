@@ -99,4 +99,10 @@ table{
 	border:none;
 }
 
+.auto_save{
+	margin-top: 15px;
+}
 
+.visible_hiden{
+	visibility: hidden;
+}

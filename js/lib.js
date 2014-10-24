@@ -57,10 +57,10 @@ library.proto = {
 			if(INTERSECTED)
 			{
 				// //Old object
-				INTERSECTED=SELECTED;
-				INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				INTERSECTED.material.opacity=1;
-				INTERSECTED.material.blending=THREE.NoBlending;
+				// INTERSECTED=SELECTED;
+				// INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
+				// INTERSECTED.material.opacity=1;
+				// INTERSECTED.material.blending=THREE.NoBlending;
 			}
 			else 
 			{
@@ -144,40 +144,38 @@ library.proto = {
 	save_scene : function save_scene(){
 		// if(typeof window.sessionStorage.save=="undefined"){
 		window.sessionStorage.clear();
-			var save = {};		
-				// Get the camera
-				save.camera = {position:window.camera.position};
+		if (clock.getDelta() > 5 || window.save_sate =="on"){
+					var save = {};		
+						// Get the camera
+						save.camera = {position:window.camera.position};
+		
+						//get objects
+						var objs = [];
+						for(key in objects) {
+							var properties = {};
+							properties.id = {id:objects[key].id};
+							properties.uuid = {id:objects[key].uuid};
+							properties.name = {name:objects[key].name};
+							properties.position = {position:objects[key].position};
+							properties.scale = {scale:objects[key].scale};
+							properties.rotation = {rotation:objects[key].rotation};
+							properties.group = {group:objects[key].userData.group};
+		
+							//push properties into objs
+							objs.push(properties);
+							// console.log(objs);
+						};
+						save.objects = objs;
+		
+					// save into session storage
+					var g_save = JSON.stringify(save);
+		
+					window.sessionStorage.save = g_save;
+					console.log(window.sessionStorage.save);
 
-				//get objects
-				var objs = [];
-				for(key in objects) {
-					var properties = {};
-					properties.id = {id:objects[key].id};
-					properties.uuid = {id:objects[key].uuid};
-					properties.name = {name:objects[key].name};
-					properties.position = {position:objects[key].position};
-					properties.scale = {scale:objects[key].scale};
-					properties.rotation = {rotation:objects[key].rotation};
-					properties.group = {group:objects[key].userData.group};
-
-					//push properties into objs
-					objs.push(properties);
-					// console.log(objs);
-				};
-				save.objects = objs;
-
-
-
-
-			// save into session storage
-			var g_save = JSON.stringify(save);
-
-			window.sessionStorage.save = g_save;
-			console.log(window.sessionStorage.save);
-		// }
-		// else if(typeof window.sessionStorage.save!="undefined"){
-
-		// }
+					$( "#auto_save_msg" ).toggle();
+		}
+		window.save_sate="off";
 	},
 
 	load_scene : function load_scene(){
@@ -358,7 +356,6 @@ menubar.Add = {
 	addDelete : function(){
 		if ( confirm( 'Delete ' + SELECTED.name + ' ?' ) === false ) return;
 		delete_obj=true;
-		unselected_object(SELECTED, controls_object);
 		//---
 		// console.log(sup_obj);
 		//---
@@ -366,6 +363,7 @@ menubar.Add = {
 		SELECTED.geometry = new THREE.Geometry();
 		SELECTED.geometry.dispose();
 		scene.remove(SELECTED);
+		unselected_object(SELECTED, controls_object);
 		//---
 		for(key in objects){
 			
@@ -718,5 +716,7 @@ function unselected_object(object, controls_object){
 		window.scene.getObjectByName("selectionBox").position.copy(scene.position);
 		window.scene.getObjectByName("selectionBox").update(window.scene.getObjectByName("main grid"));
 		window.scene.getObjectByName("selectionBox").visible=false;
+
+		SELECTED ="";
 	}
 }

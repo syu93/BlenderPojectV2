@@ -1,4 +1,4 @@
-	var scene, camera, renderer, projector, width, height, intersects;
+	var scene, camera, renderer, projector, width, height, intersects, clock, save_sate="off";
 	var scene2, camera2, renderer2, projector2, width, height, intersects;
 	var objects = [];
 	var mouse = new THREE.Vector2(),
@@ -26,6 +26,8 @@
 		projector = new THREE.Projector();
 		
 		grid();
+
+		clock = new THREE.Clock();
 
 		renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });		
 		renderer.setSize(width , height);
@@ -73,19 +75,11 @@
 		renderer.render(scene, camera);
 		controls.update();
 		object_control.update();
+		clock.start();
 		
 		document.getElementById("s_tools").innerHTML=window.onCtrl;
-		document.getElementById("s_tools2").innerHTML=window.nb_group;
-
-
-		if(SELECTED){
-		document.getElementById("obect_id").innerHTML=(SELECTED.uuid);
-		document.getElementById("obect_type").innerHTML=(SELECTED.name);
-		}
-		else{
-		document.getElementById("obect_id").innerHTML=("");	
-		document.getElementById("obect_type").innerHTML=("");	
-		}
+		document.getElementById("s_tools2").innerHTML=window.save_sate;
+		selectede_info(SELECTED);
 	}
 
 	function render2() {
@@ -134,6 +128,9 @@
 
 		onMouseDownPosition.set(mouse.x, mouse.y);
 
+		 save_sate ="on";
+		 library.proto.save_scene();
+
 	}
 	function onDocumentMouseUp( event ) {
 		event.preventDefault();
@@ -171,11 +168,14 @@ $( document ).ready(function(){
 	library.proto.load_scene();
 
 	window.onresize = function(event) {
+		width = window.innerWidth-200;
+		height = window.innerHeight-60;
+
 		// init();
-		// render();
+		render();
 
 		// init2();
-		// render2();
+		render2();
 
 		// library.proto.load_scene();
 	};

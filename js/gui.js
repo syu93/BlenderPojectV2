@@ -46,5 +46,24 @@ $( document ).ready(function(){
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
-
 });
+
+function selectede_info(SELECTED){
+	if(SELECTED){
+		document.getElementById("obect_id").innerHTML=(SELECTED.id);
+		document.getElementById("obect_uuid").innerHTML=(SELECTED.uuid);
+		document.getElementById("obect_type").innerHTML=(SELECTED.name);
+		document.getElementById("obect_gp").innerHTML=(SELECTED.userData.group);
+		var x = SELECTED.position.x;
+		var y = SELECTED.position.y;
+		var z = SELECTED.position.z;
+		document.getElementById("obect_pos").innerHTML=("X="+x+",\r\n Y="+y+",\r\n Z="+z);
+	}
+	else{
+		document.getElementById("obect_id").innerHTML=("");	
+		document.getElementById("obect_uuid").innerHTML=("");
+		document.getElementById("obect_type").innerHTML=("");
+		document.getElementById("obect_gp").innerHTML=("");
+		document.getElementById("obect_pos").innerHTML=("X=,\r\n Y=,\r\n Z=");
+	}
+}

@@ -40,17 +40,20 @@
 								<td class="row_title">uuid</td>
 								<td id="obect_id">...</td>
 							</tr>
+							<td class="row_title">uuid</td>
+								<td id="obect_uuid">...</td>
+							</tr>
 							<tr>
 								<td class="row_title">type</td>
 								<td id="obect_type">...</td>
 							</tr>
 							<tr>
-								<td class="row_title">plop</td>
-								<td>...</td>
+								<td class="row_title">group</td>
+								<td id="obect_gp">...</td>
 							</tr>
 							<tr>
-								<td class="row_title">plop</td>
-								<td>...</td>
+								<td class="row_title">position</td>
+								<td id="obect_pos">...</td>
 							</tr>
 
 						</tbody>
@@ -86,6 +89,7 @@
 				<li tabindex="0" id="save"><span>save</span></li>				
 				<li tabindex="0" id="delete"><span>delete</span></li>
 			</ul>
+			<span id='auto_save_msg' class="auto_save visible_hiden">auto save</span>
 		</div>
 
 		<span style='position: absolute; bottom:0;' id="s_tools" data=""></span>
