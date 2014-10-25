@@ -35,38 +35,64 @@ $( document ).ready(function(){
 	});	
 
 	$('#t_clear').click(function(){
-		// clear_scene();		
+		clear_scene();		
 	});
 
 	$('#save').click(function(){
+		window.save_state = "on";
 		library.proto.save_scene();
 	});
 
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
-	$('#start').click(function(){
-		clock.stop();
+	// $('#start').click(function(){
+	// 	clock.stop();
 		// clock.start();
-	});
+	// });
 });
 
 function selected_info(SELECTED){
 	if(SELECTED){
-		document.getElementById("obect_id").innerHTML=(SELECTED.id);
-		document.getElementById("obect_uuid").innerHTML=(SELECTED.uuid);
-		document.getElementById("obect_type").innerHTML=(SELECTED.name);
-		document.getElementById("obect_gp").innerHTML=(SELECTED.userData.group);
-		var x = SELECTED.position.x;
-		var y = SELECTED.position.y;
-		var z = SELECTED.position.z;
-		document.getElementById("obect_pos").innerHTML=("X="+x+",\r\n Y="+y+",\r\n Z="+z);
+		document.getElementById("object_id").innerHTML=(SELECTED.id);
+		document.getElementById("object_uuid").innerHTML=(SELECTED.uuid);
+		document.getElementById("object_type").innerHTML=(SELECTED.name);
+		document.getElementById("object_gp").innerHTML=(SELECTED.userData.group);
+		var z_x = SELECTED.position.x;
+		var z_y = SELECTED.position.y;
+		var z_z = SELECTED.position.z;
+		document.getElementById("object_pos_x").innerHTML=(z_x);
+		document.getElementById("object_pos_y").innerHTML=(z_y);
+		document.getElementById("object_pos_z").innerHTML=(z_z);
+		var r_x = SELECTED.rotation.x;
+		var r_y = SELECTED.rotation.y;
+		var r_z = SELECTED.rotation.z;
+		document.getElementById("object_rot_x").innerHTML=(r_x);
+		document.getElementById("object_rot_y").innerHTML=(r_y);
+		document.getElementById("object_rot_z").innerHTML=(r_z);
+		var s_x = SELECTED.scale.x;
+		var s_y = SELECTED.scale.y;
+		var s_z = SELECTED.scale.z;
+		document.getElementById("object_scl_x").innerHTML=(s_x);
+		document.getElementById("object_scl_y").innerHTML=(s_y);
+		document.getElementById("object_scl_z").innerHTML=(s_z);
 	}
 	else{
-		document.getElementById("obect_id").innerHTML=("");	
-		document.getElementById("obect_uuid").innerHTML=("");
-		document.getElementById("obect_type").innerHTML=("");
-		document.getElementById("obect_gp").innerHTML=("");
-		document.getElementById("obect_pos").innerHTML=("X=,\r\n Y=,\r\n Z=");
+		document.getElementById("object_id").innerHTML=("");	
+		document.getElementById("object_uuid").innerHTML=("");
+		document.getElementById("object_type").innerHTML=("");
+		document.getElementById("object_gp").innerHTML=("");
+		document.getElementById("object_pos_x").innerHTML=("");
+		document.getElementById("object_pos_y").innerHTML=("");
+		document.getElementById("object_pos_z").innerHTML=("");
+
+		document.getElementById("object_rot_x").innerHTML=("");
+		document.getElementById("object_rot_y").innerHTML=("");
+		document.getElementById("object_rot_z").innerHTML=("");
+		
+		document.getElementById("object_scl_x").innerHTML=("");
+		document.getElementById("object_scl_y").innerHTML=("");
+		document.getElementById("object_scl_z").innerHTML=("");
+
 	}
 }

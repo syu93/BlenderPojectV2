@@ -137,46 +137,64 @@ library.proto = {
 	groupCreate : function(gp_name){
 		subGroup = new THREE.Object3D(); 
 		subGroup.name= gp_name;
-
+		groups.push(subGroup);
 		return subGroup;
 	},
 	
 	save_scene : function save_scene(){
-		// if(typeof window.sessionStorage.save=="undefined"){
-		if (clock.getElapsedTime() % 10 > 1  || window.save_sate =="on"){
-			window.sessionStorage.clear();
-					var save = {};		
-						// Get the camera
-						save.camera = {position:window.camera.position};
-		
-						//get objects
-						var objs = [];
-						for(key in objects) {
-							var properties = {};
-							properties.id = {id:objects[key].id};
-							properties.uuid = {id:objects[key].uuid};
-							properties.name = {name:objects[key].name};
-							properties.position = {position:objects[key].position};
-							properties.scale = {scale:objects[key].scale};
-							properties.rotation = {rotation:objects[key].rotation};
-							properties.group = {group:objects[key].userData.group};
-		
-							//push properties into objs
-							objs.push(properties);
-							// console.log(objs);
-						};
-						save.objects = objs;
-		
-					// save into session storage
-					var g_save = JSON.stringify(save);
-		
-					window.sessionStorage.save = g_save;
-					console.log(window.sessionStorage.save);
+		if ( (Math.round(window.clock.getElapsedTime()) == (window.timer+300)) || window.save_state =="on"){
+			window.timer = Math.round(window.clock.getElapsedTime());
 
-					$( "#auto_save_msg" ).toggle('.visible_hiden');
-		window.save_sate="off";
-		window.clock.start();
-		return;
+			window.sessionStorage.clear();
+
+			var save = {};		
+				// Get the camera
+				save.camera = {position:window.camera.position};
+
+				//get group elements
+				var gprs = [];
+				for (key in groups){
+					var properties  = {};
+					properties.id = {id:groups[key].id};
+					properties.uuid = {uuid:groups[key].uuid};
+					properties.name = {name:groups[key].name};
+					properties.position = {position:groups[key].position};
+					properties.scale = {scale:groups[key].scale};
+					properties.rotation = {rotation:groups[key].rotation};
+
+					//push properties into gprs
+					gprs.push(properties);
+				}
+				save.groups = objs;
+
+				//get objects
+				var objs = [];
+				for(key in objects) {
+					var properties = {};
+					properties.id = {id:objects[key].id};
+					properties.uuid = {uuid:objects[key].uuid};
+					properties.name = {name:objects[key].name};
+					properties.position = {position:objects[key].position};
+					properties.scale = {scale:objects[key].scale};
+					properties.rotation = {rotation:objects[key].rotation};
+					properties.group = {group:objects[key].userData.group};
+
+					//push properties into objs
+					objs.push(properties);
+				}
+				save.objects = objs;
+
+			// save into session storage
+			var g_save = JSON.stringify(save);
+
+			// window.sessionStorage.save = g_save;
+
+			//display save info to user and dev =)
+			console.log(window.sessionStorage.save);
+			$( '#auto_save_msg' ).toggle('slow', 'linear', function(){
+					$( '#auto_save_msg' ).delay(5000).hide(1000);
+				});
+		window.save_state="off";
 		}
 	},
 
@@ -185,14 +203,14 @@ library.proto = {
 			var g_save = window.sessionStorage.save;
 
 			var save = JSON.parse(g_save);
-			console.log(save);
+			// console.log(save);
 
 			// Retrieve camera
 			window.camera.position.copy(save.camera.position);
 
 			// Retrieve object
 			for(key in save.objects) {
-				console.log(save.objects[key].position);
+				// console.log(save.objects[key].position);
 				//Creat the object
 				switch ( save.objects[key].name.name ) {
 					case "cube":
@@ -224,7 +242,7 @@ library.proto = {
 				created_obj.userData.group = save.objects[key].group.group;
 
 				if(created_obj.userData.group != "none"){
-					// FIXME : add object leaded to the group
+					//
 				}
 			}
 		}
@@ -631,10 +649,6 @@ function clear_scene(){
 		if (obj !== camera) {
 			window.scene.remove(obj);
 		}
-		object_control();
-		axis();
-		grid();
-		origin();
 	}
 }
 

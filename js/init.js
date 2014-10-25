@@ -1,6 +1,7 @@
-	var scene, camera, renderer, projector, width, height, intersects, clock, save_sate="off";
+	var scene, camera, renderer, projector, width, height, intersects, clock, timer, save_sate="off";
 	var scene2, camera2, renderer2, projector2, width, height, intersects;
 	var objects = [];
+	var groups = [];
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED,rect;
@@ -29,8 +30,8 @@
 
 		clock = new THREE.Clock();
 		clock.start();
-		// clock.getDelta();
-
+		clock.getDelta();
+		timer=0;
 		renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });		
 		renderer.setSize(width , height);
 		renderer.setClearColor( 0x373737, 1);
@@ -79,15 +80,11 @@
 		object_control.update();
 		
 		// document.getElementById("s_tools").innerHTML=window.onCtrl;
-		document.getElementById("s_tools").innerHTML=window.clock.getElapsedTime();
+		document.getElementById("s_tools").innerHTML=Math.round(window.clock.getElapsedTime());
 		document.getElementById("s_tools2").innerHTML=window.save_sate;
+
 		selected_info(SELECTED);
-		// console.log(clock.getElapsedTime ());
-		if (clock.getElapsedTime () > 5){
-			console.log('save');
-			// library.proto.save_scene();
-			clock.start();
-		}
+		library.proto.save_scene();
 	}
 
 	function render2() {
@@ -135,11 +132,6 @@
 		controls.enabled = true;
 
 		onMouseDownPosition.set(mouse.x, mouse.y);
-
-			// save_sate ="on";
-			// library.proto.save_scene();
-		console.log('save');
-
 	}
 	function onDocumentMouseUp( event ) {
 		event.preventDefault();

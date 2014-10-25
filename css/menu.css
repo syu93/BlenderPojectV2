@@ -16,7 +16,7 @@ li{
 
 .level1 li{
 	display: inline-block;
-	z-index: 1;
+	z-index: 9999;
 	position:relative;
 	text-align: center;
 	width: 50px;
@@ -63,6 +63,7 @@ li{
 	text-align: left;
 	color: #2ea3f2;
 	text-shadow: none;
+	z-index: 9999;
 }
 
 .level2 li:first-child{
