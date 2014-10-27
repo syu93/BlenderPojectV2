@@ -23,6 +23,7 @@
 		
 		<link rel="stylesheet" href="css/init.css">
 		<link rel="stylesheet" href="css/menu.css">
+		<link rel="stylesheet" href="css/control_panel.css">
 	</head>
 	
 	<body style="color:#fff; background:#171717;">
@@ -71,6 +72,9 @@
 	<!--|| CONTROL_PANEL ||-->
 		<div class="container_control_panel">
 			<div id="control_panel" class="control_panel">
+				<div class="poject_name">
+					<input class="text_feild" id="poject_name" type="text" name="pj_name" placeholder="Project name">
+				</div>
 				<div class="active_info">
 					<table class="active_info_table">
 						<tbody>

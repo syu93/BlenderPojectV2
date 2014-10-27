@@ -165,7 +165,7 @@ library.proto = {
 					//push properties into gprs
 					gprs.push(properties);
 				}
-				save.groups = objs;
+				save.groups = gprs;
 
 				//get objects
 				var objs = [];
@@ -187,7 +187,7 @@ library.proto = {
 			// save into session storage
 			var g_save = JSON.stringify(save);
 
-			// window.sessionStorage.save = g_save;
+			window.sessionStorage.save = g_save;
 
 			//display save info to user and dev =)
 			console.log(window.sessionStorage.save);
@@ -241,8 +241,19 @@ library.proto = {
 				created_obj.rotation.copy(save.objects[key].rotation.rotation);
 				created_obj.userData.group = save.objects[key].group.group;
 
-				if(created_obj.userData.group != "none"){
-					//
+				for(key in save.groups){
+					if( created_obj.userData.group == save.groups[key].name.name ) {
+
+						var created_grp = library.proto.groupCreate(created_obj.userData.group);
+							window.scene.add(created_grp);
+						created_grp.id = save.groups[key].id.id;
+						created_grp.uuid = save.groups[key].uuid.uuid;
+						created_grp.position.copy(save.groups[key].position.position);
+						created_grp.scale.copy(save.groups[key].scale.scale);
+						created_grp.rotation.copy(save.groups[key].rotation.rotation);
+
+						THREE.SceneUtils.attach(created_obj, window.scene, created_grp);
+					}
 				}
 			}
 		}
@@ -393,6 +404,13 @@ menubar.Add = {
 		console.log(SELECTED);
 		//---
 		delete_obj=false;
+	}
+},
+
+menubar.File = {
+	doNew : function(){
+		if ( confirm( 'Do you want to save modifications to ' + SELECTED.name + ' ?' ) === false ) return;
+		window.sessionStorage.clear();
 	}
 }
 

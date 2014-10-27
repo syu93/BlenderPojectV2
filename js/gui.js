@@ -1,5 +1,5 @@
 $( document ).ready(function(){
-//GUI
+// IN_PANEL_GUI
 	$('#n_cube').click(function(){
 		$("#s_tools").attr('data', 'sphere');
 		menubar.Add.addCube();			
@@ -46,12 +46,20 @@ $( document ).ready(function(){
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
-	// $('#start').click(function(){
-	// 	clock.stop();
-		// clock.start();
-	// });
+
+	$('#poject_name').click(function(){
+		console.log($('#poject_name').is(':focus'));
+		if($('#poject_name').is(':focus')){
+			// window.addEventListener( 'keydown', false){
+			// 	alert('plop');
+			// }
+		}
+
+	});
+
 });
 
+// IN_APP_GUI
 function selected_info(SELECTED){
 	if(SELECTED){
 		document.getElementById("object_id").innerHTML=(SELECTED.id);
