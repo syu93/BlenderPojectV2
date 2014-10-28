@@ -1,28 +1,35 @@
 $( document ).ready(function(){
+// prevent all
+	$('canvas').click(function(){
+		addEventListener("keydown", enablePreventDefault);
+		addEventListener("keydown", obj_control_mode);
+	});
+
 // IN_PANEL_GUI
+	// File
+	$('#n_new').click(function(){
+		menubar.File.doNew();
+	});
+
+	// Add
 	$('#n_cube').click(function(){
 		$("#s_tools").attr('data', 'sphere');
 		menubar.Add.addCube();			
-		// plop();
 	});
 	
 	$('#n_sphere').click(function(){
-		// $("#s_tools").attr('data', 'sphere');
 		menubar.Add.addSphere();
 	});
 
 	$('#n_circle').click(function(){
-		// $("#s_tools").attr('data', 'sphere');
 		menubar.Add.addCircle();
 	});
 
 	$('#n_triangle').click(function(){
-		// $("#s_tools").attr('data', 'sphere');
 		menubar.Add.addTriangle();
 	});
 
 	$('#n_cilinder').click(function(){
-		// $("#s_tools").attr('data', 'sphere');
 		menubar.Add.addCylinder();
 	});
 
@@ -47,20 +54,13 @@ $( document ).ready(function(){
 		menubar.Add.addDelete();
 	});
 
+	// Controle Panel
 	$('#poject_name').click(function(){
-		console.log($('#poject_name').is(':focus'));
 		if($('#poject_name').is(':focus')){
-			// window.addEventListener( 'keydown', false){
-			// 	alert('plop');
-			// }
+			removeEventListener("keydown", enablePreventDefault);
+			removeEventListener("keydown", obj_control_mode);
 		}
-
 	});
-
-	$('#n_new').click(function(){
-		menubar.File.doNew();
-	});
-
 });
 
 // IN_APP_GUI

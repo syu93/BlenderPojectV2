@@ -12,34 +12,36 @@ library.proto = {
 		controls_object =  new THREE.TransformControls( camera, renderer.domElement );
 		// controls_object.addEventListener( 'change', render ); // lag ?
 		controls_object.name="object_controller";
-		
-					window.addEventListener( 'keydown', function ( event ) {
+					//FIXME get this function out !!!
+					function obj_control_mode( event ) {
 					//console.log(event.which);
 					switch ( event.keyCode ) {
 					  case 17: //Ctrl
 						break;
 					  case 81: // Q
-						controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
+						window.controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
 						break;
 					  case 87: // W
-						controls_object.setMode( "translate" );
+						window.controls_object.setMode( "translate" );
 						break;
 					  case 69: // E
-						controls_object.setMode( "rotate" );
+						window.controls_object.setMode( "rotate" );
 						break;
 					  case 82: // R
-						controls_object.setMode( "scale" );
+						window.controls_object.setMode( "scale" );
 						break;
 					case 187:
 					case 107: // +,=,num+
-						controls_object.setSize( controls_object.size + 0.1 );
+						window.controls_object.setSize( controls_object.size + 0.1 );
 						break;
 					case 189:
 					case 10: // -,_,num-
-						controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
+						window.controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
 						break;
 						}
-				});
+					}
+
+				window.addEventListener( 'keydown', obj_control_mode);
 		return  controls_object;
 	},
 	
@@ -78,7 +80,7 @@ library.proto = {
 		
 	muti_selection : function muti_selection(){
 		addEventListener("keydown", function(event){
-			event.preventDefault();
+			// event.preventDefault();
 			if(event.keyCode == 16 ){ // Shift
 				addEventListener("keydown", group_assign);
 			}
@@ -423,7 +425,7 @@ menubar.File = {
 //---
 
 function group_assign(event){
-		event.preventDefault();
+		// event.preventDefault();
 			switch ( event.keyCode ) {
 				case  	49 : // 1
 				case  	97 : // numpad 1
@@ -573,7 +575,7 @@ function group_assign(event){
 }
 
 function group_select(event){
-	event.preventDefault();
+	// event.preventDefault();
 			switch ( event.keyCode ) {
 				case  	49 : // 1
 				case  	97 : // numpad 1
@@ -759,4 +761,8 @@ function unselected_object(object, controls_object){
 
 		SELECTED ="";
 	}
+}
+
+function enablePreventDefault(event){
+	event.preventDefault();
 }
