@@ -237,6 +237,7 @@ library.proto = {
 					break;
 
 				}
+
 				// Set objects properties
 				created_obj.id = save.objects[key].id.id;
 				created_obj.uuid = save.objects[key].uuid.uuid;
