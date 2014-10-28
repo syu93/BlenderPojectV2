@@ -147,7 +147,11 @@ library.proto = {
 
 			window.sessionStorage.clear();
 
-			var save = {};		
+			var save = {};
+
+				// Get the project name
+				save.project = {name:$("#poject_name").val()}
+
 				// Get the camera
 				save.camera = {position:window.camera.position};
 
@@ -409,8 +413,9 @@ menubar.Add = {
 
 menubar.File = {
 	doNew : function(){
-		if ( confirm( 'Do you want to save modifications to ' + SELECTED.name + ' ?' ) === false ) return;
+		if ( confirm( "Do you want to save modifications to " + $('#poject_name').val() + " ?" ) === false ) return;
 		window.sessionStorage.clear();
+		location.reload();
 	}
 }
 

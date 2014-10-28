@@ -32,7 +32,7 @@
 			<ul class="level1">
 				<li tabindex="0" id=""><span>file</span>
 					<ul class="level2">
-						<li tabindex="0" id=""><span>new</span></li>
+						<li tabindex="0" id="n_new"><span>new</span></li>
 						<li tabindex="0" id=""><span>open project</span></li>
 						<li tabindex="0" id="save"><span>save</span></li>
 						<li tabindex="0" id="t_clear"><span>clear scence</span></li>
@@ -73,7 +73,7 @@
 		<div class="container_control_panel">
 			<div id="control_panel" class="control_panel">
 				<div class="poject_name">
-					<input class="text_feild" id="poject_name" type="text" name="pj_name" placeholder="Project name">
+					<input class="text_feild" id="poject_name" value="my project" type="text" name="pj_name" placeholder="Project name">
 				</div>
 				<div class="active_info">
 					<table class="active_info_table">

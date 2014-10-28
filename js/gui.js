@@ -57,6 +57,10 @@ $( document ).ready(function(){
 
 	});
 
+	$('#n_new').click(function(){
+		menubar.File.doNew();
+	});
+
 });
 
 // IN_APP_GUI
