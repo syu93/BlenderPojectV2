@@ -12,36 +12,7 @@ library.proto = {
 		controls_object =  new THREE.TransformControls( camera, renderer.domElement );
 		// controls_object.addEventListener( 'change', render ); // lag ?
 		controls_object.name="object_controller";
-					//FIXME get this function out !!!
-					function obj_control_mode( event ) {
-					//console.log(event.which);
-					switch ( event.keyCode ) {
-					  case 17: //Ctrl
-						break;
-					  case 81: // Q
-						window.controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
-						break;
-					  case 87: // W
-						window.controls_object.setMode( "translate" );
-						break;
-					  case 69: // E
-						window.controls_object.setMode( "rotate" );
-						break;
-					  case 82: // R
-						window.controls_object.setMode( "scale" );
-						break;
-					case 187:
-					case 107: // +,=,num+
-						window.controls_object.setSize( controls_object.size + 0.1 );
-						break;
-					case 189:
-					case 10: // -,_,num-
-						window.controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
-						break;
-						}
-					}
-
-				window.addEventListener( 'keydown', obj_control_mode);
+		window.addEventListener( 'keydown', obj_control_mode);
 		return  controls_object;
 	},
 	
@@ -760,6 +731,34 @@ function unselected_object(object, controls_object){
 		window.scene.getObjectByName("selectionBox").visible=false;
 
 		SELECTED ="";
+	}
+}
+
+function obj_control_mode( event ) {
+//console.log(event.which);
+switch ( event.keyCode ) {
+  case 17: //Ctrl
+	break;
+  case 81: // Q
+	window.controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
+	break;
+  case 87: // W
+	window.controls_object.setMode( "translate" );
+	break;
+  case 69: // E
+	window.controls_object.setMode( "rotate" );
+	break;
+  case 82: // R
+	window.controls_object.setMode( "scale" );
+	break;
+case 187:
+case 107: // +,=,num+
+	window.controls_object.setSize( controls_object.size + 0.1 );
+	break;
+case 189:
+case 10: // -,_,num-
+	window.controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
+	break;
 	}
 }
 
