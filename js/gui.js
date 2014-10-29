@@ -7,63 +7,111 @@ $( document ).ready(function(){
 
 // IN_PANEL_GUI
 	// File
+	// Level2
 	$('#n_new').click(function(){
 		menubar.File.doNew();
 	});
 
 	// Add
+	// Level2
 	$('#n_cube').click(function(){
-		$("#s_tools").attr('data', 'sphere');
-		menubar.Add.addCube();			
+		menubar.Add.addCube();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();
 	});
 	
+	// Level2
 	$('#n_sphere').click(function(){
 		menubar.Add.addSphere();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();
 	});
 
+	// Level2
 	$('#n_circle').click(function(){
 		menubar.Add.addCircle();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();
 	});
 
+	// Level2
 	$('#n_triangle').click(function(){
 		menubar.Add.addTriangle();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();
 	});
 
+	// Level2
 	$('#n_cilinder').click(function(){
 		menubar.Add.addCylinder();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();
 	});
 
+	// Level2
 	$('#n_clone').click(function(){
 		menubar.Add.addClone();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();
 	});	
 
+	// Level2
 	$('#n_cloneGp').click(function(){
 		menubar.Add.addCloneGp();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();
 	});	
 
+	// Level2
 	$('#t_clear').click(function(){
-		clear_scene();		
+		clear_scene();
+		//display none
+		$(".level2").toggle();
+		//juste make is hiden
+			$(".level2").toggle();	
 	});
 
+	// Level1
 	$('#save').click(function(){
 		window.save_state = "on";
 		library.proto.save_scene();
 	});
 
+	// Level1
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
 
 	// Controle Panel
-	$('#poject_name').click(function(){
-		if($('#poject_name').is(':focus')){
-			removeEventListener("keydown", enablePreventDefault);
-			removeEventListener("keydown", obj_control_mode);
-		}
-	});
+	if($('#poject_name').is(':focus')){
+		removeEventListener("keydown", enablePreventDefault);
+		removeEventListener("keydown", obj_control_mode);
+	}
 });
 
 // IN_APP_GUI
+function objects_list(objects){
+	if(objects.length > 0 && objects_list != objects.length){
+		// for(key in objects){
+		// 	$("#objects_list").append("<tr><td>plop</td></tr>");
+		// }
+	}
+}
+
 function selected_info(SELECTED){
 	if(SELECTED){
 		document.getElementById("object_id").innerHTML=(SELECTED.id);

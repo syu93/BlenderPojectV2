@@ -78,3 +78,7 @@ li{
 	color: #ffffff;
 	text-shadow: 0 0 3px #fff;
 }
+
+.level2 li:focus .leve2{
+	display: none;
+}

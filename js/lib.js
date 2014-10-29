@@ -182,6 +182,9 @@ library.proto = {
 			var save = JSON.parse(g_save);
 			// console.log(save);
 
+			// Retrieve project
+			$("#poject_name").val(save.project.name);
+
 			// Retrieve camera
 			window.camera.position.copy(save.camera.position);
 
@@ -259,6 +262,7 @@ menubar.Add = {
 			// cube.position.x = Math.random() * 1000 - 250;
 		scene.add(cube);
 		objects.push( cube );
+		objects_list = objects.length;
 		library.proto.selection(cube);
 		
 		return cube;
@@ -276,6 +280,7 @@ menubar.Add = {
 		
 		scene.add(sphere);
 		objects.push( sphere );
+		objects_list = objects.length;
 		library.proto.selection(sphere);
 		
 		return sphere;
@@ -291,7 +296,8 @@ menubar.Add = {
 		circle.userData = {group:"none"};
 		
 		scene.add(circle);
-		objects.push( circle );		
+		objects.push( circle );
+		objects_list = objects.length;	
 		library.proto.selection(circle);
 		
 		return circle;
@@ -310,7 +316,8 @@ menubar.Add = {
 		cylinder.name = 'cylinder';
 		cylinder.userData = {group:"none"};
 		scene.add(cylinder);
-		objects.push( cylinder );		
+		objects.push( cylinder );
+		objects_list = objects.length;	
 		library.proto.selection(cylinder);
 
 		return cylinder;
@@ -332,6 +339,7 @@ menubar.Add = {
 
 		scene.add(triangle);
 		objects.push( triangle );
+		objects_list = objects.length;
 		library.proto.selection(triangle);
 
 		return triangle;
@@ -342,13 +350,15 @@ menubar.Add = {
 	addClone : function(){
 		if( window.onCtrl ) {
 		var clone = SELECTED.clone();
-			window.scene.add(clone);
-			window.objects.push(clone);
+		window.scene.add(clone);
+		objects.push(clone);
+		objects_list = objects.length;
+		library.proto.selection(clone);
 		// add Group
-			// if(SELECTED.userData.group != "none"){
-			// 	var grp = scene.getObjectByName(clone.userData.group);
-			// 	grp.add(clone);
-			// }
+		// if(SELECTED.userData.group != "none"){
+		// 	var grp = scene.getObjectByName(clone.userData.group);
+		// 	grp.add(clone);
+		// }
 		}
 	},
 	
@@ -366,17 +376,17 @@ menubar.Add = {
 		if ( confirm( 'Delete ' + SELECTED.name + ' ?' ) === false ) return;
 		delete_obj=true;
 		//---
-		// console.log(sup_obj);
-		//---
+		for(key in objects){
+			if (objects[key].uuid == SELECTED.uuid){
+				objects.splice(key, 1);
+			}
+		}
+		//---		
 		SELECTED.geometry = {};
 		SELECTED.geometry = new THREE.Geometry();
 		SELECTED.geometry.dispose();
 		scene.remove(SELECTED);
 		unselected_object(SELECTED, controls_object);
-		//---
-		for(key in objects){
-			
-		}
 		//---
 		render();
 		console.log(SELECTED);
@@ -387,7 +397,7 @@ menubar.Add = {
 
 menubar.File = {
 	doNew : function(){
-		if ( confirm( "Do you want to save modifications to " + $('#poject_name').val() + " ?" ) === false ) return;
+		if ( confirm( "Do you want to quite " + $('#poject_name').val() + " ?" ) === false ) return;
 		window.sessionStorage.clear();
 		location.reload();
 	}

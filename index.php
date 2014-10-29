@@ -77,6 +77,13 @@
 				</div>
 				<div class="active_info">
 					<table class="active_info_table">
+						<tbody id="objects_list">
+
+						</tody>
+					</table>
+				</div>
+				<div class="active_info">
+					<table class="active_info_table">
 						<tbody>
 							<tr>
 								<td class="row_title">uuid</td>
