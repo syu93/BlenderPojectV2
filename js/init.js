@@ -1,7 +1,7 @@
 	var scene, camera, renderer, projector, width, height, intersects, clock, timer, save_sate="off";
 	var scene2, camera2, renderer2, projector2, width, height, intersects;
 	var objects = [];
-	var objects_list;
+	var objects_list=0;
 	var groups = [];
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
@@ -84,8 +84,8 @@
 		document.getElementById("s_tools").innerHTML=Math.round(window.clock.getElapsedTime());
 		document.getElementById("s_tools2").innerHTML=window.save_sate;
 
+		objects_list_info(objects);
 		selected_info(SELECTED);
-		objects_list(objects);
 		library.proto.save_scene();
 	}
 

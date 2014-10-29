@@ -262,7 +262,6 @@ menubar.Add = {
 			// cube.position.x = Math.random() * 1000 - 250;
 		scene.add(cube);
 		objects.push( cube );
-		objects_list = objects.length;
 		library.proto.selection(cube);
 		
 		return cube;
@@ -280,7 +279,6 @@ menubar.Add = {
 		
 		scene.add(sphere);
 		objects.push( sphere );
-		objects_list = objects.length;
 		library.proto.selection(sphere);
 		
 		return sphere;
@@ -297,7 +295,6 @@ menubar.Add = {
 		
 		scene.add(circle);
 		objects.push( circle );
-		objects_list = objects.length;	
 		library.proto.selection(circle);
 		
 		return circle;
@@ -317,7 +314,6 @@ menubar.Add = {
 		cylinder.userData = {group:"none"};
 		scene.add(cylinder);
 		objects.push( cylinder );
-		objects_list = objects.length;	
 		library.proto.selection(cylinder);
 
 		return cylinder;
@@ -339,7 +335,6 @@ menubar.Add = {
 
 		scene.add(triangle);
 		objects.push( triangle );
-		objects_list = objects.length;
 		library.proto.selection(triangle);
 
 		return triangle;
@@ -352,7 +347,6 @@ menubar.Add = {
 		var clone = SELECTED.clone();
 		window.scene.add(clone);
 		objects.push(clone);
-		objects_list = objects.length;
 		library.proto.selection(clone);
 		// add Group
 		// if(SELECTED.userData.group != "none"){

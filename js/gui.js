@@ -16,73 +16,41 @@ $( document ).ready(function(){
 	// Level2
 	$('#n_cube').click(function(){
 		menubar.Add.addCube();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();
 	});
 	
 	// Level2
 	$('#n_sphere').click(function(){
 		menubar.Add.addSphere();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();
 	});
 
 	// Level2
 	$('#n_circle').click(function(){
 		menubar.Add.addCircle();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();
 	});
 
 	// Level2
 	$('#n_triangle').click(function(){
 		menubar.Add.addTriangle();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();
 	});
 
 	// Level2
 	$('#n_cilinder').click(function(){
 		menubar.Add.addCylinder();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();
 	});
 
 	// Level2
 	$('#n_clone').click(function(){
 		menubar.Add.addClone();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();
 	});	
 
 	// Level2
 	$('#n_cloneGp').click(function(){
 		menubar.Add.addCloneGp();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();
 	});	
 
 	// Level2
 	$('#t_clear').click(function(){
 		clear_scene();
-		//display none
-		$(".level2").toggle();
-		//juste make is hiden
-			$(".level2").toggle();	
 	});
 
 	// Level1
@@ -101,14 +69,27 @@ $( document ).ready(function(){
 		removeEventListener("keydown", enablePreventDefault);
 		removeEventListener("keydown", obj_control_mode);
 	}
+
+	$('#objects_list').hover(function(){
+			$('#objects_list tr:hover td:nth-child(2n)').click(function(event) {
+			    var selected_id = $(event.target).text();
+			    var clicked_obj = window.scene.getObjectById(parseInt(selected_id));
+			    console.log("clicked_obj");
+			    library.proto.selection(clicked_obj);
+			});
+		}
+	);
+
 });
 
 // IN_APP_GUI
-function objects_list(objects){
-	if(objects.length > 0 && objects_list != objects.length){
-		// for(key in objects){
-		// 	$("#objects_list").append("<tr><td>plop</td></tr>");
-		// }
+function objects_list_info(objects){
+	if(objects_list != objects.length){
+		$("#objects_list").html("");
+		for(key in objects){
+			$("#objects_list").append("<tr><td class='row_title'>"+objects[key].name+"</td><td class='row_title'>"+objects[key].id+"</td><td><input type='checkbox' name='visible' checked></td></tr>");
+		}
+		objects_list = objects.length;
 	}
 }
 

@@ -34,9 +34,12 @@
 	border-radius:3px;
 
 	resize: vertical;
-	overflow: scroll;
-	overflow-y: hidden;
-	-ms-overflow-y: hidden;
+
+	overflow-x: scroll;
+	-ms-overflow-x:scroll;
+
+	overflow-y: auto;
+	-ms-overflow-y: auto;
 
 	min-height: 32px;
 	max-height: 80%;
@@ -108,4 +111,13 @@ table{
 
 	font-size: 100%;
 	font-weight: bold;
+}
+
+/******************************/
+/******************************/
+/******************************/
+
+#objects_list tr:hover td:nth-child(2n){
+	background: #272727;
+	cursor: pointer;
 }
