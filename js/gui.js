@@ -1,18 +1,22 @@
 $( document ).ready(function(){
-// prevent all
+// Type and editing scene
 	$('canvas').click(function(){
 		addEventListener("keydown", enablePreventDefault);
 		addEventListener("keydown", obj_control_mode);
 	});
+	$('#poject_name').click(function(event){
+		removeEventListener("keydown", enablePreventDefault);
+		removeEventListener("keydown", obj_control_mode);
+	});
 
 // IN_PANEL_GUI
-	// File
+// File menu
 	// Level2
 	$('#n_new').click(function(){
 		menubar.File.doNew();
 	});
 
-	// Add
+// Add menu
 	// Level2
 	$('#n_cube').click(function(){
 		menubar.Add.addCube();
@@ -64,32 +68,61 @@ $( document ).ready(function(){
 		menubar.Add.addDelete();
 	});
 
-	// Controle Panel
-	if($('#poject_name').is(':focus')){
-		removeEventListener("keydown", enablePreventDefault);
-		removeEventListener("keydown", obj_control_mode);
-	}
 
-	$('#objects_list').hover(function(){
-			$('#objects_list tr:hover td:nth-child(2n)').click(function(event) {
-			    var selected_id = $(event.target).text();
-			    var clicked_obj = window.scene.getObjectById(parseInt(selected_id));
-			    console.log("clicked_obj");
-			    library.proto.selection(clicked_obj);
-			});
+	$('#objects_list').click(function(event){ // FIXME:Need to check if the object belong to scene or groups
+	    var selected_id = $(event.target).text();
+	    if(!isNaN(parseInt(selected_id))) {
+		    var clicked_obj = window.scene.getObjectById(parseInt(selected_id));
+
+		    if(clicked_obj!="undefined"){
+		    	library.proto.selection(clicked_obj);
+			}
 		}
-	);
+	});
+
+	$('#objects_list').click(function(event){ // FIXME:Need to check if the object belong to scene or groups
+	    var selected_id = parseInt($(event.target).attr("id"));
+	    if( !isNaN(selected_id) ) {
+	    	display_ojects(selected_id);
+		}
+	});
+
 
 });
 
 // IN_APP_GUI
+
+function display_ojects(id){
+	// console.log(id);
+	var obj_toggle = window.scene.getObjectById(id);
+	// console.log(obj_toggle);
+
+		if(obj_toggle.visible === true){
+			obj_toggle.visible=false
+			obj_toggle.scale.x=obj_toggle.scale.x/100000;
+			obj_toggle.scale.y=obj_toggle.scale.y/100000;
+			obj_toggle.scale.z=obj_toggle.scale.z/100000;
+		}
+		else{
+			obj_toggle.visible=true;
+			obj_toggle.scale.x=obj_toggle.scale.x*100000;
+			obj_toggle.scale.y=obj_toggle.scale.y*100000;
+			obj_toggle.scale.z=obj_toggle.scale.z*100000;
+		}
+}
+
 function objects_list_info(objects){
-	if(objects_list != objects.length){
+	if( objects_list != objects.length || groups_list != groups.length ){
 		$("#objects_list").html("");
 		for(key in objects){
-			$("#objects_list").append("<tr><td class='row_title'>"+objects[key].name+"</td><td class='row_title'>"+objects[key].id+"</td><td><input type='checkbox' name='visible' checked></td></tr>");
+			$("#objects_list").append("<tr><td class='row_title'>"+objects[key].name+"</td><td class='row_title select_obj'>"+objects[key].id+"</td><td><input id='"+objects[key].id+"' class='visible_obj' type='checkbox' name='visible' checked></td></tr>");
 		}
+		for(key in groups){
+			$("#objects_list").append("<tr><td class='row_title_grp'>"+groups[key].name+"</td><td class='row_title select_obj'>"+groups[key].id+"</td><td><input id='"+groups[key].id+"' class='visible_obj' type='checkbox' name='visible' checked></td></tr>");
+		}
+
 		objects_list = objects.length;
+		groups_list = groups.length;
 	}
 }
 
