@@ -29,22 +29,12 @@ library.proto = {
 	
 			if(INTERSECTED)
 			{
-				// //Old object
-				// INTERSECTED=SELECTED;
-				// INTERSECTED.material.color.setHex("0x"+SELECTED.oldMaterial);
-				// INTERSECTED.material.opacity=1;
-				// INTERSECTED.material.blending=THREE.NoBlending;
-			}
-			else 
-			{
 				//Old object
 				INTERSECTED = object;
 				controls_object.detach(INTERSECTED);
 			}
 				//Current object
 				SELECTED = object;
-				SELECTED.oldMaterial = SELECTED.material.color.getHex().toString(16);
-				controls_object.attach( SELECTED );
 				selected_object(SELECTED, controls_object);window.onCtrl=true;
 	
 	},
@@ -233,7 +223,8 @@ library.proto = {
 						created_grp.scale.copy(save.groups[key].scale.scale);
 						created_grp.rotation.copy(save.groups[key].rotation.rotation);
 
-						THREE.SceneUtils.attach(created_obj, window.scene, created_grp);
+						// THREE.SceneUtils.attach(created_obj, window.scene, created_grp);
+						created_grp.add(created_obj);
 					}
 				}
 			}
@@ -393,6 +384,7 @@ menubar.File = {
 	doNew : function(){
 		if ( confirm( "Do you want to quite " + $('#poject_name').val() + " ?" ) === false ) return;
 		window.sessionStorage.clear();
+		$("#poject_name").val("");
 		location.reload();
 	}
 }

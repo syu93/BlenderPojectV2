@@ -3,6 +3,7 @@
 	var objects = [];
 	var objects_list=0;
 	var groups = [];
+	var groups_list=0;
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED,rect;
