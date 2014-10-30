@@ -25,8 +25,7 @@ library.proto = {
 		return selectionBox;
 		},
 	
-	selection : function selection(object){
-	
+	selection : function selection(object, is_group){
 			if(INTERSECTED)
 			{
 				//Old object
@@ -35,7 +34,8 @@ library.proto = {
 			}
 				//Current object
 				SELECTED = object;
-				selected_object(SELECTED, controls_object);window.onCtrl=true;
+				selected_object(SELECTED, controls_object, is_group);
+				window.onCtrl=true;
 	
 	},
 		
@@ -128,6 +128,7 @@ library.proto = {
 					properties.position = {position:groups[key].position};
 					properties.scale = {scale:groups[key].scale};
 					properties.rotation = {rotation:groups[key].rotation};
+					properties.visible = {visible:groups[key].visible};
 
 					//push properties into gprs
 					gprs.push(properties);
@@ -145,6 +146,7 @@ library.proto = {
 					properties.scale = {scale:objects[key].scale};
 					properties.rotation = {rotation:objects[key].rotation};
 					properties.group = {group:objects[key].userData.group};
+					properties.visible = {visible:objects[key].visible};
 
 					//push properties into objs
 					objs.push(properties);
@@ -211,6 +213,7 @@ library.proto = {
 				created_obj.scale.copy(save.objects[key].scale.scale);
 				created_obj.rotation.copy(save.objects[key].rotation.rotation);
 				created_obj.userData.group = save.objects[key].group.group;
+				created_obj.visible = save.objects[key].visible;
 
 				for(key in save.groups){
 					if( created_obj.userData.group == save.groups[key].name.name ) {
@@ -222,6 +225,7 @@ library.proto = {
 						created_grp.position.copy(save.groups[key].position.position);
 						created_grp.scale.copy(save.groups[key].scale.scale);
 						created_grp.rotation.copy(save.groups[key].rotation.rotation);
+						created_grp.visible = save.groups[key].visible;
 
 						// THREE.SceneUtils.attach(created_obj, window.scene, created_grp);
 						created_grp.add(created_obj);
@@ -253,7 +257,7 @@ menubar.Add = {
 			// cube.position.x = Math.random() * 1000 - 250;
 		scene.add(cube);
 		objects.push( cube );
-		library.proto.selection(cube);
+		library.proto.selection(cube, false);
 		
 		return cube;
 	},
@@ -270,7 +274,7 @@ menubar.Add = {
 		
 		scene.add(sphere);
 		objects.push( sphere );
-		library.proto.selection(sphere);
+		library.proto.selection(sphere, false);
 		
 		return sphere;
 	},
@@ -286,7 +290,7 @@ menubar.Add = {
 		
 		scene.add(circle);
 		objects.push( circle );
-		library.proto.selection(circle);
+		library.proto.selection(circle, false);
 		
 		return circle;
 	},
@@ -305,7 +309,7 @@ menubar.Add = {
 		cylinder.userData = {group:"none"};
 		scene.add(cylinder);
 		objects.push( cylinder );
-		library.proto.selection(cylinder);
+		library.proto.selection(cylinder, false);
 
 		return cylinder;
 	},
@@ -326,7 +330,7 @@ menubar.Add = {
 
 		scene.add(triangle);
 		objects.push( triangle );
-		library.proto.selection(triangle);
+		library.proto.selection(triangle, false);
 
 		return triangle;
 	},
@@ -338,7 +342,7 @@ menubar.Add = {
 		var clone = SELECTED.clone();
 		window.scene.add(clone);
 		objects.push(clone);
-		library.proto.selection(clone);
+		library.proto.selection(clone, false);
 		// add Group
 		// if(SELECTED.userData.group != "none"){
 		// 	var grp = scene.getObjectByName(clone.userData.group);
@@ -524,7 +528,7 @@ function group_assign(event){
 					if(SELECTED.userData.group != selected_group.name)
 					{
 						var old_group = window.scene.getObjectByName(SELECTED.userData.group);
-						console.log(old_group);
+						// console.log(old_group);
 
 						if(SELECTED.userData.group =="none")
 						{
@@ -704,27 +708,28 @@ function enable_grid(){
 	console.log("Grid are disable");
 }
 
-function selected_object(object, controls_object){
-	console.log(object);
+function selected_object(object, controls_object, is_group){
 
 	window.onCtrl=false;
 
 	controls_object.attach(object);
-	
-	window.scene.getObjectByName("selectionBox").position.copy(object.position);
-	window.scene.getObjectByName("selectionBox").update( object );
-	window.scene.getObjectByName("selectionBox").visible=true;
+	if(is_group === false){
+		window.scene.getObjectByName("selectionBox").position.copy(object.position);
+		window.scene.getObjectByName("selectionBox").update( object );
+		window.scene.getObjectByName("selectionBox").visible=true;
+	}
 }
 
-function unselected_object(object, controls_object){
+function unselected_object(object, controls_object, is_group){
 	if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0 || delete_obj == true){
 		window.onCtrl=false;
 
 		controls_object.detach(SELECTED);
-
-		window.scene.getObjectByName("selectionBox").position.copy(scene.position);
-		window.scene.getObjectByName("selectionBox").update(window.scene.getObjectByName("main grid"));
-		window.scene.getObjectByName("selectionBox").visible=false;
+		if(is_group === false){
+				window.scene.getObjectByName("selectionBox").position.copy(scene.position);
+				window.scene.getObjectByName("selectionBox").update(window.scene.getObjectByName("main grid"));
+				window.scene.getObjectByName("selectionBox").visible=false;
+		}
 
 		SELECTED ="";
 	}

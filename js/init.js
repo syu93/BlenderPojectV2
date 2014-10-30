@@ -147,12 +147,12 @@
 
 		if ( intersects.length > 0 ) {
 			
-			library.proto.selection(intersects[ 0 ].object);
+			library.proto.selection(intersects[ 0 ].object, false);
 		}
 		else
 		{
 			if(SELECTED){ //If an object is selected
-				unselected_object(SELECTED, controls_object);
+				unselected_object(SELECTED, controls_object, false);
 			}
 		}
 	}

@@ -70,23 +70,44 @@ $( document ).ready(function(){
 
 
 	$('#objects_list').click(function(event){ // FIXME:Need to check if the object belong to scene or groups
+	    var clicked_obj;
 	    var selected_id = $(event.target).text();
-	    if(!isNaN(parseInt(selected_id))) {
-		    var clicked_obj = window.scene.getObjectById(parseInt(selected_id));
+	    if(!isNaN(parseInt(selected_id))) {		    
+	    	clicked_obj = window.scene.getObjectById(parseInt(selected_id));
+			// console.log(typeof(clicked_obj));
 
-		    if(clicked_obj!="undefined"){
-		    	library.proto.selection(clicked_obj);
+		   	if(typeof(clicked_obj)!=="undefined") {
+			   	library.proto.selection(clicked_obj, false);
+			}
+			else if(typeof(clicked_obj)==="undefined"){
+				for(key in groups){
+					clicked_obj = groups[key].getObjectById(parseInt(selected_id));
+					if(typeof(clicked_obj)!=="undefined"){
+						library.proto.selection(clicked_obj, false);
+						return;
+					}
+				}
 			}
 		}
 	});
 
 	$('#objects_list').click(function(event){ // FIXME:Need to check if the object belong to scene or groups
+	    // var is_group = "true";
 	    var selected_id = parseInt($(event.target).attr("id"));
 	    if( !isNaN(selected_id) ) {
 	    	display_ojects(selected_id);
 		}
+		else{
+			for(key in groups){
+				if(typeof(clicked_obj)!=="undefined"){
+					clicked_obj = groups[key].getObjectById(parseInt(selected_id));
+					library.proto.selection(clicked_obj, true);
+					display_ojects(selected_id);
+					return;
+				}
+			}			
+		}
 	});
-
 
 });
 
@@ -113,12 +134,17 @@ function display_ojects(id){
 
 function objects_list_info(objects){
 	if( objects_list != objects.length || groups_list != groups.length ){
+		var checked = "";
 		$("#objects_list").html("");
 		for(key in objects){
-			$("#objects_list").append("<tr><td class='row_title'>"+objects[key].name+"</td><td class='row_title select_obj'>"+objects[key].id+"</td><td><input id='"+objects[key].id+"' class='visible_obj' type='checkbox' name='visible' checked></td></tr>");
+			if(objects[key].visible === true){checked="checked";}
+			
+			$("#objects_list").append("<tr><td class='row_title'>"+objects[key].name+"</td><td class='row_title select_obj'>"+objects[key].id+"</td><td><input id='"+objects[key].id+"' class='visible_obj' type='checkbox' name='visible' "+checked+"></td></tr>");
 		}
 		for(key in groups){
-			$("#objects_list").append("<tr><td class='row_title_grp'>"+groups[key].name+"</td><td class='row_title select_obj'>"+groups[key].id+"</td><td><input id='"+groups[key].id+"' class='visible_obj' type='checkbox' name='visible' checked></td></tr>");
+			if(groups[key].visible === true){checked="checked";}
+
+			$("#objects_list").append("<tr><td class='row_title_grp'>"+groups[key].name+"</td><td class='row_title select_obj'>"+groups[key].id+"</td><td><input id='"+groups[key].id+"' class='visible_obj' type='checkbox' name='visible' "+checked+"></td></tr>");
 		}
 
 		objects_list = objects.length;
