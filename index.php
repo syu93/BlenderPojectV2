@@ -5,9 +5,12 @@
 	// debug($_SESSION);
 	
 ?>
+<!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>My first Three.js app Blender Project</title>
+		<meta name="description" content="">
 		<script src="js/libs/jquery-1.11.0.min.js"></script>
 		<script src="js/libs/three.min.js"></script>
 		
@@ -20,6 +23,8 @@
 		<script src="js/init.js"></script>
 		<script src="js/lib.js"></script>
 		<script src="js/gui.js"></script>
+		<script src="js/controlPanel.js"></script>
+		<script src="js/prompt.js"></script>
 		
 		<link rel="stylesheet" href="css/init.css">
 		<link rel="stylesheet" href="css/menu.css">
@@ -41,21 +46,27 @@
 				</li>
 				<li tabindex="0"><span>add</span>
 					<ul class="level2">
-						<li id="n_cube"><span>Cube</span></li>
-						<li id="n_sphere"><span>Sphere</span></li>
-						<li id="n_circle"><span>Circle</span></li>
-						<li id="n_triangle"><span>Triangle</span></li>
-						<li id="n_cilinder"><span>Cylinder</span></li>
+						<li id="n_cube"><span>cube</span></li>
+						<li id="n_sphere"><span>sphere</span></li>
+						<li id="n_circle"><span>circle</span></li>
+						<li id="n_triangle"><span>triangle</span></li>
+						<li id="n_cilinder"><span>cylinder</span></li>
 						<li class="last-child"></li>
 					</ul>
 				</li>
-				<li tabindex="0"><span>clone</span>
+				<li tabindex="0"><span>object</span>
 					<ul class="level2">
-						<li id="n_clone"><span>object</span></li>
-						<li id="n_cloneGp"><span>Group</span></li>
+						<li id="n_clone"><span>clone object</span></li>
+						<li id="n_cloneGp"><span>clone group</span></li>
 						<li class="last-child"></li>
 					</ul>
-				</li>				
+				</li>
+				<li tabindex="0"><span>view</span>
+					<ul class="level2">
+						<li id="d_grid"><span>display grid</span></li>
+						<li class="last-child"></li>
+					</ul>
+				</li>
 				<li tabindex="0" id="delete"><span>delete</span></li>
 			</ul>
 		</div>
@@ -86,7 +97,7 @@
 					<table class="active_info_table">
 						<tbody>
 							<tr>
-								<td class="row_title">uuid</td>
+								<td class="row_title">id</td>
 								<td id="object_id">...</td>
 							</tr>
 							<td class="row_title">uuid</td>

@@ -124,3 +124,9 @@ table{
 	background: #272727;
 	cursor: pointer;
 }
+
+.list_object_seleted{
+	/*background: #778899 !important;*/
+	background: #4682b4 !important;
+	text-shadow: 0 0 3px #fff;
+}

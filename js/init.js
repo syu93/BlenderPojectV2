@@ -4,6 +4,7 @@
 	var objects_list=0;
 	var groups = [];
 	var groups_list=0;
+	var grid;
 	var mouse = new THREE.Vector2(),
 	offset = new THREE.Vector3(),
 	INTERSECTED, SELECTED,rect;
@@ -28,7 +29,7 @@
 		// Projector for the camera
 		projector = new THREE.Projector();
 		
-		grid();
+		grid = grid();
 
 		clock = new THREE.Clock();
 		clock.start();
@@ -82,10 +83,12 @@
 		object_control.update();
 		
 		// document.getElementById("s_tools").innerHTML=window.onCtrl;
-		document.getElementById("s_tools").innerHTML=Math.round(window.clock.getElapsedTime());
-		document.getElementById("s_tools2").innerHTML=window.save_sate;
+		// document.getElementById("s_tools").innerHTML=Math.round(window.clock.getElapsedTime());
+		// document.getElementById("s_tools2").innerHTML=window.save_sate;
 
 		objects_list_info(objects);
+		// ctr_panel_active(SELECTED);
+
 		selected_info(SELECTED);
 		library.proto.save_scene();
 	}

@@ -32,6 +32,7 @@ library.proto = {
 				INTERSECTED = object;
 				controls_object.detach(INTERSECTED);
 			}
+				INTERSECTED = SELECTED;
 				//Current object
 				SELECTED = object;
 				selected_object(SELECTED, controls_object, is_group);
@@ -53,46 +54,35 @@ library.proto = {
 	
 	muti_move : function muti_move(){
 		addEventListener("keydown", function(event){
-			switch ( event.keyCode ) {
-				case 17: // Ctrl			
-					//---
-					if(typeof (selected_group) != "undefined"){
-						controls_object.attach(selected_group);
-						for(var i=0; i<selected_group.children.length; i++)
-						{
-						var bx = "multi_box_"+i;
-							var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
-							
-							window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
-							window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
-							window.scene.getObjectByName("selectionBox_"+i).visible=true;
-							window.scene.getObjectByName("selectionBox_"+i).material.color.r=0;
-							window.scene.getObjectByName("selectionBox_"+i).material.color.g=1;
-							window.scene.getObjectByName("selectionBox_"+i).material.color.b=0;
-							// console.log(window.scene.getObjectByName("selectionBox_"+i).material.color.r);
-						}
+			if( event.keyCode == 17) {
+				if(typeof(selected_group) !== "undefined"){
+					controls_object.attach(selected_group);
+					for(var i=0; i<selected_group.children.length; i++)
+					{
+						var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
+						
+						window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
+						window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
+						window.scene.getObjectByName("selectionBox_"+i).visible=true;
+						window.scene.getObjectByName("selectionBox_"+i).material.color.r=0;
+						window.scene.getObjectByName("selectionBox_"+i).material.color.g=1;
+						window.scene.getObjectByName("selectionBox_"+i).material.color.b=0;
+						// console.log(window.scene.getObjectByName("selectionBox_"+i).material.color.r);
 					}
-			break;
+				}
 			}	
 		});
 		addEventListener("keyup", function(event){
-			switch ( event.keyCode ) {
-				case 17: // Ctrl			
-					//---
-					if((typeof (selected_group) != "undefined"))
+			if( event.keyCode == 17) {
+				if((typeof(selected_group) !== "undefined"))
+				{
+					controls_object.attach(SELECTED);
+					for(var i=0; i<selected_group.children.length; i++)
 					{
-						controls_object.attach(SELECTED);
-						for(var i=0; i<selected_group.children.length; i++)
-						{
-						var bx = "multi_box_"+i;
-							var bx = library.proto.box_selection(); bx.name="selectionBox_"+i; window.scene.add(bx);
-							
-							window.scene.getObjectByName("selectionBox_"+i).position.copy(selected_group.children[i].position);
-							window.scene.getObjectByName("selectionBox_"+i).update( selected_group.children[i] );
-							window.scene.getObjectByName("selectionBox_"+i).visible=false;
-						}
+						var bx = window.getElementByName("selectionBox_"+i);
+						console.log(bx);
 					}
-			break;
+				}
 			}	
 		});
 	},
@@ -104,7 +94,7 @@ library.proto = {
 		return subGroup;
 	},
 	
-	save_scene : function save_scene(){
+	save_scene : function(){
 		if ( (Math.round(window.clock.getElapsedTime()) == (window.timer+300)) || window.save_state =="on"){
 			window.timer = Math.round(window.clock.getElapsedTime());
 
@@ -114,6 +104,15 @@ library.proto = {
 
 				// Get the project name
 				save.project = {name:$("#poject_name").val()}
+
+				// Get grid config
+				var grid_cfg = [];
+					var properties = {};
+					properties.visible = {visible:grid.visible};
+					
+					//push properties into grid
+					grid_cfg.push(properties);
+				save.grid = grid_cfg;
 
 				// Get the camera
 				save.camera = {position:window.camera.position};
@@ -167,7 +166,7 @@ library.proto = {
 		}
 	},
 
-	load_scene : function load_scene(){
+	load_scene : function(){
 		if(typeof window.sessionStorage.save!="undefined"){
 			var g_save = window.sessionStorage.save;
 
@@ -176,6 +175,11 @@ library.proto = {
 
 			// Retrieve project
 			$("#poject_name").val(save.project.name);
+
+			// Retrieve grid
+			for(key in save.grid){
+				window.grid.visible = save.grid[key].visible.visible;
+			}
 
 			// Retrieve camera
 			window.camera.position.copy(save.camera.position);
@@ -213,7 +217,7 @@ library.proto = {
 				created_obj.scale.copy(save.objects[key].scale.scale);
 				created_obj.rotation.copy(save.objects[key].rotation.rotation);
 				created_obj.userData.group = save.objects[key].group.group;
-				created_obj.visible = save.objects[key].visible;
+				created_obj.visible = save.objects[key].visible.visible;
 
 				for(key in save.groups){
 					if( created_obj.userData.group == save.groups[key].name.name ) {
@@ -225,7 +229,7 @@ library.proto = {
 						created_grp.position.copy(save.groups[key].position.position);
 						created_grp.scale.copy(save.groups[key].scale.scale);
 						created_grp.rotation.copy(save.groups[key].rotation.rotation);
-						created_grp.visible = save.groups[key].visible;
+						created_grp.visible = save.groups[key].visible.visible;
 
 						// THREE.SceneUtils.attach(created_obj, window.scene, created_grp);
 						created_grp.add(created_obj);
@@ -627,9 +631,10 @@ function origin(){
 function grid(){
 		var size = 500; var step = 25;
 		var gridHelper = new THREE.GridHelper( size, step );
-		// gridHelper.setColors(0, 0x5d5d5d)
+		// gridHelper.setColors(0, 0x171717);
 		gridHelper.name="main grid";
 		window.scene.add( gridHelper );
+		return gridHelper;
 }
 
 function orientation(){
@@ -700,12 +705,14 @@ function enable_axis(){
 	console.log("Axis are enabled");
 }
 
-function enable_grid(){
-	window.scene.children[3].visible=true;
-	console.log("Grid are enabled");
-}function disable_grid(){
-	window.scene.children[3].visible=false;
-	console.log("Grid are disable");
+function display_grid(){
+	if(grid.visible === true){
+		grid.visible=false;
+	}
+	else{
+		grid.visible=true;
+	}
+	
 }
 
 function selected_object(object, controls_object, is_group){
@@ -713,6 +720,7 @@ function selected_object(object, controls_object, is_group){
 	window.onCtrl=false;
 
 	controls_object.attach(object);
+	ctr_panel_active();
 	if(is_group === false){
 		window.scene.getObjectByName("selectionBox").position.copy(object.position);
 		window.scene.getObjectByName("selectionBox").update( object );
@@ -721,16 +729,18 @@ function selected_object(object, controls_object, is_group){
 }
 
 function unselected_object(object, controls_object, is_group){
-	if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0 || delete_obj == true){
+	if (onMouseDownPosition.distanceTo( onMouseUpPosition ) == 0 || delete_obj === true){
 		window.onCtrl=false;
 
 		controls_object.detach(SELECTED);
+		$('#obj_'+object.id).removeClass("list_object_seleted");
 		if(is_group === false){
 				window.scene.getObjectByName("selectionBox").position.copy(scene.position);
 				window.scene.getObjectByName("selectionBox").update(window.scene.getObjectByName("main grid"));
 				window.scene.getObjectByName("selectionBox").visible=false;
 		}
 
+		INTERSECTED=SELECTED;
 		SELECTED ="";
 	}
 }

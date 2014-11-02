@@ -26,7 +26,8 @@ li{
 	padding: 0 10px 0 10px;
 }
 .level1 li:hover > .level2 li{
-	visibility: visible;
+	/*visibility: visible;*/
+	display: block;
 	opacity:1;
 	z-index: 9999;
 	height: 30px;
@@ -54,7 +55,8 @@ li{
 	height:0;
 }
 .level2 li{
-	visibility: hidden;
+	/*visibility: hidden;*/
+	display: none;
 	height: 0;
 	width: 125px;
 	border-bottom:solid #ccc 1px;
