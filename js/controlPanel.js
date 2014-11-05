@@ -61,7 +61,7 @@ function display_ojects(id){
 			else{
 				unselected_object(obj_toggle, controls_object, false);
 			}
-			$('#obj_'+obj_toggle.id).removeClass("list_object_seleted");
+			// $('#obj_'+obj_toggle.id).removeClass("list_object_seleted");
 			window.delete_obj=false;
 		}
 		else{
@@ -115,13 +115,13 @@ function objects_list_info(objects){
 			if(objects[key].visible === true){checked_obj="checked";}
 			
 			$("#objects_list").append("<tr><td class='row_title'>"+objects[key].name+"</td><td id='obj_"+objects[key].id+"' class='row_title select_obj'>"+objects[key].id+"</td><td><input id='"+objects[key].id+"' class='visible_obj' type='checkbox' name='visible' "+checked_obj+"></td></tr>");
-			ctr_panel_active();
+			// ctr_panel_active();
 		}
 		for(key in groups){
 			if(groups[key].visible === true){checked_grp="checked";}
 
 			$("#objects_list").append("<tr><td class='row_title_grp'>"+groups[key].name+"</td><td id='obj_"+groups[key].id+"' class='row_title select_obj'>"+groups[key].id+"</td><td><input id='"+groups[key].id+"' class='visible_obj' type='checkbox' name='visible' "+checked_grp+"></td></tr>");
-			ctr_panel_active();
+			// ctr_panel_active();
 		}
 
 		objects_list = objects.length;
@@ -129,13 +129,16 @@ function objects_list_info(objects){
 	}
 }
 
-function ctr_panel_active(){
-	var selected_id = window.SELECTED.id;
-	if(typeof(INTERSECTED) !== 'undefined'){
-		var old_selected_id = window.INTERSECTED.id;
-		$('#obj_'+old_selected_id).removeClass("list_object_seleted");
+function ctr_panel_active(SELECTED){
+	// var selected_id = window.SELECTED.id;
+	if(SELECTED){
+		var selected_id = SELECTED.id;
+		if(typeof(INTERSECTED) !== 'undefined'){
+			var old_selected_id = window.INTERSECTED.id;
+			$('#obj_'+old_selected_id).removeClass("list_object_seleted");
+		}
+		$('#obj_'+selected_id).addClass("list_object_seleted");
 	}
-	$('#obj_'+selected_id).addClass("list_object_seleted");
 }
 
 function selected_info(SELECTED){

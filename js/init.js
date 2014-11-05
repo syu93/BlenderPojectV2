@@ -87,10 +87,10 @@
 		// document.getElementById("s_tools2").innerHTML=window.save_sate;
 
 		objects_list_info(objects);
-		// ctr_panel_active(SELECTED);
 
 		selected_info(SELECTED);
 		library.proto.save_scene();
+		ctr_panel_active(SELECTED);
 	}
 
 	function render2() {

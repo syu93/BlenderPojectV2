@@ -720,7 +720,7 @@ function selected_object(object, controls_object, is_group){
 	window.onCtrl=false;
 
 	controls_object.attach(object);
-	ctr_panel_active();
+	// ctr_panel_active();
 	if(is_group === false){
 		window.scene.getObjectByName("selectionBox").position.copy(object.position);
 		window.scene.getObjectByName("selectionBox").update( object );

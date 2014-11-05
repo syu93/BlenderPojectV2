@@ -5,6 +5,11 @@ $( document ).ready(function(){
 		addEventListener("keydown", obj_control_mode);
 		addEventListener("keydown", group_select);
 	});
+
+	$('input').click(function(){
+		objects_list_info(objects);
+	});
+
 	$('#poject_name').click(function(event){
 		removeEventListener("keydown", enablePreventDefault);
 		removeEventListener("keydown", obj_control_mode);
