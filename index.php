@@ -12,6 +12,7 @@
 		<title>My first Three.js app Blender Project</title>
 		<meta name="description" content="">
 		<script src="js/libs/jquery-1.11.0.min.js"></script>
+		<script src="js/libs/jquery-ui.min.js"></script>
 		<script src="js/libs/three.min.js"></script>
 		
 		<script src="js/API/OrbitControls.js"></script>
@@ -29,6 +30,7 @@
 		<link rel="stylesheet" href="css/init.css">
 		<link rel="stylesheet" href="css/menu.css">
 		<link rel="stylesheet" href="css/control_panel.css">
+		<link rel="stylesheet" href="css/tool_panel.css">
 	</head>
 	
 	<body style="color:#fff; background:#171717;">
@@ -73,12 +75,25 @@
 	<!--|| MENU_BAR ||-->
 
 	<!--|| CANVAS_AREA ||-->
-		<div id="canvas" style="position: absolute; margin-top:35px;">
+		<div id="canvas">
 			<span id='auto_save_msg' class="auto_save visible_hiden">saving the scene...</span>
 			<div id="direction" style="position:absolute; bottom:0px;">
 			</div>
 		</div>
 	<!--|| CANVAS_AREA ||-->
+
+	<!--|| TOOL_BAR ||-->
+<!-- 	<div id="container_tool_panel" class="container_tool_panel">
+	<i> . . . </i>
+		<div class="tool_panel">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</div>
+	</div> -->
+	<!--|| TOOL_BAR ||-->
 
 	<!--|| CONTROL_PANEL ||-->
 		<div class="container_control_panel">

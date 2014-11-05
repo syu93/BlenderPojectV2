@@ -1,0 +1,17 @@
+.container_tool_panel{
+	display:block;
+	position:absolute; top:25px; left:0px;
+	/*border-right: solid black 1px;*/
+	width: 35px;
+	height: 100%;
+	-webkit-box-shadow: 1px 0 2px 0 #000000;
+	box-shadow: 1px 0 2px 0 #000000;
+}
+
+.tool_panel{
+	padding-top: 20px;
+	background: #303030;
+
+	width: 35px;
+	height: 100%;
+}

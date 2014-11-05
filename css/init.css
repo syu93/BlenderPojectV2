@@ -8,7 +8,11 @@ body
 	overflow: hidden;
 
 }
-
+#canvas{
+	position: absolute;
+	margin-top:35px;
+	margin-left: 35px;
+}
 .menu_bar{
 	display:block; 
 	position:absolute; top:0px;
@@ -21,13 +25,4 @@ body
 	-webkit-box-shadow: 0 2px 5px 0 #000000;
 	box-shadow: 0 2px 5px 0 #000000;
 
-}
-.container_control_panel{
-	display:block;
-	position:absolute; top:25px; right:0px;
-	border-left: inset black 1px;
-	width: 199px;
-	height: 100%;
-	-webkit-box-shadow: -1px 0 2px 0 #000000;
-	box-shadow: -1px 0 2px 0 #000000;
 }

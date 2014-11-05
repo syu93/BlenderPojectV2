@@ -15,7 +15,7 @@
 	var onMouseUpPosition = new THREE.Vector2();
 
 	function init(){
-		width = window.innerWidth-200;
+		width = window.innerWidth-234;
 		height = window.innerHeight-60;
 		// main scene
 		scene = new THREE.Scene();
@@ -109,7 +109,7 @@
 
 		event.preventDefault();
 
-		mouse.x = (( event.clientX ) / rect.clientWidth)* 2 - 1;
+		mouse.x = (( event.clientX - 35) / rect.clientWidth)* 2 - 1;
 		mouse.y = -(( event.clientY - 35) / rect.clientHeight) * 2 + 1;
 		
 		var vector = new THREE.Vector3( mouse.x, mouse.y,1);

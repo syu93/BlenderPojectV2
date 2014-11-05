@@ -7,7 +7,12 @@ $(document).ready(function(){
 	    	clicked_obj = window.scene.getObjectById(parseInt(selected_id));
 
 		   	if(typeof(clicked_obj)!=="undefined") {
-			   	library.proto.selection(clicked_obj, false);
+				if(typeof(clicked_obj.userData.group) === 'undefined'){
+					library.proto.selection(clicked_obj, true);
+				}
+				else{
+					library.proto.selection(clicked_obj, false);
+				}
 			}
 			else if(typeof(clicked_obj)==="undefined"){
 				for(key in groups){
@@ -115,7 +120,7 @@ function objects_list_info(objects){
 		for(key in groups){
 			if(groups[key].visible === true){checked_grp="checked";}
 
-			$("#objects_list").append("<tr><td class='row_title_grp'>"+groups[key].name+"</td><td class='row_title select_obj'>"+groups[key].id+"</td><td><input id='"+groups[key].id+"' class='visible_obj' type='checkbox' name='visible' "+checked_grp+"></td></tr>");
+			$("#objects_list").append("<tr><td class='row_title_grp'>"+groups[key].name+"</td><td id='obj_"+groups[key].id+"' class='row_title select_obj'>"+groups[key].id+"</td><td><input id='"+groups[key].id+"' class='visible_obj' type='checkbox' name='visible' "+checked_grp+"></td></tr>");
 			ctr_panel_active();
 		}
 
