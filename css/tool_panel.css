@@ -3,15 +3,106 @@
 	position:absolute; top:25px; left:0px;
 	/*border-right: solid black 1px;*/
 	width: 35px;
-	height: 100%;
-	-webkit-box-shadow: 1px 0 2px 0 #000000;
-	box-shadow: 1px 0 2px 0 #000000;
+	height: 95%;
+	/*-webkit-box-shadow: 0px 0 3px 0 #000000;*/
+	/*box-shadow: 0px 0 3px 0 #000000;*/
+	resize: both;
 }
-
-.tool_panel{
-	padding-top: 20px;
+.container_tool_panel ul li{
+	margin:0;
+	padding:0;
+}
+.tool_panel{ /*main*/
+	/*z-index: 1;*/
+	/*padding-top: 20px;*/
 	background: #303030;
 
 	width: 35px;
 	height: 100%;
+    resize: both;
+    min-height: 57px;
+    min-width: 35px;
+    overflow: hidden;
+    white-space: normal;
+	-webkit-box-shadow: 0px 0 3px 0 #000000;
+	box-shadow: 0px 0 3px 0 #000000;
+	/*text-align: center;*/
+}
+ #dragme{
+ 	
+	display:block;
+	position:absolute; top:0px; left:0px;
+	/*width: 35px;*/
+	width: 35px;
+	height: 100%;
+ }
+#dropable{
+	width: 29px;
+	height: 9px;
+
+	border: inset black 1px;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	border-radius: 3px;
+
+	display: block;
+	text-align: center;
+	font-size: 5px;
+
+/*	-webkit-box-shadow: inset 0px 0 3px 0 #000000;
+	box-shadow: inset 0px 0 3px 0 #000000;*/
+
+	background:#111111;
+	color:#373737;
+ }
+#dropable:hover{
+	cursor: pointer;
+}
+.aside-tool-bar{ /* drop zone */
+	/*z-index: -1;*/
+	display:block;
+	position:absolute; top:0px; left:0px;
+	/*width: 100%;*/
+	height: 100%;
+	/*background: #ccc;*/
+}
+
+/*********************************************/
+.tool .icone{
+	float: left;
+	display: block;
+	background: #111111;
+	width: 35px;
+	height: 35px;
+	line-height: 29px;
+	-webkit-box-shadow: inset 0px 0 3px 0 #000000;
+	box-shadow: inset 0px 0 3px 0 #000000;
+	border-right: solid #373737 1px;
+	border-bottom: solid #373737 1px;
+}
+.tool .icone:first-child{
+	border-radius: 3px 0 0 3px;
+}
+.tool .icone:last-child{
+	border-radius:  0 3px 3px 0;
+}
+
+.tool .icone img{
+	width: 30px;
+	height: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+hr{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: 0;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+	background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+	background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
 }

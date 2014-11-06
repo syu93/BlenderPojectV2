@@ -26,6 +26,7 @@
 		<script src="js/gui.js"></script>
 		<script src="js/controlPanel.js"></script>
 		<script src="js/prompt.js"></script>
+		<script src="js/drag.js"></script>
 		
 		<link rel="stylesheet" href="css/init.css">
 		<link rel="stylesheet" href="css/menu.css">
@@ -83,16 +84,26 @@
 	<!--|| CANVAS_AREA ||-->
 
 	<!--|| TOOL_BAR ||-->
-<!-- 	<div id="container_tool_panel" class="container_tool_panel">
-	<i> . . . </i>
-		<div class="tool_panel">
-			<ul>
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
-			</ul>
-		</div>
-	</div> -->
+	<div class="aside-tool-bar">
+		<aside id="dragme" draggable="true">
+			<div class="container_tool_panel">
+				<div class="tool_panel">
+					<div id="dropable">-</div>
+					<hr>
+					<ul class="tool">
+						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
+						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
+						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
+						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
+						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
+
+<!-- 						<li><i class="icone">glyphicons_186_move.png</i></li>
+						<li><i class="icone">glyphicons_186_move.png</i></li> -->
+					</ul>
+				</div>
+			</div>
+		</aside>
+	</div>
 	<!--|| TOOL_BAR ||-->
 
 	<!--|| CONTROL_PANEL ||-->
