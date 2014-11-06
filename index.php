@@ -91,7 +91,7 @@
 					<div id="dropable">-</div>
 					<hr>
 					<ul class="tool">
-						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
+						<li id='t_drag'class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
 						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
 						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
 						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>

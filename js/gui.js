@@ -78,4 +78,34 @@ $( document ).ready(function(){
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
+
+
 });
+
+function obj_control_mode() {
+//console.log(event.which);
+switch ( window.selected_tool ) {
+  case 17: //Ctrl
+	break;
+  case 81: // Q
+	window.controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
+	break;
+  case 87: // W
+	window.controls_object.setMode( "translate" );
+	break;
+  case 69: // E
+	window.controls_object.setMode( "rotate" );
+	break;
+  case 82: // R
+	window.controls_object.setMode( "scale" );
+	break;
+case 187:
+case 107: // +,=,num+
+	window.controls_object.setSize( controls_object.size + 0.1 );
+	break;
+case 189:
+case 10: // -,_,num-
+	window.controls_object.setSize( Math.max(controls_object.size - 0.1, 0.1 ) );
+	break;
+	}
+}
