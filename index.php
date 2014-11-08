@@ -32,6 +32,10 @@
 		<link rel="stylesheet" href="css/menu.css">
 		<link rel="stylesheet" href="css/control_panel.css">
 		<link rel="stylesheet" href="css/tool_panel.css">
+
+		<!-- Font-icone -->
+		<link href="css/tool-panel-icone/css/tool-panel-icone.css" rel="stylesheet">
+		<link href="css/tool-panel-icone/css/animation.css" rel="stylesheet">
 	</head>
 	
 	<body style="color:#fff; background:#171717;">
@@ -91,14 +95,7 @@
 					<div id="dropable">-</div>
 					<hr>
 					<ul class="tool">
-						<li id='t_drag'class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
-						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
-						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
-						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
-						<li class="icone"><span><img src="css/img/png/glyphicons_186_move.png"></span></li>
-
-<!-- 						<li><i class="icone">glyphicons_186_move.png</i></li>
-						<li><i class="icone">glyphicons_186_move.png</i></li> -->
+						<li class="icone"><i class="icon-eye"></i></li>
 					</ul>
 				</div>
 			</div>

@@ -16,6 +16,12 @@ function drop(event) {
     event.preventDefault();
     return false;
 }
+function backdrop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+
     $('#dropable')
         .mousedown(function(){
             var dm = document.getElementById('dragme'); 

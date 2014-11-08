@@ -1,0 +1,58 @@
+{
+  "name": "tool-panel-icone",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "366c3c56b79031deacc953d7f92085e5",
+      "css": "eye-outline",
+      "code": 59394,
+      "src": "typicons"
+    },
+    {
+      "uid": "k7sao112253txym1egnte7822irbyphe",
+      "css": "eye",
+      "code": 59399,
+      "src": "typicons"
+    },
+    {
+      "uid": "debaf3311987af708b9c1646fc192c15",
+      "css": "resize-full-outline",
+      "code": 59396,
+      "src": "typicons"
+    },
+    {
+      "uid": "cdfalpadi7huwv9ah4fef2gpfpb4c6qm",
+      "css": "resize-full",
+      "code": 59397,
+      "src": "typicons"
+    },
+    {
+      "uid": "2b9bcf0829f99d9bdaa653b0a8cf41f5",
+      "css": "move-outline",
+      "code": 59395,
+      "src": "typicons"
+    },
+    {
+      "uid": "fhkechw94uv9ydw6tukba3ka2hhoif4n",
+      "css": "move-1",
+      "code": 59398,
+      "src": "typicons"
+    },
+    {
+      "uid": "d12574a0151c84ddf56f4fd7b4aff678",
+      "css": "arrows-cw-outline",
+      "code": 59392,
+      "src": "typicons"
+    },
+    {
+      "uid": "mqlxga8x57rhlfv44zsvmz1reex8lbqg",
+      "css": "arrows-cw",
+      "code": 59393,
+      "src": "typicons"
+    }
+  ]
+}
