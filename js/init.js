@@ -1,5 +1,6 @@
 	var scene, camera, renderer, projector, width, height, intersects, clock, timer, save_sate="off";
 	var scene2, camera2, renderer2, projector2, width, height, intersects;
+	var selected_tool;
 	var objects = [];
 	var objects_list=0;
 	var groups = [];
@@ -123,7 +124,8 @@
 		}
 		else
 		{
-			$('canvas').css("cursor", "auto");
+			// $('canvas').css("cursor", "auto");
+			// $('canvas').css( 'cursor', 'url(css/img/ico-eye.png) 25 15, auto' );
 		}
 	}
 	function onDocumentMouseDown( event ) {

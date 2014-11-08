@@ -79,7 +79,8 @@ $( document ).ready(function(){
 		menubar.Add.addDelete();
 	});
 
-
+	// $('body').css( 'cursor', 'url(eye.png), auto' );
+	// $('canvas').css( 'cursor', 'url(eye.png), auto' );
 });
 
 function obj_control_mode() {

@@ -1,11 +1,13 @@
 *{
 	margin:0;
 	padding: 0;
+	/*cursor:pointer;*/
 }
 body
 {
 	margin:0;
 	overflow: hidden;
+	/*cursor:pointer;*/
 
 }
 #canvas{
