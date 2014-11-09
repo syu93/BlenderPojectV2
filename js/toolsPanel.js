@@ -1,21 +1,7 @@
 $(document).ready(function(){
+	default_tool();
 	$('#t_camera').click(function(){
-		window.selected_tool='t_camera';
-		$('canvas').mousedown(function(){
-			if(selected_tool=='t_camera'){
-				window.delete_obj=true;
-				unselected_object(window.SELECTED, window.controls_object, false);
-			}
-			$('canvas').mousemove(function(){
-				toolpanel.tool.selected_tool(window.selected_tool);
-			});
-		});
-		$('canvas').mouseup(function(){
-			$('canvas').css( 'cursor', 'auto' );
-			$('canvas').mousemove(function(){
-				$('canvas').css( 'cursor', 'auto' );
-			});
-		});
+		default_tool();
 	});
 
 	$('#t_move').click(function(){
@@ -41,3 +27,22 @@ $(document).ready(function(){
 	});
 
 });
+
+function default_tool(){
+	window.selected_tool='t_camera';
+	$('canvas').mousedown(function(){
+		if(selected_tool=='t_camera'){
+			window.delete_obj=true;
+			unselected_object(window.SELECTED, window.controls_object, false);
+		}
+		$('canvas').mousemove(function(){
+			toolpanel.tool.selected_tool(window.selected_tool);
+		});
+	});
+	$('canvas').mouseup(function(){
+		$('canvas').css( 'cursor', 'auto' );
+		$('canvas').mousemove(function(){
+			$('canvas').css( 'cursor', 'auto' );
+		});
+	});
+}
