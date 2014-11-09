@@ -25,6 +25,7 @@
 		<script src="js/lib.js"></script>
 		<script src="js/gui.js"></script>
 		<script src="js/controlPanel.js"></script>
+		<script src="js/toolsPanel.js"></script>
 		<script src="js/prompt.js"></script>
 		<script src="js/drag.js"></script>
 		
@@ -91,11 +92,14 @@
 	<div class="aside-tool-bar">
 		<aside id="dragme" draggable="true">
 			<div class="container_tool_panel">
-				<div class="tool_panel">
+				<div id="tool_panel" class="tool_panel">
 					<div id="dropable">-</div>
 					<hr>
 					<ul class="tool">
-						<li class="icone"><i class="icon-eye"></i></li>
+						<li id="t_camera" class="icone"><i class="icon-eye"></i></li>
+						<li id="t_move" class="icone"><i class="icon-move-1"></i></li>
+						<li id="t_scale" class="icone"><i class="icon-resize-full"></i></li>
+						<li id="t_rotate" class="icone"><i class="icon-arrows-cw"></i></li>
 					</ul>
 				</div>
 			</div>

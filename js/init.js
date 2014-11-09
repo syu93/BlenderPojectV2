@@ -86,6 +86,8 @@
 		// document.getElementById("s_tools").innerHTML=window.onCtrl;
 		document.getElementById("s_tools").innerHTML=Math.round(window.clock.getElapsedTime());
 		// document.getElementById("s_tools2").innerHTML=window.save_sate;
+		// console.log($('#dragme').css('left'));
+		// console.log($('#tool_panel').css('width'));
 
 		objects_list_info(objects);
 
@@ -119,13 +121,11 @@
 		var intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
-			$('canvas').css("cursor", "move");
-			// console.log(intersects[ 0 ].object);
+			// toolpanel.tool.selected_tool(window.selected_tool);
 		}
 		else
 		{
-			// $('canvas').css("cursor", "auto");
-			// $('canvas').css( 'cursor', 'url(css/img/ico-eye.png) 25 15, auto' );
+			// toolpanel.tool.selected_tool(window.selected_tool);
 		}
 	}
 	function onDocumentMouseDown( event ) {

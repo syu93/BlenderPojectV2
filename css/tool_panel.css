@@ -3,7 +3,7 @@
 	position:absolute; top:35px; left:0px;
 	/*border-right: solid black 1px;*/
 	width: 35px;
-	height: 95%;
+	/*height: 95%;*/
 	/*-webkit-box-shadow: 0px 0 3px 0 #000000;*/
 	/*box-shadow: 0px 0 3px 0 #000000;*/
 	resize: both;
@@ -35,7 +35,7 @@
 	position:absolute; top:0px; left:0px;
 	/*width: 35px;*/
 	width: 35px;
-	height: 100%;
+	/*height: 100%;*/
  }
 #dropable{
 	width: 29px;
@@ -93,7 +93,11 @@
 	margin-left: auto;
 	margin-right: auto;
 }
-
+.icone:hover{
+	background: #272727;
+	cursor:pointer;
+	text-shadow: 0 0 3px #fff;
+}
 hr{
 	margin-top: 5px;
 	margin-bottom: 5px;
