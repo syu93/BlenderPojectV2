@@ -789,14 +789,13 @@ switch ( event.keyCode ) {
 	window.controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
 	break;
   case 87: // W
-	// window.controls_object.setMode( "translate" ); 
-	alert();
+	window.controls_object.setMode( "translate" );
 	break;
   case 69: // E
-	// window.controls_object.setMode( "rotate" );
+	window.controls_object.setMode( "rotate" );
 	break;
   case 82: // R
-	// window.controls_object.setMode( "scale" );
+	window.controls_object.setMode( "scale" );
 	break;
 case 187:
 case 107: // +,=,num+
