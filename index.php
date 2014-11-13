@@ -24,6 +24,7 @@
 		<script src="js/init.js"></script>
 		<script src="js/lib.js"></script>
 		<script src="js/gui.js"></script>
+		<script src="js/menu.js"></script>
 		<script src="js/controlPanel.js"></script>
 		<script src="js/toolsPanel.js"></script>
 		<script src="js/prompt.js"></script>
@@ -43,7 +44,7 @@
 	<!--|| MENU_BAR ||-->
 		<div class='menu_bar'>
 			<ul class="level1">
-				<li tabindex="0" id=""><span>file</span>
+				<li tabindex="0" id="m_file"><span>file</span>
 					<ul class="level2">
 						<li tabindex="0" id="n_new"><span>new</span></li>
 						<li tabindex="0" id=""><span>open project</span></li>
@@ -52,7 +53,7 @@
 						<li class="last-child"></li>
 					</ul>
 				</li>
-				<li tabindex="0"><span>add</span>
+				<li tabindex="0" if="m_add"><span>add</span>
 					<ul class="level2">
 						<li id="n_cube"><span>cube</span></li>
 						<li id="n_sphere"><span>sphere</span></li>
@@ -62,14 +63,14 @@
 						<li class="last-child"></li>
 					</ul>
 				</li>
-				<li tabindex="0"><span>object</span>
+				<li tabindex="0" id="m_object"><span>object</span>
 					<ul class="level2">
 						<li id="n_clone"><span>clone object</span></li>
 						<li id="n_cloneGp"><span>clone group</span></li>
 						<li class="last-child"></li>
 					</ul>
 				</li>
-				<li tabindex="0"><span>view</span>
+				<li tabindex="0" id="m_view"><span>view</span>
 					<ul class="level2">
 						<li id="d_grid"><span>display grid</span></li>
 						<li class="last-child"></li>
