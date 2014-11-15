@@ -103,10 +103,7 @@ library.proto = {
 			var save = {};
 
 				// Get the project name
-
-				// 
-				var tools_panel = {left:$('#dragme').css('left'),top:$('#dragme').css('top'), width:$('#tool_panel').css('width'), height:$('#tool_panel').css('height')};
-				save.project = {name:$("#poject_name").val(), tools:tools_panel};
+				save.project = {name:$("#poject_name").val()}
 
 				// Get grid config
 				var grid_cfg = [];
@@ -178,14 +175,6 @@ library.proto = {
 
 			// Retrieve project
 			$("#poject_name").val(save.project.name);
-
-			// Retrieve tool panel position
-			$("#dragme").css('left',save.project.tools.left);
-			$("#dragme").css('top',save.project.tools.top);
-
-			$("#tool_panel").css('width',save.project.tools.width);
-			$("#tool_panel").css('height',save.project.tools.height);
-
 
 			// Retrieve grid
 			for(key in save.grid){
@@ -408,29 +397,6 @@ menubar.File = {
 	}
 }
 
-var toolpanel = function() {};
-
-toolpanel.tool = {
-	selected_tool : function (selected_tool){
-		switch(selected_tool){
-			case 't_camera':
-				$('canvas').css( 'cursor', 'url(css/img/ico-eye.png) 10 5, auto' );
-				break;
-			case 't_move':
-				$('canvas').css( 'cursor', 'url(css/img/ico-drag.png) 10 5, auto' );
-				window.controls_object.setMode( "translate" );
-				break;
-			case 't_scale':
-				$('canvas').css( 'cursor', 'url(css/img/ico-scale.png) 10 5, auto' );
-				window.controls_object.setMode( "scale" );
-				break;
-			case 't_rotate':
-				$('canvas').css( 'cursor', 'url(css/img/scale-drag.png) 10 5, auto' );
-				window.controls_object.setMode( "rotate" );
-				break;
-		}
-	}
-}
 //---
 
 function group_assign(event){
@@ -776,7 +742,6 @@ function unselected_object(object, controls_object, is_group){
 
 		INTERSECTED=SELECTED;
 		SELECTED ="";
-		delete_obj=false;
 	}
 }
 
