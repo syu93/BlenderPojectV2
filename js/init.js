@@ -42,7 +42,7 @@
 		container = $('#canvas');
 		container.append(renderer.domElement);		
 		rect = container[0];
-		// console.log(rect.clientHeight);
+		// console.log(renderer.domElement);
 		
 		/***********************************************/
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -84,7 +84,7 @@
 		object_control.update();
 		
 		// document.getElementById("s_tools").innerHTML=window.onCtrl;
-		document.getElementById("s_tools").innerHTML=Math.round(window.clock.getElapsedTime());
+		// document.getElementById("s_tools").innerHTML=Math.round(window.clock.getElapsedTime());
 		// document.getElementById("s_tools2").innerHTML=window.save_sate;
 		// console.log($('#dragme').css('left'));
 		// console.log($('#tool_panel').css('width'));

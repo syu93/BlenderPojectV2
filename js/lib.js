@@ -411,8 +411,11 @@ menubar.File = {
 var toolpanel = function() {};
 
 toolpanel.tool = {
-	selected_tool : function (selected_tool){
+	select_tool : function (selected_tool){
 		switch(selected_tool){
+			default:
+				$('canvas').css( 'cursor', 'default' );
+				break
 			case 't_camera':
 				$('canvas').css( 'cursor', 'url(css/img/ico-eye.png) 10 5, auto' );
 				break;

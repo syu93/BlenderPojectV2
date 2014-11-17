@@ -78,14 +78,12 @@ $( document ).ready(function(){
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
-
-	// $('body').css( 'cursor', 'url(eye.png), auto' );
-	// $('canvas').css( 'cursor', 'url(eye.png), auto' );
+	
 });
 
-function obj_control_mode() {
+function obj_control_mode( event ) {
 //console.log(event.which);
-switch ( window.selected_tool ) {
+switch ( event.keyCode ) {
   case 17: //Ctrl
 	break;
   case 81: // Q
