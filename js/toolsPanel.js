@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	default_tool(selected_tool);
+	// default_tool();
 
 	$('#t_camera').click(function(){
 		window.selected_tool = 't_camera';
@@ -21,36 +21,20 @@ $(document).ready(function(){
 
 });
 
-// function default_tool(){
-// 	window.selected_tool='t_camera';
-// 	$('canvas').mousedown(function(){
-// 		if(selected_tool=='t_camera'){
-// 			window.delete_obj=true;
-// 			unselected_object(window.SELECTED, window.controls_object, false);
-// 		}
-// 		$('canvas').mousemove(function(){
-// 			toolpanel.tool.selected_tool(window.selected_tool);
-// 		});
-// 	});
-// 	$('canvas').mouseup(function(){
-// 		$('canvas').css( 'cursor', 'auto' );
-// 		$('canvas').mousemove(function(){
-// 			$('canvas').css( 'cursor', 'auto' );
-// 		});
-// 	});
-// }
-
-function default_tool(selected_tool){
+function default_tool(){
 	window.selected_tool = 't_camera';
 	tool_camera(selected_tool);
 }
 
 function tool_camera(selected_tool){
+	$('canvas').unbind('mouseup');
+	$('canvas').unbind('mousedown');
+	
 	$('canvas').mousedown( function(){
-	if(SELECTED){
-		window.delete_obj=true;
-		unselected_object(window.SELECTED, window.controls_object, false);
-	}
+		if(SELECTED){
+			window.delete_obj=true;
+			unselected_object(window.SELECTED, window.controls_object, false);
+		}
 		$('canvas').mousemove( function(){
 			toolpanel.tool.select_tool(selected_tool);
 		});
@@ -59,5 +43,6 @@ function tool_camera(selected_tool){
 		$('canvas').unbind('mousemove');
 		$('canvas').css( 'cursor', 'default' );
 		window.delete_obj=false;
+		library.proto.selection(INTERSECTED, false);
 	});
 }
