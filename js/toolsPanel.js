@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	// default_tool();
+	default_tool();
 
 	$('#t_camera').click(function(){
 		window.selected_tool = 't_camera';
@@ -8,11 +8,13 @@ $(document).ready(function(){
 
 	$('#t_move').click(function(){
 		window.selected_tool = 't_move';
+		tool_move(selected_tool);
 	});
 
 
 	$('#t_scale').click(function(){
 		window.selected_tool = 't_scale';
+		tool_scale(selected_tool);
 	});
 
 	$('#t_rotate').click(function(){
@@ -29,6 +31,7 @@ function default_tool(){
 function tool_camera(selected_tool){
 	$('canvas').unbind('mouseup');
 	$('canvas').unbind('mousedown');
+	$('canvas').unbind('mousemove');
 	
 	$('canvas').mousedown( function(){
 		if(SELECTED){
@@ -43,6 +46,26 @@ function tool_camera(selected_tool){
 		$('canvas').unbind('mousemove');
 		$('canvas').css( 'cursor', 'default' );
 		window.delete_obj=false;
-		library.proto.selection(INTERSECTED, false);
+		if(INTERSECTED){
+			library.proto.selection(INTERSECTED, false);
+		}
 	});
+}
+
+function tool_move(selected_tool){
+	$('canvas').unbind('mouseup');
+	$('canvas').unbind('mousedown');
+	$('canvas').unbind('mousemove');
+
+	window.controls_object.setMode( "translate" );
+	toolpanel.tool.select_tool(selected_tool);
+}
+
+function tool_scale(selected_tool){
+	$('canvas').unbind('mouseup');
+	$('canvas').unbind('mousedown');
+	$('canvas').unbind('mousemove');
+
+	window.controls_object.setMode( "scale" );
+	toolpanel.tool.select_tool(selected_tool);
 }

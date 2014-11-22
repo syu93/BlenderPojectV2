@@ -789,12 +789,18 @@ switch ( event.keyCode ) {
 	window.controls_object.setSpace( controls_object.space == "local" ? "world" : "local" );
 	break;
   case 87: // W
+  	window.selected_tool = "t_move";
+  	toolpanel.tool.select_tool(selected_tool);
 	window.controls_object.setMode( "translate" );
 	break;
   case 69: // E
+  	window.selected_tool = "t_rotate";
+  	toolpanel.tool.select_tool(selected_tool);
 	window.controls_object.setMode( "rotate" );
 	break;
   case 82: // R
+  	window.selected_tool = "t_sale";
+  	toolpanel.tool.select_tool(selected_tool);
 	window.controls_object.setMode( "scale" );
 	break;
 case 187:
