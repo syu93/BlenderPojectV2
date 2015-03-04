@@ -78,8 +78,6 @@ $( document ).ready(function(){
 	$('#delete').click(function(){
 		menubar.Add.addDelete();
 	});
-	
-});
 
 function obj_control_mode( event ) {
 //console.log(event.which);
