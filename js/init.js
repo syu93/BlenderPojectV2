@@ -30,6 +30,22 @@
 		// Projector for the camera
 		projector = new THREE.Projector();
 		
+		/**/
+		// LIGHT
+		var light = new THREE.PointLight(0xffffff);
+		light.position.set(0,150,100);
+		light.name='light';
+		objects.push( light );
+		scene.add(light);
+		// create a small sphere to show position of light
+		var lightbulb = new THREE.Mesh( 
+			new THREE.SphereGeometry( 10, 16, 8 ), 
+			new THREE.MeshBasicMaterial( { color: 0xffaa00 } )
+		);
+		scene.add( lightbulb );
+		lightbulb.position = light.position;
+		/**/
+
 		grid = grid();
 
 		clock = new THREE.Clock();
@@ -179,7 +195,7 @@ $( document ).ready(function(){
 	window.onresize = function(event) {
 
 		// alert('plop');
-		location.reload();
+		// location.reload();
 		// init();
 		// render();
 
