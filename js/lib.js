@@ -200,6 +200,10 @@ library.proto = {
 				// console.log(save.objects[key].position);
 				//Creat the object
 				switch ( save.objects[key].name.name ) {
+					case "light":
+						var created_obj = menubar.Add.addLight();
+					break;
+
 					case "cube":
 						var created_obj = menubar.Add.addCube();
 					break;
@@ -254,6 +258,24 @@ library.proto = {
 var menubar = function() {};
 
 menubar.Add = {
+
+	addLight : function(){
+		// LIGHT
+		var light = new THREE.PointLight(0xffffff);
+		light.position.set(0,150,100);
+		light.name='light';
+		objects.push( light );
+		scene.add(light);
+		// create a small sphere to show position of light
+		var lightbulb = new THREE.Mesh( 
+			new THREE.SphereGeometry( 10, 16, 8 ), 
+			new THREE.MeshBasicMaterial( { color: 0xffaa00 } )
+		);
+		scene.add( lightbulb );
+		lightbulb.position = light.position;
+
+		return light;
+	},
 
 	addCube : function(){
 		var width = 100;
