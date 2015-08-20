@@ -1,0 +1,8 @@
+{
+    "name": "BlenderProjectV2/rebuild",
+    "private": true,
+    "dependencies": {
+        "three.js" : "*",
+        "extjs " : "v6.0.0-640"
+    }
+}
